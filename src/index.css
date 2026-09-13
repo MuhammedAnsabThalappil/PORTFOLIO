@@ -102,6 +102,35 @@ body {
   z-index: 1;
 }
 
+/* ─── Responsive inner grid helpers ─── */
+/* Used by AchievementsShowcase hero card, Newspaper card, ExperienceEducation */
+.resp-inner-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 2rem;
+  align-items: center;
+}
+
+.achiev-hero-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 2rem;
+  align-items: center;
+}
+
+.newspaper-inner-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 2rem;
+  align-items: center;
+}
+
+.exp-inner-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 2rem;
+}
+
 .section {
   padding: 5.5rem 0;
   position: relative;
@@ -208,6 +237,12 @@ body {
   gap: 1.5rem;
 }
 
+/* Prevent grid blowout — all direct children get min-width: 0 */
+.bento-grid > * { min-width: 0; }
+.achiev-hero-grid > * { min-width: 0; }
+.newspaper-inner-grid > * { min-width: 0; }
+.exp-inner-grid > * { min-width: 0; }
+
 .col-span-12 { grid-column: span 12; }
 .col-span-8  { grid-column: span 8; }
 .col-span-7  { grid-column: span 7; }
@@ -232,6 +267,74 @@ body {
 @media (max-width: 480px) {
   .hero-stats-grid { grid-template-columns: repeat(2, 1fr) !important; }
   .hero-stat-card { padding: 1rem !important; }
+
+  /* Bento grid tighter gap */
+  .bento-grid { gap: 1rem; }
+
+  /* Reduce glass card padding */
+  .glass-card { padding: 1.25rem; border-radius: 14px; }
+
+  /* Section vertical padding */
+  .section { padding: 3.5rem 0; }
+
+  /* Container horizontal padding */
+  .container { padding: 0 1rem; }
+
+  /* Collapse achievement inner grids to single column */
+  .achiev-hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
+  }
+  .newspaper-inner-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
+  }
+  .exp-inner-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+
+  /* Ensure col-span-5/7 inside these grids span full width */
+  .achiev-hero-grid > *,
+  .newspaper-inner-grid > *,
+  .exp-inner-grid > * {
+    grid-column: 1 / -1 !important;
+  }
+}
+
+@media (max-width: 430px) {
+  /* Tighter container on 375/390/430 */
+  .container { padding: 0 0.9rem; }
+
+  /* Section subtitle wraps cleanly */
+  .section-subtitle { font-size: 1rem; }
+
+  /* Buttons — prevent overflow on very small screens */
+  .btn {
+    font-size: 0.85rem;
+    padding: 0.8rem 1.25rem;
+    letter-spacing: 0.03em;
+  }
+  .btn-sm {
+    font-size: 0.78rem;
+    padding: 0.55rem 1rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .container { padding: 0 0.8rem; }
+  .bento-grid { gap: 0.85rem; }
+  .glass-card { padding: 1.1rem; border-radius: 12px; }
+  .section { padding: 3rem 0; }
+  /* Buttons wrap when needed */
+  .btn { padding: 0.75rem 1rem; font-size: 0.82rem; }
+}
+
+@media (max-width: 360px) {
+  /* 320px edge cases */
+  .container { padding: 0 0.75rem; }
+  .bento-grid { gap: 0.75rem; }
+  .glass-card { padding: 1rem; }
 }
 
 /* Buttons System */
@@ -375,6 +478,48 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
   }
   .hero-profile-col {
     display: none !important;
+  }
+}
+
+/* ─── Mobile: hero stat cards ─── */
+@media (max-width: 480px) {
+  .hero-stat-card {
+    gap: 0.65rem !important;
+  }
+  /* Keep icon box from making cards too wide on 320px */
+  .hero-stat-card > div:first-child {
+    width: 36px !important;
+    height: 36px !important;
+    flex-shrink: 0 !important;
+  }
+}
+
+/* ─── Mobile: SkillsSection filter tabs ─── */
+@media (max-width: 480px) {
+  .skills-filter-tabs {
+    gap: 0.4rem;
+  }
+  .skills-filter-btn {
+    padding: 0.5rem 0.75rem !important;
+    font-size: 0.78rem !important;
+  }
+  .skills-filter-btn span {
+    max-width: 9rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+/* ─── Mobile: Footer name wraps ─── */
+@media (max-width: 480px) {
+  .footer-name {
+    font-size: 1.2rem !important;
+    word-break: break-word;
+  }
+  .footer-bottom {
+    flex-direction: column !important;
+    text-align: center;
   }
 }
 

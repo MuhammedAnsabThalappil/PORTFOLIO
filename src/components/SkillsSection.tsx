@@ -43,6 +43,7 @@ export const SkillsSection: React.FC = () => {
 
         {/* Category Filter Tabs */}
         <div
+          className="skills-filter-tabs"
           style={{
             display: 'flex',
             alignItems: 'center',
@@ -58,6 +59,7 @@ export const SkillsSection: React.FC = () => {
               <button
                 key={cat.key}
                 onClick={() => setActiveTab(cat.key as any)}
+                className="skills-filter-btn"
                 style={{
                   display: 'inline-flex',
                   alignItems: 'center',

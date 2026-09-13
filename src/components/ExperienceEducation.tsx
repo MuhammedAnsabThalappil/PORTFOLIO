@@ -29,15 +29,9 @@ export const ExperienceEducation: React.FC = () => {
             background: 'linear-gradient(135deg, rgba(12, 16, 29, 0.95), rgba(24, 18, 44, 0.95))',
           }}
         >
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(12, 1fr)',
-              gap: '2rem',
-            }}
-          >
+          <div className="exp-inner-grid">
             {/* Left Metadata Column */}
-            <div className="col-span-5">
+            <div className="col-span-5" style={{ minWidth: 0 }}>
               <h3
                 style={{
                   fontFamily: 'var(--font-heading)',
@@ -106,7 +100,7 @@ export const ExperienceEducation: React.FC = () => {
             </div>
 
             {/* Right Story & Mentorship Column */}
-            <div className="col-span-7" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+            <div className="col-span-7" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', minWidth: 0 }}>
               {EXPERIENCE.paragraphs.map((p, idx) => (
                 <p
                   key={idx}

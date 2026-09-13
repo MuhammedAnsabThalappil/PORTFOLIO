@@ -53,7 +53,7 @@ export const ContactSection: React.FC = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
             className="col-span-5"
-            style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}
+            style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', minWidth: 0 }}
           >
             <p style={{ fontSize: '1.2rem', color: '#ffffff', lineHeight: 1.65, marginBottom: '2rem' }}>
               Have an idea, opportunity, project or collaboration in mind? Let's connect and turn it into reality.
@@ -104,6 +104,7 @@ export const ContactSection: React.FC = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.15 }}
             className="glass-card col-span-7"
+            style={{ minWidth: 0 }}
           >
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
               <div>

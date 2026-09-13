@@ -48,14 +48,7 @@ export const AchievementsShowcase: React.FC<AchievementsShowcaseProps> = ({ onOp
             marginBottom: '2rem',
           }}
         >
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(12, 1fr)',
-              gap: '2rem',
-              alignItems: 'center',
-            }}
-          >
+          <div className="achiev-hero-grid">
             {/* Left Photo Holder */}
             <div
               className="col-span-6"
@@ -109,18 +102,21 @@ export const AchievementsShowcase: React.FC<AchievementsShowcaseProps> = ({ onOp
             <div className="col-span-6">
               <div
                 style={{
-                  display: 'inline-flex',
+                  display: 'flex',
+                  flexWrap: 'wrap',
                   alignItems: 'center',
-                  gap: '0.5rem',
+                  gap: '0.4rem',
                   padding: '0.35rem 0.85rem',
                   borderRadius: '9999px',
                   background: 'rgba(245, 158, 11, 0.15)',
                   border: '1px solid rgba(245, 158, 11, 0.35)',
                   color: '#f59e0b',
-                  fontSize: '0.85rem',
+                  fontSize: '0.8rem',
                   fontWeight: 800,
                   fontFamily: 'var(--font-mono)',
                   marginBottom: '0.85rem',
+                  width: 'fit-content',
+                  maxWidth: '100%',
                 }}
               >
                 <Trophy size={16} />
@@ -132,10 +128,11 @@ export const AchievementsShowcase: React.FC<AchievementsShowcaseProps> = ({ onOp
               <h3
                 style={{
                   fontFamily: 'var(--font-heading)',
-                  fontSize: '2.25rem',
+                  fontSize: 'clamp(1.5rem, 5vw, 2.25rem)',
                   fontWeight: 900,
                   marginBottom: '0.25rem',
                   color: '#ffffff',
+                  wordBreak: 'break-word',
                 }}
               >
                 {HERO_ACHIEVEMENT.title}
@@ -184,14 +181,16 @@ export const AchievementsShowcase: React.FC<AchievementsShowcaseProps> = ({ onOp
                       <span
                         key={mIdx}
                         style={{
-                          fontSize: '0.8rem',
+                          fontSize: '0.75rem',
                           fontFamily: 'var(--font-mono)',
-                          padding: '0.3rem 0.75rem',
+                          padding: '0.3rem 0.6rem',
                           borderRadius: '8px',
                           background: isAnsab ? 'rgba(0, 240, 255, 0.15)' : 'rgba(255, 255, 255, 0.05)',
                           border: isAnsab ? '1px solid rgba(0, 240, 255, 0.4)' : '1px solid rgba(255, 255, 255, 0.08)',
                           color: isAnsab ? 'var(--primary-cyan)' : 'var(--text-muted)',
                           fontWeight: isAnsab ? 700 : 500,
+                          wordBreak: 'break-word',
+                          maxWidth: '100%',
                         }}
                       >
                         {member}
@@ -222,7 +221,7 @@ export const AchievementsShowcase: React.FC<AchievementsShowcaseProps> = ({ onOp
                     transition: 'all 0.2s ease',
                   }}
                 >
-                  <span>READ THE STORY (“{HERO_ACHIEVEMENT.storyTeaser}”)</span>
+                  <span style={{ minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>READ THE STORY</span>
                   <ChevronDown
                     size={18}
                     style={{
@@ -271,7 +270,7 @@ export const AchievementsShowcase: React.FC<AchievementsShowcaseProps> = ({ onOp
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))',
             gap: '1.25rem',
             marginBottom: '2rem',
           }}
@@ -393,14 +392,7 @@ export const AchievementsShowcase: React.FC<AchievementsShowcaseProps> = ({ onOp
               padding: '2rem',
             }}
           >
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(12, 1fr)',
-                gap: '2rem',
-                alignItems: 'center',
-              }}
-            >
+            <div className="newspaper-inner-grid">
               <div className="col-span-7">
                 <div
                   style={{
@@ -420,10 +412,11 @@ export const AchievementsShowcase: React.FC<AchievementsShowcaseProps> = ({ onOp
                 <h3
                   style={{
                     fontFamily: 'var(--font-heading)',
-                    fontSize: '2rem',
+                    fontSize: 'clamp(1.2rem, 4vw, 2rem)',
                     fontWeight: 900,
                     color: '#0f172a',
                     marginBottom: '0.35rem',
+                    wordBreak: 'break-word',
                   }}
                 >
                   {MEDIA_RECOGNITION.newspaper}
@@ -452,19 +445,21 @@ export const AchievementsShowcase: React.FC<AchievementsShowcaseProps> = ({ onOp
                     display: 'inline-flex',
                     alignItems: 'center',
                     gap: '0.5rem',
-                    padding: '0.65rem 1.25rem',
+                    padding: '0.65rem 1.1rem',
                     borderRadius: '10px',
                     background: '#0f172a',
                     color: '#ffffff',
                     fontWeight: 700,
-                    fontSize: '0.85rem',
+                    fontSize: '0.82rem',
                     fontFamily: 'var(--font-heading)',
                     border: 'none',
                     cursor: 'pointer',
+                    maxWidth: '100%',
+                    flexWrap: 'wrap' as const,
                   }}
                 >
-                  <Maximize2 size={16} />
-                  <span>VIEW FULL NEWSPAPER CLIPPING</span>
+                  <Maximize2 size={16} style={{ flexShrink: 0 }} />
+                  <span>VIEW NEWSPAPER CLIPPING</span>
                 </button>
               </div>
 

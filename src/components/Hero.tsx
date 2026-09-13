@@ -12,7 +12,7 @@ export const Hero: React.FC = () => {
   ];
 
   return (
-    <section className="section" id="hero" style={{ paddingTop: '8rem', paddingBottom: '3.5rem' }}>
+    <section className="section" id="hero" style={{ paddingTop: 'clamp(5rem, 12vw, 8rem)', paddingBottom: '3.5rem' }}>
       <div className="container">
         <div
           style={{
@@ -102,13 +102,14 @@ export const Hero: React.FC = () => {
             {/* Quote Statement */}
             <blockquote
               style={{
-                fontSize: '1.15rem',
+                fontSize: 'clamp(1rem, 3vw, 1.15rem)',
                 fontStyle: 'italic',
                 color: 'var(--text-main)',
                 borderLeft: '3px solid var(--primary-cyan)',
                 paddingLeft: '1rem',
                 marginBottom: '1.5rem',
                 lineHeight: 1.6,
+                wordBreak: 'break-word',
               }}
             >
               "{PROFILE.heroStatement}"

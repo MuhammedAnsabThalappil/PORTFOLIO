@@ -23,12 +23,14 @@ export const Footer: React.FC = () => {
         >
           <div>
             <div
+              className="footer-name"
               style={{
                 fontFamily: 'var(--font-heading)',
-                fontSize: '1.6rem',
+                fontSize: 'clamp(1.1rem, 4vw, 1.6rem)',
                 fontWeight: 900,
                 color: '#ffffff',
                 marginBottom: '0.35rem',
+                wordBreak: 'break-word',
               }}
             >
               MUHAMMED ANSAB THALAPPIL
@@ -105,6 +107,7 @@ export const Footer: React.FC = () => {
         </div>
 
         <div
+          className="footer-bottom"
           style={{
             paddingTop: '2rem',
             borderTop: '1px solid rgba(255, 255, 255, 0.05)',
