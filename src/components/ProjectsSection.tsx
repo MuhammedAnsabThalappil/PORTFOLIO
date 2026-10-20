@@ -1,43 +1,63 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Code, ExternalLink, Github, Smartphone, Cpu, BarChart2, Trophy } from 'lucide-react';
-import { FEATURED_PROJECT, EXTRA_PROJECTS } from '../data/portfolioData';
+import { usePortfolio } from '../context/PortfolioContext';
 import { Project } from '../types';
+import { REVEAL, REVEAL_SCALE, VIEWPORT } from '../hooks/useReveal';
 
 interface ProjectsSectionProps {
   onOpenProjectModal: (project: Project) => void;
 }
 
 const PROJECT_ICONS: Record<string, React.ReactNode> = {
-  'flutter-mobile-app': <Smartphone size={22} style={{ color: 'var(--primary-cyan)' }} />,
-  'embedded-raspi-iot': <Cpu size={22} style={{ color: 'var(--secondary-violet)' }} />,
+  'flutter-mobile-app':       <Smartphone size={22} style={{ color: 'var(--primary-cyan)' }} />,
+  'embedded-raspi-iot':       <Cpu size={22} style={{ color: 'var(--secondary-violet)' }} />,
   'data-analytics-dashboard': <BarChart2 size={22} style={{ color: 'var(--accent-emerald)' }} />,
 };
 
 const PROJECT_EMOJI: Record<string, string> = {
-  'flutter-mobile-app': '📱',
-  'embedded-raspi-iot': '🍓',
+  'flutter-mobile-app':       '📱',
+  'embedded-raspi-iot':       '🍓',
   'data-analytics-dashboard': '🧠',
 };
 
 export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenProjectModal }) => {
+  const { featuredProject: FEATURED_PROJECT, extraProjects: EXTRA_PROJECTS } = usePortfolio();
+
   return (
     <section className="section" id="projects">
       <div className="container">
-        <div className="section-eyebrow">
-          <Code size={16} />
-          <span>03 — PROJECTS</span>
-        </div>
-        <h2 className="section-title">
+        {/* Header */}
+        <motion.div
+          custom={0}
+          variants={REVEAL}
+          initial="hidden"
+          whileInView="visible"
+          viewport={VIEWPORT}
+        >
+          <div className="section-eyebrow">
+            <Code size={16} />
+            <span>03 — PROJECTS</span>
+          </div>
+        </motion.div>
+        <motion.h2
+          custom={1}
+          variants={REVEAL}
+          initial="hidden"
+          whileInView="visible"
+          viewport={VIEWPORT}
+          className="section-title"
+        >
           THINGS I'VE <span className="gradient-text">BUILT.</span>
-        </h2>
+        </motion.h2>
 
         {/* ─── Featured Project ─── */}
         <motion.div
-          initial={{ opacity: 0, y: 25 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.55 }}
+          custom={0}
+          variants={REVEAL}
+          initial="hidden"
+          whileInView="visible"
+          viewport={VIEWPORT}
           className="glass-card"
           style={{
             padding: '0',
@@ -72,10 +92,11 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenProjectM
                       objectFit: 'cover',
                       position: 'absolute',
                       inset: 0,
+                      transition: 'transform 0.5s ease',
                     }}
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).style.display = 'none';
-                    }}
+                    onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.04)')}
+                    onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+                    onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
                   />
                 ) : null}
                 {/* Overlay gradient */}
@@ -87,7 +108,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenProjectM
                     pointerEvents: 'none',
                   }}
                 />
-                {/* Award badge overlay */}
+                {/* Award badge */}
                 <div
                   style={{
                     position: 'absolute',
@@ -216,19 +237,26 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenProjectM
               </div>
 
               <div style={{ display: 'flex', gap: '0.85rem', flexWrap: 'wrap' }}>
-                <a href="#achievement" className="btn btn-primary btn-sm">
+                <motion.a
+                  href="#achievement"
+                  className="btn btn-primary btn-sm"
+                  whileHover={{ scale: 1.04, y: -2 }}
+                  whileTap={{ scale: 0.97 }}
+                >
                   <span>VIEW RECOGNITION</span>
                   <ExternalLink size={15} />
-                </a>
-                <a
+                </motion.a>
+                <motion.a
                   href={FEATURED_PROJECT.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-secondary btn-sm"
+                  whileHover={{ scale: 1.03, y: -2 }}
+                  whileTap={{ scale: 0.97 }}
                 >
                   <Github size={15} />
                   <span>GITHUB</span>
-                </a>
+                </motion.a>
               </div>
             </div>
           </div>
@@ -239,10 +267,12 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenProjectM
           {EXTRA_PROJECTS.map((proj, idx) => (
             <motion.div
               key={proj.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.45, delay: idx * 0.1 }}
+              custom={idx}
+              variants={REVEAL_SCALE}
+              initial="hidden"
+              whileInView="visible"
+              viewport={VIEWPORT}
+              whileHover={{ y: -6, borderColor: 'rgba(0,240,255,0.28)' }}
               className="glass-card col-span-4"
               style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}
             >
@@ -319,31 +349,33 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenProjectM
 
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '1.5rem' }}>
                   {proj.technologies.map((t, tIdx) => (
-                    <span key={tIdx} className="tag-pill">
-                      {t}
-                    </span>
+                    <span key={tIdx} className="tag-pill">{t}</span>
                   ))}
                 </div>
               </div>
 
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
-                <button
+                <motion.button
                   onClick={() => onOpenProjectModal(proj)}
                   className="btn btn-secondary btn-sm"
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
                   style={{ flex: 1 }}
                 >
                   <span>VIEW DETAILS</span>
-                </button>
-                <a
+                </motion.button>
+                <motion.a
                   href={proj.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-secondary btn-sm"
+                  whileHover={{ scale: 1.08 }}
+                  whileTap={{ scale: 0.93 }}
                   style={{ padding: '0.6rem 0.75rem', borderRadius: '10px' }}
                   aria-label="GitHub Code"
                 >
                   <Github size={15} />
-                </a>
+                </motion.a>
               </div>
             </motion.div>
           ))}

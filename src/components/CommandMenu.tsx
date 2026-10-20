@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, X, Trophy, Briefcase, Code, User, Mail, Compass, Award, ExternalLink } from 'lucide-react';
 import { SOCIALS } from '../data/portfolioData';
+import { usePortfolio } from '../context/PortfolioContext';
 
 interface CommandMenuProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-// Static — defined outside the component to avoid recreation on every render.
 const COMMAND_ITEMS = [
   { name: 'About Muhammed Ansab', section: '#about', icon: User, tag: 'Section' },
   { name: 'Visual Journey Roadmap', section: '#journey', icon: Compass, tag: 'Section' },
@@ -22,10 +22,12 @@ const COMMAND_ITEMS = [
   { name: 'Contact & Collaboration', section: '#contact', icon: Mail, tag: 'Section' },
   { name: 'LinkedIn Profile', url: SOCIALS.linkedin, icon: ExternalLink, tag: 'Social' },
   { name: 'Send Direct Email', url: SOCIALS.email, icon: Mail, tag: 'Action' },
-] as const;
+];
 
 export const CommandMenu: React.FC<CommandMenuProps> = ({ isOpen, onClose }) => {
+  const { socials } = usePortfolio();
   const [query, setQuery] = useState('');
+
 
   // Cmd+K toggle is handled in App.tsx — only Escape is handled locally.
   useEffect(() => {

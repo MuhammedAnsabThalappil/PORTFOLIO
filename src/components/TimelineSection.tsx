@@ -1,13 +1,23 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Compass, CheckCircle2 } from 'lucide-react';
-import { TIMELINE } from '../data/portfolioData';
+import { usePortfolio } from '../context/PortfolioContext';
+import { REVEAL, REVEAL_SCALE, VIEWPORT } from '../hooks/useReveal';
 
 export const TimelineSection: React.FC = () => {
+  const { timeline: TIMELINE } = usePortfolio();
+
   return (
     <section className="section" id="journey">
       <div className="container">
-        <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
+        <motion.div
+          custom={0}
+          variants={REVEAL}
+          initial="hidden"
+          whileInView="visible"
+          viewport={VIEWPORT}
+          style={{ textAlign: 'center', marginBottom: '3.5rem' }}
+        >
           <div className="section-eyebrow" style={{ justifyContent: 'center' }}>
             <Compass size={16} />
             <span>VISUAL ROADMAP</span>
@@ -18,30 +28,34 @@ export const TimelineSection: React.FC = () => {
           <p className="section-subtitle" style={{ margin: '0 auto' }}>
             From early foundations and national awards to venture building and AI engineering ambitions.
           </p>
-        </div>
+        </motion.div>
 
         {/* Timeline Grid */}
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
             gap: '1.5rem',
           }}
         >
           {TIMELINE.map((item, index) => (
             <motion.div
               key={item.step}
-              initial={{ opacity: 0, y: 25 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.45, delay: index * 0.08 }}
+              custom={index}
+              variants={REVEAL_SCALE}
+              initial="hidden"
+              whileInView="visible"
+              viewport={VIEWPORT}
+              whileHover={{ y: -5, borderColor: 'rgba(0, 240, 255, 0.35)' }}
               className="glass-card"
               style={{
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
                 borderColor: index === 2 || index === 5 ? 'rgba(0, 240, 255, 0.3)' : 'var(--border-color)',
-                background: index === 2 ? 'linear-gradient(135deg, rgba(12, 16, 29, 0.9), rgba(0, 240, 255, 0.06))' : 'var(--bg-card)',
+                background: index === 2
+                  ? 'linear-gradient(135deg, rgba(12, 16, 29, 0.9), rgba(0, 240, 255, 0.06))'
+                  : 'var(--bg-card)',
               }}
             >
               <div>

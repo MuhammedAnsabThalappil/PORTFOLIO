@@ -1,37 +1,58 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { MapPin, Brain, Code2, Rocket, Target, User } from 'lucide-react';
-import { PROFILE } from '../data/portfolioData';
+import { usePortfolio } from '../context/PortfolioContext';
+import { REVEAL, REVEAL_SCALE, VIEWPORT } from '../hooks/useReveal';
 
 export const AboutBento: React.FC = () => {
+  const { profile: PROFILE } = usePortfolio();
+
   const getIcon = (num: string) => {
     switch (num) {
       case '01': return <Brain size={24} style={{ color: 'var(--primary-cyan)' }} />;
       case '02': return <Code2 size={24} style={{ color: 'var(--secondary-violet)' }} />;
       case '03': return <Rocket size={24} style={{ color: 'var(--accent-amber)' }} />;
-      default: return <Target size={24} />;
+      default:   return <Target size={24} />;
     }
   };
 
   return (
     <section className="section" id="about">
       <div className="container">
-        <div className="section-eyebrow">
-          <User size={16} />
-          <span>01 — ABOUT ME</span>
-        </div>
-        <h2 className="section-title">
+        {/* Section header */}
+        <motion.div
+          custom={0}
+          variants={REVEAL}
+          initial="hidden"
+          whileInView="visible"
+          viewport={VIEWPORT}
+        >
+          <div className="section-eyebrow">
+            <User size={16} />
+            <span>01 — ABOUT ME</span>
+          </div>
+        </motion.div>
+
+        <motion.h2
+          custom={1}
+          variants={REVEAL}
+          initial="hidden"
+          whileInView="visible"
+          viewport={VIEWPORT}
+          className="section-title"
+        >
           FROM PROJECTS <span className="gradient-text">TO BUSINESSES.</span>
-        </h2>
+        </motion.h2>
 
         {/* Story & Mission Bento Row */}
         <div className="bento-grid" style={{ marginBottom: '1.5rem' }}>
           {/* Main Story Card */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+            custom={0}
+            variants={REVEAL}
+            initial="hidden"
+            whileInView="visible"
+            viewport={VIEWPORT}
             className="glass-card col-span-7"
             style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}
           >
@@ -53,10 +74,11 @@ export const AboutBento: React.FC = () => {
 
           {/* Mission Card */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.15 }}
+            custom={1}
+            variants={REVEAL}
+            initial="hidden"
+            whileInView="visible"
+            viewport={VIEWPORT}
             className="glass-card col-span-5"
             style={{
               background: 'linear-gradient(135deg, rgba(13, 17, 32, 0.95), rgba(28, 20, 48, 0.95))',
@@ -91,7 +113,7 @@ export const AboutBento: React.FC = () => {
                   marginBottom: '1.75rem',
                 }}
               >
-                “{PROFILE.mission}”
+                "{PROFILE.mission}"
               </blockquote>
             </div>
 
@@ -115,16 +137,18 @@ export const AboutBento: React.FC = () => {
           </motion.div>
         </div>
 
-        {/* 3 Identity Cards Bento Row */}
+        {/* 3 Identity Cards */}
         <div className="bento-grid">
           {PROFILE.identityCards.map((card, idx) => (
             <motion.div
               key={card.number}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
+              custom={idx}
+              variants={REVEAL_SCALE}
+              initial="hidden"
+              whileInView="visible"
+              viewport={VIEWPORT}
               className="glass-card col-span-4"
+              whileHover={{ y: -6, borderColor: 'rgba(0, 240, 255, 0.3)' }}
               style={{
                 display: 'flex',
                 flexDirection: 'column',

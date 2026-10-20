@@ -1,9 +1,22 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Sparkles, ArrowRight, Linkedin, Github, Mail, Trophy, Briefcase, Clock, Bot } from 'lucide-react';
-import { PROFILE, SOCIALS } from '../data/portfolioData';
+import { usePortfolio } from '../context/PortfolioContext';
+import { REVEAL, REVEAL_SCALE, STAGGER_CONTAINER, VIEWPORT } from '../hooks/useReveal';
+
+const HERO_STAGGER: import('framer-motion').Variants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.07, delayChildren: 0.05 } },
+};
+
+const HERO_ITEM: import('framer-motion').Variants = {
+  hidden: { opacity: 0, y: 22 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] } },
+};
 
 export const Hero: React.FC = () => {
+  const { profile: PROFILE, socials: SOCIALS } = usePortfolio();
+
   const stats = [
     { icon: <Trophy size={18} style={{ color: '#f59e0b' }} />, value: '2', label: 'Awards' },
     { icon: <Briefcase size={18} style={{ color: 'var(--primary-cyan)' }} />, value: '3', label: 'Businesses' },
@@ -23,16 +36,17 @@ export const Hero: React.FC = () => {
           }}
           className="hero-main-grid"
         >
-          {/* Main Text Content Column */}
+          {/* ── Main Text Content Column ── */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            variants={HERO_STAGGER}
+            initial="hidden"
+            animate="visible"
             style={{ gridColumn: 'span 7' }}
             className="col-span-7"
           >
-            {/* Top Tagline */}
-            <div
+            {/* Tagline pill */}
+            <motion.div
+              variants={HERO_ITEM}
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -50,10 +64,11 @@ export const Hero: React.FC = () => {
             >
               <Sparkles size={14} />
               <span>AI × CODE × BUSINESS</span>
-            </div>
+            </motion.div>
 
-            {/* Name & Core Brand */}
-            <h1
+            {/* Name */}
+            <motion.h1
+              variants={HERO_ITEM}
               style={{
                 fontFamily: 'var(--font-heading)',
                 fontSize: 'clamp(2.5rem, 6vw, 4.25rem)',
@@ -65,9 +80,11 @@ export const Hero: React.FC = () => {
               }}
             >
               {PROFILE.fullName.toUpperCase()}
-            </h1>
+            </motion.h1>
 
-            <div
+            {/* Brand */}
+            <motion.div
+              variants={HERO_ITEM}
               className="gradient-text"
               style={{
                 fontFamily: 'var(--font-heading)',
@@ -78,10 +95,11 @@ export const Hero: React.FC = () => {
               }}
             >
               {PROFILE.coreBrand}
-            </div>
+            </motion.div>
 
-            {/* Professional Roles */}
-            <div
+            {/* Roles */}
+            <motion.div
+              variants={HERO_ITEM}
               style={{
                 display: 'flex',
                 flexWrap: 'wrap',
@@ -92,15 +110,16 @@ export const Hero: React.FC = () => {
                 marginBottom: '1.5rem',
               }}
             >
-              <span style={{ color: 'var(--primary-cyan)', fontWeight: 600 }}>AI & DATA SCIENCE STUDENT</span>
+              <span style={{ color: 'var(--primary-cyan)', fontWeight: 600 }}>AI &amp; DATA SCIENCE STUDENT</span>
               <span>·</span>
               <span>DEVELOPER</span>
               <span>·</span>
               <span style={{ color: 'var(--secondary-violet)', fontWeight: 600 }}>ENTREPRENEUR</span>
-            </div>
+            </motion.div>
 
-            {/* Quote Statement */}
-            <blockquote
+            {/* Quote */}
+            <motion.blockquote
+              variants={HERO_ITEM}
               style={{
                 fontSize: 'clamp(1rem, 3vw, 1.15rem)',
                 fontStyle: 'italic',
@@ -113,65 +132,71 @@ export const Hero: React.FC = () => {
               }}
             >
               "{PROFILE.heroStatement}"
-            </blockquote>
+            </motion.blockquote>
 
-            <p style={{ fontSize: '1.05rem', color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: '2rem', maxWidth: '600px' }}>
-              I'm Muhammed Ansab, an AI & Data Science student, programmer and entrepreneur passionate about turning ideas into impact through code, innovation, and practical ventures.
-            </p>
+            {/* Description */}
+            <motion.p
+              variants={HERO_ITEM}
+              style={{ fontSize: '1.05rem', color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: '2rem', maxWidth: '600px' }}
+            >
+              I'm Muhammed Ansab, an AI &amp; Data Science student, programmer and entrepreneur passionate about turning ideas into impact through code, innovation, and practical ventures.
+            </motion.p>
 
-            {/* Actions */}
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', marginBottom: '2.5rem' }}>
-              <a href="#projects" className="btn btn-primary">
+            {/* CTA Buttons */}
+            <motion.div variants={HERO_ITEM} style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', marginBottom: '2.5rem' }}>
+              <motion.a
+                href="#projects"
+                className="btn btn-primary"
+                whileHover={{ scale: 1.04, y: -2 }}
+                whileTap={{ scale: 0.97 }}
+              >
                 <span>EXPLORE MY WORK</span>
                 <ArrowRight size={18} />
-              </a>
-              <a href="#contact" className="btn btn-secondary">
+              </motion.a>
+              <motion.a
+                href="#contact"
+                className="btn btn-secondary"
+                whileHover={{ scale: 1.03, y: -2 }}
+                whileTap={{ scale: 0.97 }}
+              >
                 <span>LET'S CONNECT</span>
-              </a>
-            </div>
+              </motion.a>
+            </motion.div>
 
             {/* Social Links */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
-              <a
-                href={SOCIALS.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="tag-pill"
-                style={{ display: 'inline-flex', gap: '0.5rem', textDecoration: 'none' }}
-              >
-                <Linkedin size={14} style={{ color: 'var(--primary-cyan)' }} />
-                <span>LinkedIn</span>
-              </a>
-              <a
-                href={SOCIALS.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="tag-pill"
-                style={{ display: 'inline-flex', gap: '0.5rem', textDecoration: 'none' }}
-              >
-                <Github size={14} style={{ color: 'var(--secondary-violet)' }} />
-                <span>GitHub</span>
-              </a>
-              <a
-                href={SOCIALS.email}
-                className="tag-pill"
-                style={{ display: 'inline-flex', gap: '0.5rem', textDecoration: 'none' }}
-              >
-                <Mail size={14} style={{ color: 'var(--accent-emerald)' }} />
-                <span>Email</span>
-              </a>
-            </div>
+            <motion.div variants={HERO_ITEM} style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+              {[
+                { href: SOCIALS.linkedin, icon: <Linkedin size={14} style={{ color: 'var(--primary-cyan)' }} />, label: 'LinkedIn' },
+                { href: SOCIALS.github, icon: <Github size={14} style={{ color: 'var(--secondary-violet)' }} />, label: 'GitHub' },
+                { href: SOCIALS.email, icon: <Mail size={14} style={{ color: 'var(--accent-emerald)' }} />, label: 'Email' },
+              ].map((social) => (
+                <motion.a
+                  key={social.label}
+                  href={social.href}
+                  target={social.label !== 'Email' ? '_blank' : undefined}
+                  rel="noopener noreferrer"
+                  className="tag-pill"
+                  whileHover={{ scale: 1.06, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  style={{ display: 'inline-flex', gap: '0.5rem', textDecoration: 'none' }}
+                >
+                  {social.icon}
+                  <span>{social.label}</span>
+                </motion.a>
+              ))}
+            </motion.div>
           </motion.div>
 
-          {/* Profile Visual Card Column */}
+          {/* ── Profile Visual Card Column ── */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          style={{ gridColumn: 'span 5', position: 'relative' }}
+            initial={{ opacity: 0, scale: 0.92, x: 20 }}
+            animate={{ opacity: 1, scale: 1, x: 0 }}
+            transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            style={{ gridColumn: 'span 5', position: 'relative' }}
             className="col-span-5 hero-profile-col"
           >
             <div
+              className="hero-profile-float"
               style={{
                 position: 'relative',
                 borderRadius: '24px',
@@ -182,8 +207,11 @@ export const Hero: React.FC = () => {
                 marginLeft: 'auto',
               }}
             >
-              {/* Professional Identity Badge — Top Right */}
-              <div
+              {/* Professional Identity Badge */}
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.7, duration: 0.4 }}
                 style={{
                   position: 'absolute',
                   top: '-16px',
@@ -223,9 +251,9 @@ export const Hero: React.FC = () => {
                     Founder • Entrepreneur
                   </div>
                 </div>
-              </div>
+              </motion.div>
 
-              {/* Profile Image Container — reduced ~18% via aspect ratio */}
+              {/* Profile Image */}
               <div
                 style={{
                   width: '100%',
@@ -245,11 +273,17 @@ export const Hero: React.FC = () => {
                     objectFit: 'cover',
                     objectPosition: 'center top',
                     filter: 'contrast(1.05)',
+                    transition: 'transform 0.5s ease',
                   }}
+                  onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.04)')}
+                  onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
                 />
 
-                {/* Bottom Overlay Badge */}
-                <div
+                {/* Bottom overlay badge */}
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.9, duration: 0.4 }}
                   style={{
                     position: 'absolute',
                     bottom: '14px',
@@ -288,17 +322,17 @@ export const Hero: React.FC = () => {
                       Co-Founder @ Motherbits LLP
                     </div>
                   </div>
-                </div>
+                </motion.div>
               </div>
             </div>
           </motion.div>
         </div>
 
-        {/* Compact Stats Row */}
+        {/* ── Stats Row ── */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.35 }}
+          variants={STAGGER_CONTAINER}
+          initial="hidden"
+          animate="visible"
           style={{
             marginTop: '3.5rem',
             display: 'grid',
@@ -308,9 +342,12 @@ export const Hero: React.FC = () => {
           className="hero-stats-grid"
         >
           {stats.map((stat, idx) => (
-            <div
+            <motion.div
               key={idx}
+              custom={idx}
+              variants={REVEAL}
               className="glass-card hero-stat-card"
+              whileHover={{ y: -4, borderColor: 'rgba(0,240,255,0.3)' }}
               style={{
                 padding: '1.25rem 1.5rem',
                 display: 'flex',
@@ -359,7 +396,7 @@ export const Hero: React.FC = () => {
                   {stat.label}
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </motion.div>
       </div>

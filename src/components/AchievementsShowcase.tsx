@@ -1,43 +1,54 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Trophy, Award, Maximize2, ChevronDown, Sparkles, Newspaper } from 'lucide-react';
-import {
-  HERO_ACHIEVEMENT,
-  ACHIEVEMENT_STATS,
-  SECONDARY_ACHIEVEMENTS,
-  MEDIA_RECOGNITION,
-  ACHIEVEMENT_FLOW_TIMELINE
-} from '../data/portfolioData';
+import { usePortfolio } from '../context/PortfolioContext';
+import { REVEAL, REVEAL_SCALE, VIEWPORT } from '../hooks/useReveal';
 
 interface AchievementsShowcaseProps {
   onOpenLightbox: (imgSrc: string, caption: string) => void;
 }
 
 export const AchievementsShowcase: React.FC<AchievementsShowcaseProps> = ({ onOpenLightbox }) => {
+  const {
+    heroAchievement: HERO_ACHIEVEMENT,
+    achievementStats: ACHIEVEMENT_STATS,
+    secondaryAchievements: SECONDARY_ACHIEVEMENTS,
+    mediaRecognition: MEDIA_RECOGNITION,
+  } = usePortfolio();
   const [storyExpanded, setStoryExpanded] = useState(false);
+
 
   return (
     <section className="section" id="achievement">
       <div className="container">
-        <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
+        {/* Header */}
+        <motion.div
+          custom={0}
+          variants={REVEAL}
+          initial="hidden"
+          whileInView="visible"
+          viewport={VIEWPORT}
+          style={{ textAlign: 'center', marginBottom: '3.5rem' }}
+        >
           <div className="section-eyebrow" style={{ justifyContent: 'center' }}>
             <Trophy size={16} />
-            <span>02 — ACHIEVEMENTS & RECOGNITION</span>
+            <span>02 — ACHIEVEMENTS &amp; RECOGNITION</span>
           </div>
           <h2 className="section-title">
-            HONORS <span className="gradient-text">& AWARDS</span>
+            HONORS <span className="gradient-text">&amp; AWARDS</span>
           </h2>
           <p className="section-subtitle" style={{ margin: '0 auto' }}>
-            “Learning, building, competing — and turning ideas into results.”
+            "Learning, building, competing — and turning ideas into results."
           </p>
-        </div>
+        </motion.div>
 
-        {/* CONVERGE 2026 Hero Featured Achievement Card */}
+        {/* CONVERGE Hero Achievement Card */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          custom={0}
+          variants={REVEAL}
+          initial="hidden"
+          whileInView="visible"
+          viewport={VIEWPORT}
           className="glass-card"
           style={{
             padding: '2rem',
@@ -49,8 +60,8 @@ export const AchievementsShowcase: React.FC<AchievementsShowcaseProps> = ({ onOp
           }}
         >
           <div className="achiev-hero-grid">
-            {/* Left Photo Holder */}
-            <div
+            {/* Left Photo */}
+            <motion.div
               className="col-span-6"
               style={{
                 borderRadius: '16px',
@@ -60,6 +71,8 @@ export const AchievementsShowcase: React.FC<AchievementsShowcaseProps> = ({ onOp
                 cursor: 'pointer',
                 border: '1px solid rgba(255, 255, 255, 0.15)',
               }}
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.3 }}
               onClick={() =>
                 onOpenLightbox(
                   HERO_ACHIEVEMENT.image,
@@ -76,8 +89,6 @@ export const AchievementsShowcase: React.FC<AchievementsShowcaseProps> = ({ onOp
                   objectFit: 'cover',
                   transition: 'transform 0.5s ease',
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.05)')}
-                onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
               />
               <div
                 style={{
@@ -96,9 +107,9 @@ export const AchievementsShowcase: React.FC<AchievementsShowcaseProps> = ({ onOp
                 <Maximize2 size={14} style={{ color: 'var(--primary-cyan)' }} />
                 <span>CLICK TO ENLARGE TEAM PHOTO</span>
               </div>
-            </div>
+            </motion.div>
 
-            {/* Right Details Block */}
+            {/* Right Details */}
             <div className="col-span-6">
               <div
                 style={{
@@ -159,10 +170,10 @@ export const AchievementsShowcase: React.FC<AchievementsShowcaseProps> = ({ onOp
                   lineHeight: 1.6,
                 }}
               >
-                “{HERO_ACHIEVEMENT.wording}”
+                "{HERO_ACHIEVEMENT.wording}"
               </blockquote>
 
-              {/* Team Members Chips */}
+              {/* Team Members */}
               <div style={{ marginBottom: '1.25rem' }}>
                 <div
                   style={{
@@ -200,10 +211,12 @@ export const AchievementsShowcase: React.FC<AchievementsShowcaseProps> = ({ onOp
                 </div>
               </div>
 
-              {/* Accordion Story Toggle */}
+              {/* Story Accordion */}
               <div>
-                <button
+                <motion.button
                   onClick={() => setStoryExpanded(!storyExpanded)}
+                  whileHover={{ background: 'rgba(0, 240, 255, 0.07)' }}
+                  whileTap={{ scale: 0.98 }}
                   style={{
                     display: 'flex',
                     alignItems: 'center',
@@ -218,19 +231,19 @@ export const AchievementsShowcase: React.FC<AchievementsShowcaseProps> = ({ onOp
                     fontFamily: 'var(--font-mono)',
                     fontWeight: 600,
                     cursor: 'pointer',
-                    transition: 'all 0.2s ease',
+                    transition: 'background 0.2s ease',
                   }}
                 >
-                  <span style={{ minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>READ THE STORY</span>
-                  <ChevronDown
-                    size={18}
-                    style={{
-                      transform: storyExpanded ? 'rotate(180deg)' : 'rotate(0deg)',
-                      transition: 'transform 0.3s ease',
-                      color: 'var(--primary-cyan)',
-                    }}
-                  />
-                </button>
+                  <span style={{ minWidth: 0, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                    READ THE STORY
+                  </span>
+                  <motion.div
+                    animate={{ rotate: storyExpanded ? 180 : 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <ChevronDown size={18} style={{ color: 'var(--primary-cyan)' }} />
+                  </motion.div>
+                </motion.button>
 
                 <AnimatePresence>
                   {storyExpanded && (
@@ -238,7 +251,7 @@ export const AchievementsShowcase: React.FC<AchievementsShowcaseProps> = ({ onOp
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3 }}
+                      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                       style={{ overflow: 'hidden' }}
                     >
                       <div
@@ -266,7 +279,7 @@ export const AchievementsShowcase: React.FC<AchievementsShowcaseProps> = ({ onOp
           </div>
         </motion.div>
 
-        {/* 4 Stats Cards Row */}
+        {/* Stats Cards */}
         <div
           style={{
             display: 'grid',
@@ -278,10 +291,12 @@ export const AchievementsShowcase: React.FC<AchievementsShowcaseProps> = ({ onOp
           {ACHIEVEMENT_STATS.map((st, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: idx * 0.08 }}
+              custom={idx}
+              variants={REVEAL_SCALE}
+              initial="hidden"
+              whileInView="visible"
+              viewport={VIEWPORT}
+              whileHover={{ y: -4, borderColor: 'rgba(0,240,255,0.3)' }}
               className="glass-card"
               style={{ textAlign: 'center', padding: '1.5rem' }}
             >
@@ -310,16 +325,17 @@ export const AchievementsShowcase: React.FC<AchievementsShowcaseProps> = ({ onOp
           ))}
         </div>
 
-        {/* Secondary Achievements + Newspaper Clipping Grid */}
+        {/* Secondary Achievements + Newspaper */}
         <div className="bento-grid">
-          {/* Secondary Achievements */}
           {SECONDARY_ACHIEVEMENTS.map((sec, idx) => (
             <motion.div
               key={sec.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.45, delay: idx * 0.1 }}
+              custom={idx}
+              variants={REVEAL}
+              initial="hidden"
+              whileInView="visible"
+              viewport={VIEWPORT}
+              whileHover={{ y: -4 }}
               className="glass-card col-span-6"
               style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}
             >
@@ -378,12 +394,13 @@ export const AchievementsShowcase: React.FC<AchievementsShowcaseProps> = ({ onOp
             </motion.div>
           ))}
 
-          {/* Newspaper Media Recognition Card */}
+          {/* Newspaper Card */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            custom={2}
+            variants={REVEAL}
+            initial="hidden"
+            whileInView="visible"
+            viewport={VIEWPORT}
             className="glass-card col-span-12"
             style={{
               background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(241, 245, 249, 0.95))',
@@ -432,15 +449,17 @@ export const AchievementsShowcase: React.FC<AchievementsShowcaseProps> = ({ onOp
                   {MEDIA_RECOGNITION.caption} · {MEDIA_RECOGNITION.page}
                 </div>
                 <p style={{ fontSize: '1.05rem', color: '#334155', lineHeight: 1.7, marginBottom: '1.5rem' }}>
-                  “{MEDIA_RECOGNITION.description}”
+                  "{MEDIA_RECOGNITION.description}"
                 </p>
-                <button
+                <motion.button
                   onClick={() =>
                     onOpenLightbox(
                       MEDIA_RECOGNITION.image,
                       `${MEDIA_RECOGNITION.newspaper} (${MEDIA_RECOGNITION.caption})`
                     )
                   }
+                  whileHover={{ scale: 1.03, y: -2 }}
+                  whileTap={{ scale: 0.97 }}
                   style={{
                     display: 'inline-flex',
                     alignItems: 'center',
@@ -455,15 +474,14 @@ export const AchievementsShowcase: React.FC<AchievementsShowcaseProps> = ({ onOp
                     border: 'none',
                     cursor: 'pointer',
                     maxWidth: '100%',
-                    flexWrap: 'wrap' as const,
                   }}
                 >
                   <Maximize2 size={16} style={{ flexShrink: 0 }} />
                   <span>VIEW NEWSPAPER CLIPPING</span>
-                </button>
+                </motion.button>
               </div>
 
-              <div
+              <motion.div
                 className="col-span-5"
                 style={{
                   borderRadius: '14px',
@@ -472,6 +490,8 @@ export const AchievementsShowcase: React.FC<AchievementsShowcaseProps> = ({ onOp
                   boxShadow: '0 10px 25px rgba(0,0,0,0.15)',
                   aspectRatio: '4 / 3',
                 }}
+                whileHover={{ scale: 1.03 }}
+                transition={{ duration: 0.35 }}
                 onClick={() =>
                   onOpenLightbox(
                     MEDIA_RECOGNITION.image,
@@ -484,7 +504,7 @@ export const AchievementsShowcase: React.FC<AchievementsShowcaseProps> = ({ onOp
                   alt="Mangalam Newspaper Clipping"
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
-              </div>
+              </motion.div>
             </div>
           </motion.div>
         </div>
