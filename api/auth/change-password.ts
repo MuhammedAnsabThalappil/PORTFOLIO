@@ -55,7 +55,7 @@ export default async function handler(req: any, res: any) {
         .from('admin_users')
         .select('*')
         .eq('username', session.username)
-        .single();
+        .maybeSingle();
 
       if (user && user.password_hash) {
         currentHash = user.password_hash;

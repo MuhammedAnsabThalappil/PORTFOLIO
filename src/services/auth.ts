@@ -7,25 +7,95 @@ export interface AdminUser {
   isTemporary: boolean;
 }
 
+/**
+ * Safely parse JSON from a fetch Response, preventing "Unexpected end of JSON input"
+ * and handling non-200 HTTP statuses, HTML error pages, and network failures gracefully.
+ */
+async function parseSafeJsonResponse<T = any>(res: Response, fallbackErrorMsg: string): Promise<T> {
+  const contentType = res.headers.get('content-type') || '';
+  let data: any = null;
+
+  try {
+    if (contentType.includes('application/json')) {
+      const text = await res.text();
+      data = text ? JSON.parse(text) : null;
+    } else {
+      // Endpoint returned HTML (e.g. 404 or Cloudflare error page) or text
+      const rawText = await res.text();
+      try {
+        data = JSON.parse(rawText);
+      } catch {
+        data = null;
+      }
+    }
+  } catch {
+    data = null;
+  }
+
+  if (!res.ok) {
+    if (data && typeof data === 'object' && data.error) {
+      throw new Error(data.error);
+    }
+
+    if (res.status === 401) {
+      throw new Error('Invalid username or password');
+    }
+    if (res.status === 404) {
+      throw new Error('Authentication service endpoint not found (404). Please ensure server functions are running.');
+    }
+    if (res.status === 429) {
+      throw new Error('Too many login attempts. Please wait a few minutes before trying again.');
+    }
+    if (res.status >= 500) {
+      throw new Error('Authentication server encountered an error. Please try again.');
+    }
+
+    throw new Error(fallbackErrorMsg);
+  }
+
+  if (!data) {
+    throw new Error('Server returned an empty or invalid response.');
+  }
+
+  return data as T;
+}
+
 export const authService = {
   /**
    * Login with username and password
    */
   async login(username: string, password: string): Promise<{ success: boolean; token: string; user: AdminUser }> {
-    const res = await fetch('/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, password }),
-    });
+    const trimmedUsername = username.trim();
+    if (!trimmedUsername || !password) {
+      throw new Error('Please enter both username and password.');
+    }
 
-    const data = await res.json();
-    if (!res.ok) {
-      throw new Error(data.error || 'Authentication failed');
+    let res: Response;
+    try {
+      res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({ username: trimmedUsername, password }),
+      });
+    } catch (netErr: any) {
+      throw new Error('Unable to connect to authentication server. Please check your network connection.');
+    }
+
+    const data = await parseSafeJsonResponse<{ success: boolean; token: string; user: AdminUser }>(
+      res,
+      'Authentication failed'
+    );
+
+    if (!data.token) {
+      throw new Error('No session token received from server.');
     }
 
     sessionStorage.setItem(TOKEN_KEY, data.token);
-    sessionStorage.setItem(TEMP_KEY, String(data.user.isTemporary));
-    sessionStorage.setItem(USER_KEY, data.user.username);
+    sessionStorage.setItem(TEMP_KEY, String(data.user?.isTemporary ?? true));
+    sessionStorage.setItem(USER_KEY, data.user?.username || trimmedUsername);
 
     return data;
   },
@@ -39,7 +109,10 @@ export const authService = {
 
     try {
       const res = await fetch('/api/auth/verify', {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: {
+          'Accept': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
       });
 
       if (!res.ok) {
@@ -47,7 +120,7 @@ export const authService = {
         return { valid: false };
       }
 
-      const data = await res.json();
+      const data = await parseSafeJsonResponse<{ valid: boolean; user?: AdminUser }>(res, 'Verification failed');
       if (data.valid && data.user) {
         sessionStorage.setItem(TEMP_KEY, String(data.user.isTemporary));
         return { valid: true, user: data.user };
@@ -74,19 +147,25 @@ export const authService = {
     const token = this.getToken();
     if (!token) throw new Error('Not authenticated');
 
-    const res = await fetch('/api/auth/change-password', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({ currentPassword, newPassword }),
-    });
-
-    const data = await res.json();
-    if (!res.ok) {
-      throw new Error(data.error || 'Password update failed');
+    let res: Response;
+    try {
+      res = await fetch('/api/auth/change-password', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ currentPassword, newPassword }),
+      });
+    } catch {
+      throw new Error('Unable to connect to server to update password.');
     }
+
+    const data = await parseSafeJsonResponse<{ success: boolean; message: string; token?: string }>(
+      res,
+      'Password update failed'
+    );
 
     if (data.token) {
       sessionStorage.setItem(TOKEN_KEY, data.token);
@@ -105,7 +184,10 @@ export const authService = {
       try {
         await fetch('/api/auth/logout', {
           method: 'POST',
-          headers: { Authorization: `Bearer ${token}` },
+          headers: {
+            'Accept': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
         });
       } catch {
         // Ignore network error on logout

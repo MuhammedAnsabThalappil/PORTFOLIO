@@ -48,7 +48,7 @@ export default async function handler(req: any, res: any) {
         .from('admin_users')
         .select('*')
         .eq('username', expectedUsername)
-        .single();
+        .maybeSingle();
 
       if (!error && user && user.password_hash) {
         passwordValid = await verifyPassword(password, user.password_hash);

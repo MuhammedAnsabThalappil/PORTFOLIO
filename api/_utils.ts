@@ -14,7 +14,7 @@ export interface SessionPayload {
 
 const DEFAULT_SECRET = process.env.ADMIN_JWT_SECRET || 'ansab-portfolio-secure-token-secret-fallback-key-2026';
 // Bcrypt hash of '2006'
-export const DEFAULT_TEMP_HASH = '$2b$10$dKXSyvg0nmeRmcV0SeJ72uDlLFmfsnioLGYq4uFOugCEJDgdMo.7q';
+export const DEFAULT_TEMP_HASH = '$2b$10$qnF2FNDQUfy.KZBrpGqEluyaU3v2u7NoErUCNYmuWUhl4N2YSTLcC';
 
 // In-memory password override for local dev session persistence if DB is not attached
 let inMemoryPasswordHash: string | null = null;

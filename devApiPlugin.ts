@@ -1,5 +1,4 @@
 import { Plugin } from 'vite';
-import url from 'url';
 
 export function devApiPlugin(): Plugin {
   return {
@@ -10,71 +9,78 @@ export function devApiPlugin(): Plugin {
           return next();
         }
 
-        const parsedUrl = url.parse(req.url, true);
-        const pathname = parsedUrl.pathname || '';
+        const origin = `http://${req.headers.host || 'localhost:3000'}`;
+        const parsedUrl = new URL(req.url, origin);
+        const pathname = parsedUrl.pathname;
 
-        // Helper response methods for Express/Vercel compatibility
-        (res as any).status = function (code: number) {
-          this.statusCode = code;
-          return this;
-        };
-
-        (res as any).json = function (data: any) {
-          this.setHeader('Content-Type', 'application/json');
-          this.end(JSON.stringify(data));
-        };
-
-        (req as any).query = parsedUrl.query;
-
-        // Collect body for POST/PUT
-        if (req.method === 'POST' || req.method === 'PUT' || req.method === 'PATCH') {
-          let bodyData = '';
-          req.on('data', chunk => {
-            bodyData += chunk.toString();
-          });
-
-          await new Promise<void>(resolve => {
-            req.on('end', () => {
-              try {
-                (req as any).body = bodyData ? JSON.parse(bodyData) : {};
-              } catch {
-                (req as any).body = bodyData;
-              }
-              resolve();
+        // Collect body data
+        let bodyData = '';
+        if (req.method && ['POST', 'PUT', 'PATCH', 'DELETE'].includes(req.method)) {
+          await new Promise<void>((resolve, reject) => {
+            req.on('data', chunk => {
+              bodyData += chunk.toString();
             });
+            req.on('end', () => resolve());
+            req.on('error', err => reject(err));
           });
         }
 
+        // Build Web standard Request
+        const standardReq = new Request(parsedUrl.toString(), {
+          method: req.method,
+          headers: req.headers as any,
+          body: ['GET', 'HEAD'].includes(req.method || 'GET') ? undefined : bodyData || undefined,
+        });
+
+        // Cloudflare Pages context mock for local Vite dev
+        const context = {
+          request: standardReq,
+          env: process.env,
+          params: {},
+          data: {},
+          waitUntil: () => {},
+          next: () => {},
+        };
+
         try {
-          let handler: any = null;
+          let mod: any = null;
 
           if (pathname === '/api/auth/login') {
-            handler = (await server.ssrLoadModule('/api/auth/login.ts')).default;
+            mod = await server.ssrLoadModule('/functions/api/auth/login.ts');
           } else if (pathname === '/api/auth/verify') {
-            handler = (await server.ssrLoadModule('/api/auth/verify.ts')).default;
+            mod = await server.ssrLoadModule('/functions/api/auth/verify.ts');
           } else if (pathname === '/api/auth/change-password') {
-            handler = (await server.ssrLoadModule('/api/auth/change-password.ts')).default;
+            mod = await server.ssrLoadModule('/functions/api/auth/change-password.ts');
           } else if (pathname === '/api/auth/logout') {
-            handler = (await server.ssrLoadModule('/api/auth/logout.ts')).default;
+            mod = await server.ssrLoadModule('/functions/api/auth/logout.ts');
           } else if (pathname === '/api/contact') {
-            handler = (await server.ssrLoadModule('/api/contact.ts')).default;
+            mod = await server.ssrLoadModule('/functions/api/contact.ts');
           } else if (pathname === '/api/analytics') {
-            handler = (await server.ssrLoadModule('/api/analytics.ts')).default;
+            mod = await server.ssrLoadModule('/functions/api/analytics.ts');
           } else if (pathname === '/api/admin/content') {
-            handler = (await server.ssrLoadModule('/api/admin/content.ts')).default;
+            mod = await server.ssrLoadModule('/functions/api/admin/content.ts');
           }
 
+          const handler = mod?.onRequest || mod?.default;
           if (handler) {
-            await handler(req, res);
+            const response: Response = await handler(context);
+            res.statusCode = response.status;
+            response.headers.forEach((val, key) => {
+              res.setHeader(key, val);
+            });
+            const text = await response.text();
+            res.end(text);
             return;
           }
 
           res.statusCode = 404;
-          (res as any).json({ error: 'Dev API endpoint not found: ' + pathname });
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify({ error: `API route not found: ${pathname}` }));
         } catch (err: any) {
-          console.error('Error executing dev API handler:', err);
+          console.error('Dev API execution error on ' + pathname + ':', err);
           res.statusCode = 500;
-          (res as any).json({ error: 'Dev API execution error: ' + err.message });
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify({ error: 'Server error processing request' }));
         }
       });
     },

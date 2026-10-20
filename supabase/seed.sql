@@ -3,10 +3,10 @@
 -- ==============================================================================
 
 -- 1. Initial Admin Account (Username: ANSAB, Temp Password: 2006)
--- Bcrypt Hash of '2006': $2b$10$dKXSyvg0nmeRmcV0SeJ72uDlLFmfsnioLGYq4uFOugCEJDgdMo.7q
+-- Bcrypt Hash of '2006': $2b$10$qnF2FNDQUfy.KZBrpGqEluyaU3v2u7NoErUCNYmuWUhl4N2YSTLcC
 INSERT INTO admin_users (username, password_hash, is_temporary_password)
-VALUES ('ANSAB', '$2b$10$dKXSyvg0nmeRmcV0SeJ72uDlLFmfsnioLGYq4uFOugCEJDgdMo.7q', true)
-ON CONFLICT (username) DO NOTHING;
+VALUES ('ANSAB', '$2b$10$qnF2FNDQUfy.KZBrpGqEluyaU3v2u7NoErUCNYmuWUhl4N2YSTLcC', true)
+ON CONFLICT (username) DO UPDATE SET password_hash = EXCLUDED.password_hash;
 
 -- 2. Profile Information
 INSERT INTO profile (

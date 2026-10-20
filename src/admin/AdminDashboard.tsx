@@ -302,7 +302,7 @@ export const AdminDashboard: React.FC = () => {
                 }}
               >
                 <ShieldAlert size={14} />
-                <span>Change Temp Pass (2006)</span>
+                <span>Change Temporary Password</span>
               </button>
             )}
 

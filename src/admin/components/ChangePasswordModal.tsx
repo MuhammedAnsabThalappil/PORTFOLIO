@@ -20,7 +20,7 @@ export const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({ isOpen
 
   // Validation rules
   const isMinLength = newPassword.length >= 8;
-  const isNotTemp = newPassword !== '2006';
+  const isNotTemp = newPassword.length > 0 && newPassword !== currentPassword;
   const hasSymbolOrNum = /[0-9!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(newPassword);
   const isMatching = newPassword.length > 0 && newPassword === confirmPassword;
   const isValid = isMinLength && isNotTemp && hasSymbolOrNum && isMatching;
@@ -146,7 +146,7 @@ export const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({ isOpen
                 required
                 value={currentPassword}
                 onChange={e => setCurrentPassword(e.target.value)}
-                placeholder="Enter current password (e.g. 2006)"
+                placeholder="Enter current password"
                 style={{
                   width: '100%',
                   padding: '0.75rem 1rem',
@@ -215,7 +215,7 @@ export const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({ isOpen
                 <Check size={13} /> <span>Contains number or symbol</span>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: isNotTemp ? '#10b981' : 'var(--text-dim)' }}>
-                <Check size={13} /> <span>Different from default 2006</span>
+                <Check size={13} /> <span>Different from current password</span>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: isMatching ? '#10b981' : 'var(--text-dim)' }}>
                 <Check size={13} /> <span>Passwords match</span>

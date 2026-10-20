@@ -65,7 +65,7 @@ export const OverviewTab: React.FC<OverviewTabProps> = ({
             </div>
             <div>
               <h4 style={{ margin: '0 0 0.25rem', color: '#fff', fontSize: '1rem' }}>
-                Temporary Development Password Active (2006)
+                Temporary Development Password Active
               </h4>
               <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-muted)' }}>
                 Please change your password to a strong phrase before deploying this site to production.

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Shield, Lock, User, ArrowRight, AlertCircle, ArrowLeft, KeyRound } from 'lucide-react';
+import { Shield, Lock, User, ArrowRight, AlertCircle, ArrowLeft } from 'lucide-react';
 import { authService } from '../services/auth';
 
 export const AdminLogin: React.FC = () => {
@@ -123,23 +123,6 @@ export const AdminLogin: React.FC = () => {
           </p>
         </div>
 
-        {/* Development Helper Pill */}
-        <div style={{
-          padding: '0.75rem 1rem',
-          borderRadius: '10px',
-          background: 'rgba(0, 240, 255, 0.06)',
-          border: '1px solid rgba(0, 240, 255, 0.2)',
-          marginBottom: '1.5rem',
-          fontSize: '0.75rem',
-          fontFamily: 'var(--font-mono)',
-          color: 'var(--text-muted)',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '0.5rem',
-        }}>
-          <KeyRound size={15} style={{ color: 'var(--primary-cyan)', flexShrink: 0 }} />
-          <span>Initial Dev Password: <code style={{ color: 'var(--primary-cyan)', fontWeight: 600 }}>2006</code> (change before production)</span>
-        </div>
 
         {/* Error Alert */}
         {error && (
