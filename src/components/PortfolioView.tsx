@@ -16,7 +16,8 @@ import { Footer } from './Footer';
 import { Modal } from './Modal';
 import { Lightbox } from './Lightbox';
 import { AnimatedBackground } from './AnimatedBackground';
-import { MobileIntro } from './MobileIntro';
+import { CinematicOpening } from './CinematicOpening';
+import { CustomCursor } from './CustomCursor';
 import { Project, Business } from '../types';
 import { trackAnalytics } from '../services/supabase';
 
@@ -42,13 +43,28 @@ export const PortfolioView: React.FC = () => {
     trackAnalytics('page_view', { path: '/' });
   }, []);
 
+  // Smooth scroll to hash anchor on load (e.g., #achievement-converge-2026)
+  useEffect(() => {
+    if (window.location.hash) {
+      const hashTarget = document.querySelector(window.location.hash);
+      if (hashTarget) {
+        setTimeout(() => {
+          hashTarget.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 600);
+      }
+    }
+  }, []);
+
   return (
     <div className="app-container">
-      {/* Animated ambient background */}
-      <AnimatedBackground />
+      {/* Custom Fluid Cursor (Desktop only, auto-disabled on touch) */}
+      <CustomCursor />
 
-      {/* Mobile-only cinematic intro (session-based) */}
-      <MobileIntro />
+      {/* Cinematic opening sequence featuring real portrait photo */}
+      <CinematicOpening />
+
+      {/* Ambient starlight & grid background */}
+      <AnimatedBackground />
 
       {/* Sticky Navigation */}
       <Navbar onOpenCommand={() => setCommandOpen(true)} />

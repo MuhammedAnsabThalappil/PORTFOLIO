@@ -1,8 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Code, ExternalLink, Github, Smartphone, Cpu, BarChart2, Trophy } from 'lucide-react';
+import { Code, ExternalLink, Github, Smartphone, Cpu, BarChart2, Trophy, Share2 } from 'lucide-react';
 import { usePortfolio } from '../context/PortfolioContext';
 import { Project } from '../types';
+import { ShareButton } from './ShareButton';
 import { REVEAL, REVEAL_SCALE, VIEWPORT } from '../hooks/useReveal';
 
 interface ProjectsSectionProps {
@@ -10,8 +11,8 @@ interface ProjectsSectionProps {
 }
 
 const PROJECT_ICONS: Record<string, React.ReactNode> = {
-  'flutter-mobile-app':       <Smartphone size={22} style={{ color: 'var(--primary-cyan)' }} />,
-  'embedded-raspi-iot':       <Cpu size={22} style={{ color: 'var(--secondary-violet)' }} />,
+  'flutter-mobile-app':       <Smartphone size={22} style={{ color: 'var(--accent-aura)' }} />,
+  'embedded-raspi-iot':       <Cpu size={22} style={{ color: '#3b82f6' }} />,
   'data-analytics-dashboard': <BarChart2 size={22} style={{ color: 'var(--accent-emerald)' }} />,
 };
 
@@ -37,7 +38,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenProjectM
         >
           <div className="section-eyebrow">
             <Code size={16} />
-            <span>03 — PROJECTS</span>
+            <span>03 — PORTFOLIO &amp; ARCHITECTURE</span>
           </div>
         </motion.div>
         <motion.h2
@@ -48,11 +49,12 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenProjectM
           viewport={VIEWPORT}
           className="section-title"
         >
-          THINGS I'VE <span className="gradient-text">BUILT.</span>
+          ENGINEERED <span className="gradient-text">SOLUTIONS.</span>
         </motion.h2>
 
         {/* ─── Featured Project ─── */}
         <motion.div
+          id="project-smart-attendance"
           custom={0}
           variants={REVEAL}
           initial="hidden"
@@ -61,9 +63,9 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenProjectM
           className="glass-card"
           style={{
             padding: '0',
-            marginBottom: '1.5rem',
-            borderColor: 'rgba(0, 240, 255, 0.3)',
-            background: 'linear-gradient(135deg, rgba(12, 16, 29, 0.97), rgba(16, 24, 44, 0.97))',
+            marginBottom: '2rem',
+            borderColor: 'rgba(220, 248, 54, 0.35)',
+            background: 'linear-gradient(135deg, rgba(14, 18, 30, 0.98), rgba(18, 24, 42, 0.98))',
             overflow: 'hidden',
           }}
         >
@@ -75,8 +77,8 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenProjectM
                   position: 'relative',
                   width: '100%',
                   height: '100%',
-                  minHeight: '300px',
-                  background: 'linear-gradient(135deg, rgba(0,240,255,0.08), rgba(139,92,246,0.12))',
+                  minHeight: '320px',
+                  background: 'linear-gradient(135deg, rgba(220, 248, 54, 0.08), rgba(59, 130, 246, 0.12))',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -86,6 +88,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenProjectM
                   <img
                     src={FEATURED_PROJECT.image}
                     alt={FEATURED_PROJECT.name}
+                    loading="lazy"
                     style={{
                       width: '100%',
                       height: '100%',
@@ -98,58 +101,78 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenProjectM
                     onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
                     onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
                   />
-                ) : null}
-                {/* Overlay gradient */}
+                ) : (
+                  <div style={{ textAlign: 'center', padding: '2rem' }}>
+                    <div style={{ fontSize: '3rem', marginBottom: '0.5rem' }}>📷</div>
+                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', color: 'var(--text-dim)' }}>
+                      MACHINE VISION CAMERA
+                    </span>
+                  </div>
+                )}
+
                 <div
                   style={{
                     position: 'absolute',
-                    inset: 0,
-                    background: 'linear-gradient(to right, transparent 60%, rgba(12,16,29,0.9))',
-                    pointerEvents: 'none',
-                  }}
-                />
-                {/* Award badge */}
-                <div
-                  style={{
-                    position: 'absolute',
-                    top: '1.25rem',
-                    left: '1.25rem',
+                    top: '16px',
+                    left: '16px',
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '0.5rem',
-                    padding: '0.45rem 0.85rem',
-                    borderRadius: '10px',
-                    background: 'rgba(9,13,26,0.9)',
-                    border: '1px solid rgba(245,158,11,0.4)',
+                    gap: '0.4rem',
+                    padding: '0.35rem 0.8rem',
+                    borderRadius: '8px',
+                    background: 'rgba(7, 8, 12, 0.85)',
                     backdropFilter: 'blur(10px)',
+                    border: '1px solid rgba(220, 248, 54, 0.4)',
+                    fontSize: '0.75rem',
+                    fontFamily: 'var(--font-mono)',
+                    color: 'var(--accent-aura)',
+                    fontWeight: 700,
                   }}
                 >
-                  <Trophy size={14} style={{ color: '#f59e0b' }} />
-                  <span style={{ fontSize: '0.72rem', fontFamily: 'var(--font-mono)', fontWeight: 700, color: '#f59e0b' }}>
-                    INSPIRE AWARD — MANAK
-                  </span>
+                  <Trophy size={13} />
+                  <span>NATIONAL INSPIRE AWARD</span>
                 </div>
               </div>
             </div>
 
             {/* Right — Content */}
-            <div className="featured-project-content-col" style={{ padding: '2.25rem 2.25rem 2.25rem 2rem' }}>
+            <div className="featured-project-content-col" style={{ padding: '2.5rem 2.5rem 2.5rem 2rem' }}>
               <div
                 style={{
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '0.78rem',
-                  color: 'var(--primary-cyan)',
-                  fontWeight: 700,
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
                   marginBottom: '0.5rem',
-                  letterSpacing: '0.06em',
                 }}
               >
-                {FEATURED_PROJECT.number} · FEATURED INNOVATION
+                <div
+                  style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '0.78rem',
+                    color: 'var(--accent-aura)',
+                    fontWeight: 700,
+                    letterSpacing: '0.06em',
+                  }}
+                >
+                  {FEATURED_PROJECT.number} // CORE INNOVATION
+                </div>
+
+                {/* Share Button for Featured Project */}
+                <ShareButton
+                  title={`Smart Attendance System — Project by Muhammed Ansab`}
+                  text={`ML-based Smart Attendance System recognized by the Government of India with the INSPIRE Award MANAK.`}
+                  url="https://ansab.pages.dev#project-smart-attendance"
+                  image={FEATURED_PROJECT.image || '/assets/projects/smart-attendance.jpg'}
+                  category="FEATURED PROJECT"
+                  variant="pill"
+                  label="SHARE"
+                />
               </div>
+
               <h3
                 style={{
                   fontFamily: 'var(--font-heading)',
-                  fontSize: 'clamp(1.35rem, 2.5vw, 1.9rem)',
+                  fontSize: 'clamp(1.4rem, 2.6vw, 2rem)',
                   fontWeight: 900,
                   marginBottom: '0.3rem',
                   color: '#ffffff',
@@ -158,12 +181,14 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenProjectM
               >
                 🏆 {FEATURED_PROJECT.name}
               </h3>
+
               <div
                 style={{
                   fontFamily: 'var(--font-mono)',
                   fontSize: '0.82rem',
-                  color: 'var(--secondary-violet)',
+                  color: '#3b82f6',
                   marginBottom: '1.25rem',
+                  fontWeight: 600,
                 }}
               >
                 {FEATURED_PROJECT.category}
@@ -193,7 +218,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenProjectM
                       marginBottom: '0.65rem',
                     }}
                   >
-                    HIGHLIGHTS
+                    ACCOLADES &amp; FEATURES
                   </div>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.45rem' }}>
                     {FEATURED_PROJECT.highlights.map((h, i) => (
@@ -201,9 +226,9 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenProjectM
                         key={i}
                         className="tag-pill"
                         style={{
-                          borderColor: 'rgba(245, 158, 11, 0.3)',
-                          color: '#fbbf24',
-                          background: 'rgba(245, 158, 11, 0.07)',
+                          borderColor: 'rgba(220, 248, 54, 0.3)',
+                          color: 'var(--accent-aura)',
+                          background: 'rgba(220, 248, 54, 0.08)',
                         }}
                       >
                         {h}
@@ -225,22 +250,22 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenProjectM
                     marginBottom: '0.65rem',
                   }}
                 >
-                  TECH STACK
+                  TECHNOLOGIES
                 </div>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
                   {FEATURED_PROJECT.technologies.map((tech, idx) => (
-                    <span key={idx} className="tag-pill" style={{ borderColor: 'rgba(0, 240, 255, 0.3)', color: '#ffffff' }}>
+                    <span key={idx} className="tag-pill" style={{ color: '#ffffff' }}>
                       {tech}
                     </span>
                   ))}
                 </div>
               </div>
 
-              <div style={{ display: 'flex', gap: '0.85rem', flexWrap: 'wrap' }}>
+              <div style={{ display: 'flex', gap: '0.85rem', flexWrap: 'wrap', alignItems: 'center' }}>
                 <motion.a
                   href="#achievement"
                   className="btn btn-primary btn-sm"
-                  whileHover={{ scale: 1.04, y: -2 }}
+                  whileHover={{ scale: 1.03, y: -2 }}
                   whileTap={{ scale: 0.97 }}
                 >
                   <span>VIEW RECOGNITION</span>
@@ -267,12 +292,13 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenProjectM
           {EXTRA_PROJECTS.map((proj, idx) => (
             <motion.div
               key={proj.id}
+              id={`project-${proj.id}`}
               custom={idx}
               variants={REVEAL_SCALE}
               initial="hidden"
               whileInView="visible"
               viewport={VIEWPORT}
-              whileHover={{ y: -6, borderColor: 'rgba(0,240,255,0.28)' }}
+              whileHover={{ y: -6, borderColor: 'rgba(220, 248, 54, 0.35)' }}
               className="glass-card col-span-4"
               style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}
             >
@@ -289,33 +315,45 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenProjectM
                     style={{
                       fontFamily: 'var(--font-mono)',
                       fontSize: '0.78rem',
-                      color: 'var(--primary-cyan)',
+                      color: 'var(--accent-aura)',
                       fontWeight: 700,
                       letterSpacing: '0.04em',
                     }}
                   >
                     {proj.number}
                   </span>
-                  <div
-                    style={{
-                      width: '38px',
-                      height: '38px',
-                      borderRadius: '10px',
-                      background: 'rgba(255,255,255,0.04)',
-                      border: '1px solid rgba(255,255,255,0.08)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}
-                  >
-                    {PROJECT_ICONS[proj.id] ?? <Code size={18} style={{ color: 'var(--text-dim)' }} />}
+
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
+                    {/* Share Button for individual project */}
+                    <ShareButton
+                      title={`${proj.name} — Project by Muhammed Ansab`}
+                      text={proj.description}
+                      url={`https://ansab.pages.dev#project-${proj.id}`}
+                      category={proj.name}
+                      variant="icon"
+                    />
+
+                    <div
+                      style={{
+                        width: '38px',
+                        height: '38px',
+                        borderRadius: '10px',
+                        background: 'rgba(255,255,255,0.04)',
+                        border: '1px solid rgba(255,255,255,0.08)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}
+                    >
+                      {PROJECT_ICONS[proj.id] ?? <Code size={18} style={{ color: 'var(--text-dim)' }} />}
+                    </div>
                   </div>
                 </div>
 
                 <h3
                   style={{
                     fontFamily: 'var(--font-heading)',
-                    fontSize: '1.2rem',
+                    fontSize: '1.25rem',
                     fontWeight: 800,
                     marginBottom: '0.2rem',
                     color: '#ffffff',
@@ -329,8 +367,9 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenProjectM
                   style={{
                     fontFamily: 'var(--font-mono)',
                     fontSize: '0.78rem',
-                    color: 'var(--secondary-violet)',
+                    color: '#3b82f6',
                     marginBottom: '0.9rem',
+                    fontWeight: 600,
                   }}
                 >
                   {proj.category}

@@ -1,0 +1,326 @@
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Share2, Copy, Check, X, MessageSquare, Linkedin, Twitter, ExternalLink } from 'lucide-react';
+
+export interface ShareData {
+  title: string;
+  text: string;
+  url: string;
+  image?: string;
+  category?: string;
+}
+
+interface ShareModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  data: ShareData | null;
+}
+
+export const ShareModal: React.FC<ShareModalProps> = ({ isOpen, onClose, data }) => {
+  const [copied, setCopied] = useState(false);
+
+  if (!isOpen || !data) return null;
+
+  const handleCopyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(data.url);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+    } catch {
+      // Fallback if clipboard API is blocked
+      const input = document.createElement('input');
+      input.value = data.url;
+      document.body.appendChild(input);
+      input.select();
+      document.execCommand('copy');
+      document.body.removeChild(input);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2500);
+    }
+  };
+
+  const handleWhatsApp = () => {
+    const message = `${data.title}\n\n${data.text}\n\n${data.url}`;
+    window.open(`https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
+  };
+
+  const handleLinkedIn = () => {
+    window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(data.url)}`, '_blank', 'noopener,noreferrer');
+  };
+
+  const handleTwitter = () => {
+    const text = `${data.title} — ${data.text}`;
+    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(data.url)}`, '_blank', 'noopener,noreferrer');
+  };
+
+  return (
+    <AnimatePresence>
+      <div
+        style={{
+          position: 'fixed',
+          inset: 0,
+          zIndex: 10000,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '1rem',
+        }}
+      >
+        {/* Backdrop */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={onClose}
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'rgba(5, 7, 12, 0.82)',
+            backdropFilter: 'blur(16px)',
+          }}
+        />
+
+        {/* Modal Window */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.94, y: 16 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.94, y: 16 }}
+          transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+          style={{
+            position: 'relative',
+            width: '100%',
+            maxWidth: '480px',
+            background: 'rgba(14, 17, 26, 0.96)',
+            border: '1px solid rgba(220, 248, 54, 0.25)',
+            borderRadius: '20px',
+            padding: '1.75rem',
+            boxShadow: '0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(220, 248, 54, 0.08)',
+            zIndex: 1,
+            overflow: 'hidden',
+          }}
+        >
+          {/* Top Header */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+              <div
+                style={{
+                  width: '36px',
+                  height: '36px',
+                  borderRadius: '10px',
+                  background: 'rgba(220, 248, 54, 0.12)',
+                  border: '1px solid rgba(220, 248, 54, 0.3)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: 'var(--accent-aura)',
+                }}
+              >
+                <Share2 size={18} />
+              </div>
+              <div>
+                <h3 style={{ fontSize: '1.05rem', fontWeight: 800, margin: 0, color: '#ffffff', fontFamily: 'var(--font-heading)' }}>
+                  SHARE THIS HIGHLIGHT
+                </h3>
+                <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
+                  {data.category || 'MUHAMMED ANSAB PORTFOLIO'}
+                </span>
+              </div>
+            </div>
+
+            <button
+              onClick={onClose}
+              aria-label="Close share modal"
+              style={{
+                width: '32px',
+                height: '32px',
+                borderRadius: '8px',
+                background: 'rgba(255, 255, 255, 0.05)',
+                border: '1px solid rgba(255, 255, 255, 0.1)',
+                color: 'var(--text-muted)',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'all 0.2s',
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = '#fff')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
+            >
+              <X size={16} />
+            </button>
+          </div>
+
+          {/* Preview Card */}
+          <div
+            style={{
+              padding: '1rem',
+              borderRadius: '14px',
+              background: 'rgba(255, 255, 255, 0.03)',
+              border: '1px solid rgba(255, 255, 255, 0.08)',
+              marginBottom: '1.5rem',
+              display: 'flex',
+              gap: '1rem',
+              alignItems: 'center',
+            }}
+          >
+            {data.image && (
+              <img
+                src={data.image}
+                alt={data.title}
+                style={{
+                  width: '64px',
+                  height: '64px',
+                  borderRadius: '10px',
+                  objectFit: 'cover',
+                  flexShrink: 0,
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                }}
+              />
+            )}
+            <div style={{ minWidth: 0 }}>
+              <div style={{ fontSize: '0.9rem', fontWeight: 700, color: '#fff', marginBottom: '0.2rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                {data.title}
+              </div>
+              <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', lineHeight: 1.4, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                {data.text}
+              </div>
+            </div>
+          </div>
+
+          {/* Social Share Grid */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0.75rem', marginBottom: '1.25rem' }}>
+            <button
+              onClick={handleWhatsApp}
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '0.5rem',
+                padding: '0.85rem 0.5rem',
+                borderRadius: '12px',
+                background: 'rgba(37, 211, 102, 0.08)',
+                border: '1px solid rgba(37, 211, 102, 0.25)',
+                color: '#25d366',
+                cursor: 'pointer',
+                fontFamily: 'var(--font-mono)',
+                fontSize: '0.75rem',
+                fontWeight: 600,
+                transition: 'transform 0.2s, background 0.2s',
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.transform = 'translateY(-2px)')}
+              onMouseLeave={(e) => (e.currentTarget.style.transform = 'translateY(0)')}
+            >
+              <MessageSquare size={20} />
+              <span>WhatsApp</span>
+            </button>
+
+            <button
+              onClick={handleLinkedIn}
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '0.5rem',
+                padding: '0.85rem 0.5rem',
+                borderRadius: '12px',
+                background: 'rgba(10, 102, 194, 0.08)',
+                border: '1px solid rgba(10, 102, 194, 0.25)',
+                color: '#0a66c2',
+                cursor: 'pointer',
+                fontFamily: 'var(--font-mono)',
+                fontSize: '0.75rem',
+                fontWeight: 600,
+                transition: 'transform 0.2s, background 0.2s',
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.transform = 'translateY(-2px)')}
+              onMouseLeave={(e) => (e.currentTarget.style.transform = 'translateY(0)')}
+            >
+              <Linkedin size={20} />
+              <span>LinkedIn</span>
+            </button>
+
+            <button
+              onClick={handleTwitter}
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '0.5rem',
+                padding: '0.85rem 0.5rem',
+                borderRadius: '12px',
+                background: 'rgba(29, 155, 240, 0.08)',
+                border: '1px solid rgba(29, 155, 240, 0.25)',
+                color: '#1d9bf0',
+                cursor: 'pointer',
+                fontFamily: 'var(--font-mono)',
+                fontSize: '0.75rem',
+                fontWeight: 600,
+                transition: 'transform 0.2s, background 0.2s',
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.transform = 'translateY(-2px)')}
+              onMouseLeave={(e) => (e.currentTarget.style.transform = 'translateY(0)')}
+            >
+              <Twitter size={20} />
+              <span>X (Twitter)</span>
+            </button>
+          </div>
+
+          {/* Copy Direct Link */}
+          <div style={{ position: 'relative' }}>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                padding: '0.4rem 0.4rem 0.4rem 0.85rem',
+                borderRadius: '12px',
+                background: 'rgba(255, 255, 255, 0.03)',
+                border: '1px solid var(--border-color)',
+              }}
+            >
+              <input
+                readOnly
+                value={data.url}
+                style={{
+                  flex: 1,
+                  background: 'transparent',
+                  border: 'none',
+                  color: 'var(--text-muted)',
+                  fontSize: '0.8rem',
+                  fontFamily: 'var(--font-mono)',
+                  outline: 'none',
+                  minWidth: 0,
+                }}
+              />
+              <button
+                onClick={handleCopyLink}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.4rem',
+                  padding: '0.55rem 0.95rem',
+                  borderRadius: '9px',
+                  background: copied ? 'var(--accent-emerald)' : 'var(--accent-aura)',
+                  color: '#07080c',
+                  border: 'none',
+                  fontSize: '0.75rem',
+                  fontWeight: 700,
+                  fontFamily: 'var(--font-mono)',
+                  cursor: 'pointer',
+                  transition: 'background 0.2s',
+                  flexShrink: 0,
+                }}
+              >
+                {copied ? <Check size={14} /> : <Copy size={14} />}
+                <span>{copied ? 'COPIED!' : 'COPY'}</span>
+              </button>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+    </AnimatePresence>
+  );
+};
