@@ -22,31 +22,31 @@ export const CinematicPhilosophy: React.FC = () => {
   return (
     <section
       style={{
-        padding: '8rem 0',
+        padding: 'clamp(3.5rem, 7vw, 5.5rem) 0',
         position: 'relative',
         textAlign: 'center',
-        background: 'radial-gradient(circle at center, rgba(139, 92, 246, 0.15) 0%, transparent 70%)',
+        background: 'radial-gradient(circle at center, rgba(91, 75, 255, 0.06) 0%, transparent 70%)',
         overflow: 'hidden',
       }}
     >
       {/* Background glow pulse */}
       <motion.div
         animate={{
-          scale: [1, 1.15, 1],
-          opacity: [0.3, 0.6, 0.3],
+          scale: [1, 1.1, 1],
+          opacity: [0.2, 0.4, 0.2],
         }}
         transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
         style={{
           position: 'absolute',
           inset: 0,
-          background: 'radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.12) 0%, transparent 60%)',
+          background: 'radial-gradient(circle at 50% 50%, rgba(91, 75, 255, 0.08) 0%, transparent 60%)',
           pointerEvents: 'none',
         }}
       />
 
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         {/* Line-by-line stagger reveal */}
-        <div style={{ marginBottom: '1.75rem', lineHeight: 0.95 }}>
+        <div style={{ marginBottom: '1.5rem', lineHeight: 0.98 }}>
           {lines.map((line, i) => (
             <div key={line} style={{ overflow: 'hidden', padding: '0.05em 0' }}>
               <motion.div
@@ -58,7 +58,7 @@ export const CinematicPhilosophy: React.FC = () => {
                 className="gradient-text"
                 style={{
                   fontFamily: 'var(--font-heading)',
-                  fontSize: 'clamp(3rem, 9vw, 6.5rem)',
+                  fontSize: 'clamp(2.5rem, 8vw, 5.5rem)',
                   fontWeight: 900,
                   letterSpacing: '-0.04em',
                   display: 'block',
@@ -77,8 +77,8 @@ export const CinematicPhilosophy: React.FC = () => {
           whileInView="visible"
           viewport={VIEWPORT}
           style={{
-            fontSize: '1.25rem',
-            color: 'var(--text-muted)',
+            fontSize: 'clamp(1rem, 2.5vw, 1.25rem)',
+            color: 'var(--text-secondary)',
             maxWidth: '640px',
             margin: '0 auto',
             fontStyle: 'italic',

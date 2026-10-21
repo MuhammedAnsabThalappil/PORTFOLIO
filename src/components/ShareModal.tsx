@@ -76,8 +76,8 @@ export const ShareModal: React.FC<ShareModalProps> = ({ isOpen, onClose, data })
           style={{
             position: 'absolute',
             inset: 0,
-            background: 'rgba(5, 7, 12, 0.82)',
-            backdropFilter: 'blur(16px)',
+            background: 'rgba(25, 26, 44, 0.45)',
+            backdropFilter: 'blur(12px)',
           }}
         />
 
@@ -91,11 +91,11 @@ export const ShareModal: React.FC<ShareModalProps> = ({ isOpen, onClose, data })
             position: 'relative',
             width: '100%',
             maxWidth: '480px',
-            background: 'rgba(14, 17, 26, 0.96)',
-            border: '1px solid rgba(220, 248, 54, 0.25)',
+            background: '#ffffff',
+            border: '1px solid var(--border-color)',
             borderRadius: '20px',
             padding: '1.75rem',
-            boxShadow: '0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(220, 248, 54, 0.08)',
+            boxShadow: '0 25px 60px rgba(25, 26, 44, 0.16), 0 0 40px rgba(91, 75, 255, 0.08)',
             zIndex: 1,
             overflow: 'hidden',
           }}
@@ -105,21 +105,21 @@ export const ShareModal: React.FC<ShareModalProps> = ({ isOpen, onClose, data })
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
               <div
                 style={{
-                  width: '36px',
-                  height: '36px',
+                  width: '38px',
+                  height: '38px',
                   borderRadius: '10px',
-                  background: 'rgba(220, 248, 54, 0.12)',
-                  border: '1px solid rgba(220, 248, 54, 0.3)',
+                  background: 'rgba(91, 75, 255, 0.1)',
+                  border: '1px solid rgba(91, 75, 255, 0.25)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  color: 'var(--accent-aura)',
+                  color: 'var(--accent-primary)',
                 }}
               >
                 <Share2 size={18} />
               </div>
               <div>
-                <h3 style={{ fontSize: '1.05rem', fontWeight: 800, margin: 0, color: '#ffffff', fontFamily: 'var(--font-heading)' }}>
+                <h3 style={{ fontSize: '1.05rem', fontWeight: 800, margin: 0, color: 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}>
                   SHARE THIS HIGHLIGHT
                 </h3>
                 <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
@@ -132,20 +132,20 @@ export const ShareModal: React.FC<ShareModalProps> = ({ isOpen, onClose, data })
               onClick={onClose}
               aria-label="Close share modal"
               style={{
-                width: '32px',
-                height: '32px',
+                width: '36px',
+                height: '36px',
                 borderRadius: '8px',
-                background: 'rgba(255, 255, 255, 0.05)',
-                border: '1px solid rgba(255, 255, 255, 0.1)',
-                color: 'var(--text-muted)',
+                background: 'var(--bg-primary)',
+                border: '1px solid var(--border-color)',
+                color: 'var(--text-secondary)',
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 transition: 'all 0.2s',
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = '#fff')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
+              onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
             >
               <X size={16} />
             </button>
@@ -156,8 +156,8 @@ export const ShareModal: React.FC<ShareModalProps> = ({ isOpen, onClose, data })
             style={{
               padding: '1rem',
               borderRadius: '14px',
-              background: 'rgba(255, 255, 255, 0.03)',
-              border: '1px solid rgba(255, 255, 255, 0.08)',
+              background: 'var(--bg-primary)',
+              border: '1px solid var(--border-color)',
               marginBottom: '1.5rem',
               display: 'flex',
               gap: '1rem',
@@ -174,15 +174,15 @@ export const ShareModal: React.FC<ShareModalProps> = ({ isOpen, onClose, data })
                   borderRadius: '10px',
                   objectFit: 'cover',
                   flexShrink: 0,
-                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                  border: '1px solid var(--border-color)',
                 }}
               />
             )}
             <div style={{ minWidth: 0 }}>
-              <div style={{ fontSize: '0.9rem', fontWeight: 700, color: '#fff', marginBottom: '0.2rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+              <div style={{ fontSize: '0.9rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.2rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                 {data.title}
               </div>
-              <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', lineHeight: 1.4, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+              <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', lineHeight: 1.4, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
                 {data.text}
               </div>
             </div>
@@ -202,11 +202,12 @@ export const ShareModal: React.FC<ShareModalProps> = ({ isOpen, onClose, data })
                 borderRadius: '12px',
                 background: 'rgba(37, 211, 102, 0.08)',
                 border: '1px solid rgba(37, 211, 102, 0.25)',
-                color: '#25d366',
+                color: '#1da851',
                 cursor: 'pointer',
                 fontFamily: 'var(--font-mono)',
                 fontSize: '0.75rem',
                 fontWeight: 600,
+                minHeight: '44px',
                 transition: 'transform 0.2s, background 0.2s',
               }}
               onMouseEnter={(e) => (e.currentTarget.style.transform = 'translateY(-2px)')}
@@ -233,6 +234,7 @@ export const ShareModal: React.FC<ShareModalProps> = ({ isOpen, onClose, data })
                 fontFamily: 'var(--font-mono)',
                 fontSize: '0.75rem',
                 fontWeight: 600,
+                minHeight: '44px',
                 transition: 'transform 0.2s, background 0.2s',
               }}
               onMouseEnter={(e) => (e.currentTarget.style.transform = 'translateY(-2px)')}
@@ -259,6 +261,7 @@ export const ShareModal: React.FC<ShareModalProps> = ({ isOpen, onClose, data })
                 fontFamily: 'var(--font-mono)',
                 fontSize: '0.75rem',
                 fontWeight: 600,
+                minHeight: '44px',
                 transition: 'transform 0.2s, background 0.2s',
               }}
               onMouseEnter={(e) => (e.currentTarget.style.transform = 'translateY(-2px)')}
@@ -278,7 +281,7 @@ export const ShareModal: React.FC<ShareModalProps> = ({ isOpen, onClose, data })
                 gap: '0.5rem',
                 padding: '0.4rem 0.4rem 0.4rem 0.85rem',
                 borderRadius: '12px',
-                background: 'rgba(255, 255, 255, 0.03)',
+                background: 'var(--bg-primary)',
                 border: '1px solid var(--border-color)',
               }}
             >
@@ -289,7 +292,7 @@ export const ShareModal: React.FC<ShareModalProps> = ({ isOpen, onClose, data })
                   flex: 1,
                   background: 'transparent',
                   border: 'none',
-                  color: 'var(--text-muted)',
+                  color: 'var(--text-secondary)',
                   fontSize: '0.8rem',
                   fontFamily: 'var(--font-mono)',
                   outline: 'none',
@@ -304,13 +307,14 @@ export const ShareModal: React.FC<ShareModalProps> = ({ isOpen, onClose, data })
                   gap: '0.4rem',
                   padding: '0.55rem 0.95rem',
                   borderRadius: '9px',
-                  background: copied ? 'var(--accent-emerald)' : 'var(--accent-aura)',
-                  color: '#07080c',
+                  background: copied ? 'var(--accent-secondary)' : 'var(--accent-primary)',
+                  color: '#ffffff',
                   border: 'none',
                   fontSize: '0.75rem',
                   fontWeight: 700,
                   fontFamily: 'var(--font-mono)',
                   cursor: 'pointer',
+                  minHeight: '38px',
                   transition: 'background 0.2s',
                   flexShrink: 0,
                 }}

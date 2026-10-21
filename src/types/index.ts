@@ -144,3 +144,16 @@ export interface BusinessTechFlowStep {
   name: string;
   icon: string;
 }
+
+export type GalleryCategory = 'Achievements' | 'Events' | 'Projects' | 'Innovation' | 'Entrepreneurship';
+
+export interface GalleryItem {
+  id: string;
+  title: string;
+  caption?: string;
+  category: GalleryCategory;
+  imageUrl: string;
+  altText: string;
+  orderIndex?: number;
+  isPublished?: boolean;
+}

@@ -16,6 +16,7 @@ import {
   SKILLS as DEFAULT_SKILLS,
   RECOGNITIONS as DEFAULT_RECOGNITIONS,
   CURRENTLY_EXPLORING as DEFAULT_CURRENTLY_EXPLORING,
+  DEFAULT_GALLERY,
 } from '../data/portfolioData';
 import {
   Profile,
@@ -32,6 +33,7 @@ import {
   Education,
   Skills,
   Recognition,
+  GalleryItem,
 } from '../types';
 import { fetchPublishedPortfolioData, isSupabaseConfigured } from '../services/supabase';
 
@@ -68,6 +70,7 @@ interface PortfolioContextType {
   recognitions: Recognition[];
   currentlyExploring: string[];
   websiteSettings: WebsiteSettings;
+  gallery: GalleryItem[];
   isLoading: boolean;
   isLiveConnected: boolean;
   refreshData: () => Promise<void>;
@@ -79,6 +82,7 @@ interface PortfolioContextType {
   updateExperience: (exp: Experience) => void;
   updateEducation: (edu: Education[]) => void;
   updateSkills: (skills: Skills) => void;
+  updateGallery: (gallery: GalleryItem[]) => void;
 }
 
 const PortfolioContext = createContext<PortfolioContextType | null>(null);
@@ -100,6 +104,7 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   const [recognitions, setRecognitions] = useState<Recognition[]>(DEFAULT_RECOGNITIONS);
   const [currentlyExploring, setCurrentlyExploring] = useState<string[]>(DEFAULT_CURRENTLY_EXPLORING);
   const [websiteSettings, setWebsiteSettings] = useState<WebsiteSettings>(DEFAULT_SETTINGS);
+  const [gallery, setGallery] = useState<GalleryItem[]>(DEFAULT_GALLERY);
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isLiveConnected, setIsLiveConnected] = useState<boolean>(isSupabaseConfigured);
@@ -256,6 +261,18 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
             footerText: data.websiteSettings.footer_text || DEFAULT_SETTINGS.footerText,
           });
         }
+        if (data.gallery && data.gallery.length > 0) {
+          setGallery(data.gallery.map((g: any) => ({
+            id: g.id || g.slug,
+            title: g.title,
+            caption: g.caption || '',
+            category: g.category || 'Events',
+            imageUrl: g.image_url || g.imageUrl || g.image,
+            altText: g.alt_text || g.altText || g.title,
+            orderIndex: g.order_index ?? g.orderIndex ?? 0,
+            isPublished: g.is_published ?? true,
+          })));
+        }
       }
     } catch (err) {
       console.warn('Could not sync with Supabase, staying on verified current data:', err);
@@ -279,6 +296,7 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   const updateExperience = (exp: Experience) => setExperience(exp);
   const updateEducation = (edu: Education[]) => setEducation(edu);
   const updateSkills = (sk: Skills) => setSkills(sk);
+  const updateGallery = (items: GalleryItem[]) => setGallery(items);
 
   return (
     <PortfolioContext.Provider
@@ -301,6 +319,7 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
         recognitions,
         currentlyExploring,
         websiteSettings,
+        gallery,
         isLoading,
         isLiveConnected,
         refreshData,
@@ -312,6 +331,7 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
         updateExperience,
         updateEducation,
         updateSkills,
+        updateGallery,
       }}
     >
       {children}

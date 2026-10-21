@@ -9,17 +9,17 @@ export const AboutBento: React.FC = () => {
 
   const getIcon = (num: string) => {
     switch (num) {
-      case '01': return <Brain size={24} style={{ color: 'var(--accent-aura)' }} />;
-      case '02': return <Code2 size={24} style={{ color: '#3b82f6' }} />;
-      case '03': return <Rocket size={24} style={{ color: 'var(--accent-amber)' }} />;
-      default:   return <Target size={24} />;
+      case '01': return <Brain size={22} style={{ color: 'var(--color-primary)' }} />;
+      case '02': return <Code2 size={22} style={{ color: 'var(--color-teal)' }} />;
+      case '03': return <Rocket size={22} style={{ color: 'var(--color-coral)' }} />;
+      default:   return <Target size={22} />;
     }
   };
 
   return (
     <section className="section" id="about">
       <div className="container">
-        {/* Section header */}
+        {/* Section Header */}
         <motion.div
           custom={0}
           variants={REVEAL}
@@ -28,7 +28,7 @@ export const AboutBento: React.FC = () => {
           viewport={VIEWPORT}
         >
           <div className="section-eyebrow">
-            <User size={16} />
+            <User size={15} />
             <span>01 — PHILOSOPHY &amp; BACKGROUND</span>
           </div>
         </motion.div>
@@ -41,10 +41,10 @@ export const AboutBento: React.FC = () => {
           viewport={VIEWPORT}
           className="section-title"
         >
-          FROM FIRST CODE <span className="gradient-text">TO FOUNDING VENTURES.</span>
+          From First Code <span className="gradient-text">To Founding Ventures.</span>
         </motion.h2>
 
-        {/* Narrative & Visual Editorial Bento Row */}
+        {/* Narrative & Visual Bento Row */}
         <div className="bento-grid" style={{ marginBottom: '2rem' }}>
           {/* Main Story Narrative Card */}
           <motion.div
@@ -54,30 +54,31 @@ export const AboutBento: React.FC = () => {
             whileInView="visible"
             viewport={VIEWPORT}
             className="glass-card col-span-7"
-            style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '2.5rem' }}
+            style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}
           >
             <div
               style={{
-                fontFamily: 'var(--font-mono)',
+                fontFamily: 'var(--font-heading)',
                 fontSize: '0.78rem',
-                color: 'var(--accent-aura)',
-                fontWeight: 700,
-                letterSpacing: '0.08em',
-                marginBottom: '1rem',
+                color: 'var(--color-primary)',
+                fontWeight: 800,
+                letterSpacing: '0.06em',
+                marginBottom: '0.75rem',
+                textTransform: 'uppercase',
               }}
             >
-              NARRATIVE ARCHIVE
+              Narrative Archive
             </div>
 
             {PROFILE.aboutStory.map((paragraph, index) => (
               <p
                 key={index}
                 style={{
-                  fontSize: index === 0 ? '1.18rem' : '1rem',
+                  fontSize: index === 0 ? '1.08rem' : '0.98rem',
                   fontWeight: index === 0 ? 600 : 400,
-                  color: index === 0 ? '#ffffff' : 'var(--text-muted)',
-                  lineHeight: 1.8,
-                  marginBottom: index < PROFILE.aboutStory.length - 1 ? '1.15rem' : 0,
+                  color: index === 0 ? 'var(--text-primary)' : 'var(--text-secondary)',
+                  lineHeight: 1.75,
+                  marginBottom: index < PROFILE.aboutStory.length - 1 ? '1rem' : 0,
                 }}
               >
                 {paragraph}
@@ -85,7 +86,7 @@ export const AboutBento: React.FC = () => {
             ))}
           </motion.div>
 
-          {/* Mission & Real Photo Visual Card */}
+          {/* Mission & Real Campus Photo Visual Card */}
           <motion.div
             custom={1}
             variants={REVEAL}
@@ -94,12 +95,9 @@ export const AboutBento: React.FC = () => {
             viewport={VIEWPORT}
             className="glass-card col-span-5"
             style={{
-              background: 'linear-gradient(135deg, rgba(14, 18, 30, 0.98), rgba(20, 24, 42, 0.98))',
-              borderColor: 'rgba(220, 248, 54, 0.25)',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
-              padding: '2.25rem',
             }}
           >
             <div>
@@ -108,25 +106,26 @@ export const AboutBento: React.FC = () => {
                   display: 'flex',
                   alignItems: 'center',
                   gap: '0.5rem',
-                  fontFamily: 'var(--font-mono)',
+                  fontFamily: 'var(--font-heading)',
                   fontSize: '0.78rem',
-                  color: 'var(--accent-aura)',
-                  fontWeight: 700,
-                  letterSpacing: '0.08em',
-                  marginBottom: '1rem',
+                  color: 'var(--color-primary)',
+                  fontWeight: 800,
+                  letterSpacing: '0.06em',
+                  marginBottom: '0.75rem',
+                  textTransform: 'uppercase',
                 }}
               >
-                <Target size={16} />
-                <span>PERSONAL MISSION</span>
+                <Target size={15} />
+                <span>Personal Mission</span>
               </div>
               <blockquote
                 style={{
-                  fontSize: '1.15rem',
+                  fontSize: '1.05rem',
                   fontStyle: 'italic',
-                  lineHeight: 1.7,
-                  color: '#ffffff',
-                  marginBottom: '1.75rem',
-                  borderLeft: '2px solid var(--accent-aura)',
+                  lineHeight: 1.65,
+                  color: 'var(--text-primary)',
+                  marginBottom: '1.5rem',
+                  borderLeft: '3px solid var(--color-primary)',
                   paddingLeft: '1rem',
                 }}
               >
@@ -134,15 +133,16 @@ export const AboutBento: React.FC = () => {
               </blockquote>
             </div>
 
-            {/* Real Campus Picture (KMCT / NIT Calicut) */}
+            {/* Real Campus Picture (KMCT Engineering College) */}
             <div
               style={{
                 borderRadius: '14px',
                 overflow: 'hidden',
                 position: 'relative',
                 aspectRatio: '16 / 9',
-                border: '1px solid rgba(255, 255, 255, 0.1)',
+                border: '1px solid var(--border-color)',
                 marginBottom: '1.25rem',
+                background: '#EEECF9',
               }}
             >
               <img
@@ -154,13 +154,14 @@ export const AboutBento: React.FC = () => {
                 style={{
                   position: 'absolute',
                   inset: 0,
-                  background: 'linear-gradient(to top, rgba(7, 8, 12, 0.85), transparent)',
+                  background: 'linear-gradient(to top, rgba(25, 26, 44, 0.75) 0%, transparent 60%)',
                   display: 'flex',
                   alignItems: 'flex-end',
                   padding: '0.75rem 1rem',
-                  fontSize: '0.75rem',
-                  fontFamily: 'var(--font-mono)',
-                  color: '#ffffff',
+                  fontSize: '0.72rem',
+                  fontFamily: 'var(--font-heading)',
+                  fontWeight: 700,
+                  color: '#FFFFFF',
                 }}
               >
                 KMCT ENGINEERING COLLEGE · AI &amp; DATA SCIENCE
@@ -169,18 +170,18 @@ export const AboutBento: React.FC = () => {
 
             <div
               style={{
-                display: 'flex',
+                display: 'inline-flex',
                 alignItems: 'center',
-                gap: '0.6rem',
-                padding: '0.6rem 1rem',
-                borderRadius: '12px',
-                background: 'rgba(255, 255, 255, 0.04)',
-                border: '1px solid rgba(255, 255, 255, 0.08)',
+                gap: '0.5rem',
+                padding: '0.45rem 0.85rem',
+                borderRadius: '10px',
+                background: 'var(--bg-surface-subtle)',
+                border: '1px solid var(--border-color)',
                 width: 'fit-content',
               }}
             >
-              <MapPin size={16} style={{ color: 'var(--accent-aura)' }} />
-              <span style={{ fontSize: '0.82rem', fontFamily: 'var(--font-mono)', color: 'var(--text-muted)' }}>
+              <MapPin size={15} style={{ color: 'var(--color-primary)' }} />
+              <span style={{ fontSize: '0.8rem', fontFamily: 'var(--font-body)', fontWeight: 600, color: 'var(--text-secondary)' }}>
                 {PROFILE.location}
               </span>
             </div>
@@ -198,12 +199,11 @@ export const AboutBento: React.FC = () => {
               whileInView="visible"
               viewport={VIEWPORT}
               className="glass-card col-span-4"
-              whileHover={{ y: -6, borderColor: 'rgba(220, 248, 54, 0.35)' }}
+              whileHover={{ y: -4 }}
               style={{
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
-                padding: '2rem',
               }}
             >
               <div>
@@ -212,29 +212,44 @@ export const AboutBento: React.FC = () => {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
-                    marginBottom: '1.25rem',
+                    marginBottom: '1rem',
                   }}
                 >
                   <span
                     style={{
                       fontFamily: 'var(--font-heading)',
-                      fontSize: '1.75rem',
-                      fontWeight: 900,
-                      color: 'var(--accent-aura)',
+                      fontSize: '0.75rem',
+                      fontWeight: 800,
+                      color: 'var(--text-muted)',
+                      letterSpacing: '0.04em',
                     }}
                   >
-                    {card.number}
+                    PILLAR {card.number}
                   </span>
-                  {getIcon(card.number)}
+                  <div
+                    style={{
+                      width: '38px',
+                      height: '38px',
+                      borderRadius: '10px',
+                      background: 'var(--bg-surface-subtle)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      border: '1px solid var(--border-color)',
+                    }}
+                  >
+                    {getIcon(card.number)}
+                  </div>
                 </div>
 
                 <h3
                   style={{
                     fontFamily: 'var(--font-heading)',
-                    fontSize: '1.3rem',
+                    fontSize: '1.25rem',
                     fontWeight: 800,
-                    marginBottom: '0.75rem',
-                    color: '#ffffff',
+                    marginBottom: '0.65rem',
+                    color: 'var(--text-primary)',
+                    lineHeight: 1.25,
                   }}
                 >
                   {card.title}
@@ -242,17 +257,17 @@ export const AboutBento: React.FC = () => {
 
                 <p
                   style={{
-                    fontSize: '0.925rem',
-                    color: 'var(--text-muted)',
-                    lineHeight: 1.68,
-                    marginBottom: '1.5rem',
+                    fontSize: '0.92rem',
+                    color: 'var(--text-secondary)',
+                    lineHeight: 1.65,
+                    marginBottom: '1.25rem',
                   }}
                 >
                   {card.description}
                 </p>
               </div>
 
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.45rem' }}>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
                 {card.tags.map((tag, tIdx) => (
                   <span key={tIdx} className="tag-pill">
                     {tag}

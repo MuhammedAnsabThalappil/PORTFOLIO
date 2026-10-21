@@ -72,7 +72,7 @@ export const CinematicOpening: React.FC<CinematicOpeningProps> = ({ onComplete }
             position: 'fixed',
             inset: 0,
             zIndex: 99999,
-            background: '#07080c',
+            background: '#0e1022',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',
@@ -90,7 +90,7 @@ export const CinematicOpening: React.FC<CinematicOpeningProps> = ({ onComplete }
               width: '600px',
               height: '600px',
               borderRadius: '50%',
-              background: 'radial-gradient(circle, rgba(220, 248, 54, 0.08) 0%, rgba(59, 130, 246, 0.04) 50%, transparent 70%)',
+              background: 'radial-gradient(circle, rgba(91, 75, 255, 0.18) 0%, rgba(0, 191, 166, 0.08) 50%, transparent 70%)',
               pointerEvents: 'none',
               filter: 'blur(60px)',
             }}
@@ -109,7 +109,7 @@ export const CinematicOpening: React.FC<CinematicOpeningProps> = ({ onComplete }
               style={{
                 fontFamily: 'var(--font-mono)',
                 fontSize: '0.75rem',
-                color: 'var(--text-muted)',
+                color: 'rgba(255, 255, 255, 0.65)',
                 letterSpacing: '0.08em',
                 display: 'flex',
                 alignItems: 'center',
@@ -121,8 +121,8 @@ export const CinematicOpening: React.FC<CinematicOpeningProps> = ({ onComplete }
                   width: '8px',
                   height: '8px',
                   borderRadius: '50%',
-                  background: 'var(--accent-aura)',
-                  boxShadow: '0 0 10px var(--accent-aura)',
+                  background: '#00BFA6',
+                  boxShadow: '0 0 10px #00BFA6',
                 }}
               />
               <span>11.0510° N, 76.0711° E · MALAPPURAM, IN</span>
@@ -131,25 +131,26 @@ export const CinematicOpening: React.FC<CinematicOpeningProps> = ({ onComplete }
             <button
               onClick={handleSkip}
               style={{
-                background: 'rgba(255, 255, 255, 0.05)',
+                background: 'rgba(255, 255, 255, 0.06)',
                 border: '1px solid rgba(255, 255, 255, 0.15)',
                 borderRadius: '9999px',
                 padding: '0.45rem 1rem',
-                color: 'var(--text-muted)',
+                color: 'rgba(255, 255, 255, 0.75)',
                 fontSize: '0.75rem',
                 fontFamily: 'var(--font-mono)',
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
                 gap: '0.4rem',
+                minHeight: '44px',
                 transition: 'all 0.2s',
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.color = '#fff';
-                e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+                e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.35)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.color = 'var(--text-muted)';
+                e.currentTarget.style.color = 'rgba(255, 255, 255, 0.75)';
                 e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.15)';
               }}
             >
@@ -180,9 +181,9 @@ export const CinematicOpening: React.FC<CinematicOpeningProps> = ({ onComplete }
                 width: 'clamp(140px, 22vw, 190px)',
                 height: 'clamp(140px, 22vw, 190px)',
                 borderRadius: '50%',
-                padding: '5px',
-                background: 'linear-gradient(135deg, rgba(220, 248, 54, 0.6), rgba(59, 130, 246, 0.4))',
-                boxShadow: '0 0 50px rgba(220, 248, 54, 0.25), 0 20px 40px rgba(0, 0, 0, 0.7)',
+                padding: '4px',
+                background: 'linear-gradient(135deg, #5B4BFF, #00BFA6)',
+                boxShadow: '0 0 50px rgba(91, 75, 255, 0.35), 0 20px 40px rgba(0, 0, 0, 0.7)',
                 marginBottom: '1.75rem',
               }}
             >
@@ -215,13 +216,13 @@ export const CinematicOpening: React.FC<CinematicOpeningProps> = ({ onComplete }
                   bottom: '-6px',
                   left: '50%',
                   transform: 'translateX(-50%)',
-                  background: '#07080c',
-                  border: '1px solid var(--accent-aura)',
+                  background: '#0e1022',
+                  border: '1px solid #5B4BFF',
                   borderRadius: '9999px',
                   padding: '0.2rem 0.65rem',
                   fontSize: '0.65rem',
                   fontFamily: 'var(--font-mono)',
-                  color: 'var(--accent-aura)',
+                  color: '#00BFA6',
                   fontWeight: 700,
                   whiteSpace: 'nowrap',
                   boxShadow: '0 4px 12px rgba(0, 0, 0, 0.6)',
@@ -242,7 +243,7 @@ export const CinematicOpening: React.FC<CinematicOpeningProps> = ({ onComplete }
                 gap: '0.45rem',
                 fontSize: '0.8rem',
                 fontFamily: 'var(--font-mono)',
-                color: 'var(--accent-aura)',
+                color: '#00BFA6',
                 letterSpacing: '0.12em',
                 marginBottom: '0.75rem',
               }}
@@ -275,7 +276,7 @@ export const CinematicOpening: React.FC<CinematicOpeningProps> = ({ onComplete }
               transition={{ delay: 0.6, duration: 0.5 }}
               style={{
                 fontSize: 'clamp(0.85rem, 2vw, 1.1rem)',
-                color: 'var(--text-muted)',
+                color: 'rgba(255, 255, 255, 0.7)',
                 fontFamily: 'var(--font-mono)',
                 letterSpacing: '0.04em',
               }}
@@ -298,7 +299,7 @@ export const CinematicOpening: React.FC<CinematicOpeningProps> = ({ onComplete }
                 style={{
                   fontSize: '0.75rem',
                   fontFamily: 'var(--font-mono)',
-                  color: 'var(--text-dim)',
+                  color: 'rgba(255, 255, 255, 0.5)',
                   letterSpacing: '0.08em',
                 }}
               >
@@ -310,7 +311,7 @@ export const CinematicOpening: React.FC<CinematicOpeningProps> = ({ onComplete }
                   fontSize: 'clamp(1.5rem, 3.5vw, 2.5rem)',
                   fontFamily: 'var(--font-mono)',
                   fontWeight: 700,
-                  color: 'var(--accent-aura)',
+                  color: '#00BFA6',
                   lineHeight: 1,
                 }}
               >
@@ -323,7 +324,7 @@ export const CinematicOpening: React.FC<CinematicOpeningProps> = ({ onComplete }
               style={{
                 width: '100%',
                 height: '3px',
-                background: 'rgba(255, 255, 255, 0.08)',
+                background: 'rgba(255, 255, 255, 0.1)',
                 borderRadius: '2px',
                 overflow: 'hidden',
               }}
@@ -332,8 +333,8 @@ export const CinematicOpening: React.FC<CinematicOpeningProps> = ({ onComplete }
                 style={{
                   height: '100%',
                   width: `${progress}%`,
-                  background: 'linear-gradient(90deg, #3b82f6, var(--accent-aura))',
-                  boxShadow: '0 0 15px var(--accent-aura)',
+                  background: 'linear-gradient(90deg, #5B4BFF, #00BFA6)',
+                  boxShadow: '0 0 15px rgba(91, 75, 255, 0.5)',
                 }}
               />
             </div>

@@ -11,15 +11,9 @@ interface ProjectsSectionProps {
 }
 
 const PROJECT_ICONS: Record<string, React.ReactNode> = {
-  'flutter-mobile-app':       <Smartphone size={22} style={{ color: 'var(--accent-aura)' }} />,
-  'embedded-raspi-iot':       <Cpu size={22} style={{ color: '#3b82f6' }} />,
-  'data-analytics-dashboard': <BarChart2 size={22} style={{ color: 'var(--accent-emerald)' }} />,
-};
-
-const PROJECT_EMOJI: Record<string, string> = {
-  'flutter-mobile-app':       '📱',
-  'embedded-raspi-iot':       '🍓',
-  'data-analytics-dashboard': '🧠',
+  'flutter-mobile-app':       <Smartphone size={20} style={{ color: 'var(--color-primary)' }} />,
+  'embedded-raspi-iot':       <Cpu size={20} style={{ color: 'var(--color-teal)' }} />,
+  'data-analytics-dashboard': <BarChart2 size={20} style={{ color: 'var(--color-coral)' }} />,
 };
 
 export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenProjectModal }) => {
@@ -28,7 +22,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenProjectM
   return (
     <section className="section" id="projects">
       <div className="container">
-        {/* Header */}
+        {/* Section Header */}
         <motion.div
           custom={0}
           variants={REVEAL}
@@ -37,10 +31,11 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenProjectM
           viewport={VIEWPORT}
         >
           <div className="section-eyebrow">
-            <Code size={16} />
+            <Code size={15} />
             <span>03 — PORTFOLIO &amp; ARCHITECTURE</span>
           </div>
         </motion.div>
+
         <motion.h2
           custom={1}
           variants={REVEAL}
@@ -49,10 +44,22 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenProjectM
           viewport={VIEWPORT}
           className="section-title"
         >
-          ENGINEERED <span className="gradient-text">SOLUTIONS.</span>
+          Engineered <span className="gradient-text">Solutions.</span>
         </motion.h2>
 
-        {/* ─── Featured Project ─── */}
+        <motion.p
+          custom={2}
+          variants={REVEAL}
+          initial="hidden"
+          whileInView="visible"
+          viewport={VIEWPORT}
+          className="section-subtitle"
+          style={{ marginBottom: '2.5rem' }}
+        >
+          Production software, computer vision architectures, and embedded IoT systems built for real-world impact.
+        </motion.p>
+
+        {/* ─── Featured Project Card ─── */}
         <motion.div
           id="project-smart-attendance"
           custom={0}
@@ -64,21 +71,19 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenProjectM
           style={{
             padding: '0',
             marginBottom: '2rem',
-            borderColor: 'rgba(220, 248, 54, 0.35)',
-            background: 'linear-gradient(135deg, rgba(14, 18, 30, 0.98), rgba(18, 24, 42, 0.98))',
             overflow: 'hidden',
+            background: '#FFFFFF',
           }}
         >
           <div className="featured-project-grid">
-            {/* Left — Image */}
+            {/* Left Image */}
             <div className="featured-project-image-col">
               <div
                 style={{
                   position: 'relative',
                   width: '100%',
                   height: '100%',
-                  minHeight: '320px',
-                  background: 'linear-gradient(135deg, rgba(220, 248, 54, 0.08), rgba(59, 130, 246, 0.12))',
+                  minHeight: '260px',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -95,38 +100,28 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenProjectM
                       objectFit: 'cover',
                       position: 'absolute',
                       inset: 0,
-                      transition: 'transform 0.5s ease',
                     }}
-                    onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.04)')}
-                    onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
                     onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
                   />
-                ) : (
-                  <div style={{ textAlign: 'center', padding: '2rem' }}>
-                    <div style={{ fontSize: '3rem', marginBottom: '0.5rem' }}>📷</div>
-                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', color: 'var(--text-dim)' }}>
-                      MACHINE VISION CAMERA
-                    </span>
-                  </div>
-                )}
+                ) : null}
 
                 <div
                   style={{
                     position: 'absolute',
-                    top: '16px',
-                    left: '16px',
+                    top: '14px',
+                    left: '14px',
                     display: 'flex',
                     alignItems: 'center',
                     gap: '0.4rem',
                     padding: '0.35rem 0.8rem',
                     borderRadius: '8px',
-                    background: 'rgba(7, 8, 12, 0.85)',
-                    backdropFilter: 'blur(10px)',
-                    border: '1px solid rgba(220, 248, 54, 0.4)',
+                    background: '#FFFFFF',
+                    border: '1px solid var(--border-color)',
+                    boxShadow: 'var(--shadow-sm)',
                     fontSize: '0.75rem',
-                    fontFamily: 'var(--font-mono)',
-                    color: 'var(--accent-aura)',
-                    fontWeight: 700,
+                    fontFamily: 'var(--font-heading)',
+                    color: '#B45309',
+                    fontWeight: 800,
                   }}
                 >
                   <Trophy size={13} />
@@ -135,60 +130,59 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenProjectM
               </div>
             </div>
 
-            {/* Right — Content */}
-            <div className="featured-project-content-col" style={{ padding: '2.5rem 2.5rem 2.5rem 2rem' }}>
+            {/* Right Content */}
+            <div className="featured-project-content-col">
               <div
                 style={{
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
-                  marginBottom: '0.5rem',
+                  marginBottom: '0.75rem',
                 }}
               >
                 <div
                   style={{
-                    fontFamily: 'var(--font-mono)',
+                    fontFamily: 'var(--font-heading)',
                     fontSize: '0.78rem',
-                    color: 'var(--accent-aura)',
-                    fontWeight: 700,
-                    letterSpacing: '0.06em',
+                    fontWeight: 800,
+                    color: 'var(--color-primary)',
+                    letterSpacing: '0.04em',
                   }}
                 >
-                  {FEATURED_PROJECT.number} // CORE INNOVATION
+                  {FEATURED_PROJECT.number} · FEATURED ARCHITECTURE
                 </div>
 
-                {/* Share Button for Featured Project */}
                 <ShareButton
-                  title={`Smart Attendance System — Project by Muhammed Ansab`}
-                  text={`ML-based Smart Attendance System recognized by the Government of India with the INSPIRE Award MANAK.`}
+                  title={FEATURED_PROJECT.name}
+                  text={FEATURED_PROJECT.description}
                   url="https://ansab.pages.dev#project-smart-attendance"
-                  image={FEATURED_PROJECT.image || '/assets/projects/smart-attendance.jpg'}
-                  category="FEATURED PROJECT"
+                  image={FEATURED_PROJECT.image}
+                  category={FEATURED_PROJECT.name}
                   variant="pill"
-                  label="SHARE"
+                  label="Share"
                 />
               </div>
 
               <h3
                 style={{
                   fontFamily: 'var(--font-heading)',
-                  fontSize: 'clamp(1.4rem, 2.6vw, 2rem)',
+                  fontSize: 'clamp(1.5rem, 3.5vw, 2.1rem)',
                   fontWeight: 900,
-                  marginBottom: '0.3rem',
-                  color: '#ffffff',
-                  lineHeight: 1.15,
+                  marginBottom: '0.35rem',
+                  color: 'var(--text-primary)',
+                  lineHeight: 1.2,
                 }}
               >
-                🏆 {FEATURED_PROJECT.name}
+                {FEATURED_PROJECT.name}
               </h3>
 
               <div
                 style={{
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '0.82rem',
-                  color: '#3b82f6',
-                  marginBottom: '1.25rem',
-                  fontWeight: 600,
+                  fontFamily: 'var(--font-heading)',
+                  fontSize: '0.85rem',
+                  color: 'var(--color-teal)',
+                  marginBottom: '1rem',
+                  fontWeight: 700,
                 }}
               >
                 {FEATURED_PROJECT.category}
@@ -196,111 +190,67 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenProjectM
 
               <p
                 style={{
-                  fontSize: '0.97rem',
-                  lineHeight: 1.72,
-                  color: 'var(--text-muted)',
-                  marginBottom: '1.5rem',
+                  fontSize: '0.95rem',
+                  color: 'var(--text-secondary)',
+                  lineHeight: 1.7,
+                  marginBottom: '1.25rem',
                 }}
               >
                 {FEATURED_PROJECT.description}
               </p>
 
-              {/* Highlights */}
-              {FEATURED_PROJECT.highlights && FEATURED_PROJECT.highlights.length > 0 && (
-                <div style={{ marginBottom: '1.5rem' }}>
-                  <div
-                    style={{
-                      fontSize: '0.72rem',
-                      fontFamily: 'var(--font-mono)',
-                      color: 'var(--text-dim)',
-                      fontWeight: 700,
-                      letterSpacing: '0.08em',
-                      marginBottom: '0.65rem',
-                    }}
-                  >
-                    ACCOLADES &amp; FEATURES
-                  </div>
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.45rem' }}>
-                    {FEATURED_PROJECT.highlights.map((h, i) => (
-                      <span
-                        key={i}
-                        className="tag-pill"
-                        style={{
-                          borderColor: 'rgba(220, 248, 54, 0.3)',
-                          color: 'var(--accent-aura)',
-                          background: 'rgba(220, 248, 54, 0.08)',
-                        }}
-                      >
-                        {h}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Tech Stack */}
-              <div style={{ marginBottom: '2rem' }}>
-                <div
-                  style={{
-                    fontSize: '0.72rem',
-                    fontFamily: 'var(--font-mono)',
-                    color: 'var(--text-dim)',
-                    fontWeight: 700,
-                    letterSpacing: '0.08em',
-                    marginBottom: '0.65rem',
-                  }}
-                >
-                  TECHNOLOGIES
-                </div>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
-                  {FEATURED_PROJECT.technologies.map((tech, idx) => (
-                    <span key={idx} className="tag-pill" style={{ color: '#ffffff' }}>
-                      {tech}
-                    </span>
-                  ))}
-                </div>
+              {/* Technologies */}
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.45rem', marginBottom: '1.5rem' }}>
+                {FEATURED_PROJECT.technologies.map((tech) => (
+                  <span key={tech} className="tag-pill">
+                    {tech}
+                  </span>
+                ))}
               </div>
 
-              <div style={{ display: 'flex', gap: '0.85rem', flexWrap: 'wrap', alignItems: 'center' }}>
-                <motion.a
-                  href="#achievement"
+              {/* Action Buttons */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
+                <button
+                  type="button"
+                  onClick={() => onOpenProjectModal(FEATURED_PROJECT)}
                   className="btn btn-primary btn-sm"
-                  whileHover={{ scale: 1.03, y: -2 }}
-                  whileTap={{ scale: 0.97 }}
                 >
-                  <span>VIEW RECOGNITION</span>
-                  <ExternalLink size={15} />
-                </motion.a>
-                <motion.a
-                  href={FEATURED_PROJECT.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-secondary btn-sm"
-                  whileHover={{ scale: 1.03, y: -2 }}
-                  whileTap={{ scale: 0.97 }}
-                >
-                  <Github size={15} />
-                  <span>GITHUB</span>
-                </motion.a>
+                  <span>Explore Architecture</span>
+                  <ExternalLink size={14} />
+                </button>
+
+                {FEATURED_PROJECT.githubUrl && (
+                  <a
+                    href={FEATURED_PROJECT.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-secondary btn-sm"
+                  >
+                    <Github size={14} />
+                    <span>View Repository</span>
+                  </a>
+                )}
               </div>
             </div>
           </div>
         </motion.div>
 
-        {/* ─── Extra Projects Grid ─── */}
-        <div className="bento-grid">
-          {EXTRA_PROJECTS.map((proj, idx) => (
+        {/* ─── Extra Projects Grid (1 col mobile, 2 col tablet, 3 col desktop) ─── */}
+        <div className="projects-grid">
+          {EXTRA_PROJECTS.map((project, idx) => (
             <motion.div
-              key={proj.id}
-              id={`project-${proj.id}`}
+              key={project.id}
               custom={idx}
               variants={REVEAL_SCALE}
               initial="hidden"
               whileInView="visible"
               viewport={VIEWPORT}
-              whileHover={{ y: -6, borderColor: 'rgba(220, 248, 54, 0.35)' }}
-              className="glass-card col-span-4"
-              style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}
+              className="glass-card"
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+              }}
             >
               <div>
                 <div
@@ -308,46 +258,44 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenProjectM
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
-                    marginBottom: '1.1rem',
+                    marginBottom: '0.85rem',
                   }}
                 >
-                  <span
+                  <div
                     style={{
-                      fontFamily: 'var(--font-mono)',
-                      fontSize: '0.78rem',
-                      color: 'var(--accent-aura)',
-                      fontWeight: 700,
-                      letterSpacing: '0.04em',
+                      width: '38px',
+                      height: '38px',
+                      borderRadius: '10px',
+                      background: 'var(--bg-surface-subtle)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      border: '1px solid var(--border-color)',
                     }}
                   >
-                    {proj.number}
-                  </span>
-
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.45rem' }}>
-                    {/* Share Button for individual project */}
-                    <ShareButton
-                      title={`${proj.name} — Project by Muhammed Ansab`}
-                      text={proj.description}
-                      url={`https://ansab.pages.dev#project-${proj.id}`}
-                      category={proj.name}
-                      variant="icon"
-                    />
-
-                    <div
-                      style={{
-                        width: '38px',
-                        height: '38px',
-                        borderRadius: '10px',
-                        background: 'rgba(255,255,255,0.04)',
-                        border: '1px solid rgba(255,255,255,0.08)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                      }}
-                    >
-                      {PROJECT_ICONS[proj.id] ?? <Code size={18} style={{ color: 'var(--text-dim)' }} />}
-                    </div>
+                    {PROJECT_ICONS[project.id] ?? <Code size={18} style={{ color: 'var(--color-primary)' }} />}
                   </div>
+
+                  <ShareButton
+                    title={project.name}
+                    text={project.description}
+                    url="https://ansab.pages.dev#projects"
+                    category={project.name}
+                    variant="pill"
+                    label="Share"
+                  />
+                </div>
+
+                <div
+                  style={{
+                    fontSize: '0.75rem',
+                    fontFamily: 'var(--font-heading)',
+                    fontWeight: 700,
+                    color: 'var(--text-muted)',
+                    marginBottom: '0.25rem',
+                  }}
+                >
+                  {project.number}
                 </div>
 
                 <h3
@@ -355,66 +303,71 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenProjectM
                     fontFamily: 'var(--font-heading)',
                     fontSize: '1.25rem',
                     fontWeight: 800,
-                    marginBottom: '0.2rem',
-                    color: '#ffffff',
-                    lineHeight: 1.25,
+                    color: 'var(--text-primary)',
+                    marginBottom: '0.25rem',
+                    lineHeight: 1.3,
                   }}
                 >
-                  {PROJECT_EMOJI[proj.id] ? `${PROJECT_EMOJI[proj.id]} ` : ''}{proj.name}
+                  {project.name}
                 </h3>
 
                 <div
                   style={{
-                    fontFamily: 'var(--font-mono)',
-                    fontSize: '0.78rem',
-                    color: '#3b82f6',
-                    marginBottom: '0.9rem',
-                    fontWeight: 600,
+                    fontFamily: 'var(--font-heading)',
+                    fontSize: '0.8rem',
+                    color: 'var(--color-primary)',
+                    fontWeight: 700,
+                    marginBottom: '0.85rem',
                   }}
                 >
-                  {proj.category}
+                  {project.category}
                 </div>
 
                 <p
                   style={{
                     fontSize: '0.9rem',
-                    color: 'var(--text-muted)',
-                    lineHeight: 1.65,
+                    color: 'var(--text-secondary)',
+                    lineHeight: 1.6,
                     marginBottom: '1.25rem',
                   }}
                 >
-                  {proj.description}
+                  {project.description}
                 </p>
-
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '1.5rem' }}>
-                  {proj.technologies.map((t, tIdx) => (
-                    <span key={tIdx} className="tag-pill">{t}</span>
-                  ))}
-                </div>
               </div>
 
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
-                <motion.button
-                  onClick={() => onOpenProjectModal(proj)}
-                  className="btn btn-secondary btn-sm"
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.97 }}
-                  style={{ flex: 1 }}
-                >
-                  <span>VIEW DETAILS</span>
-                </motion.button>
-                <motion.a
-                  href={proj.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-secondary btn-sm"
-                  whileHover={{ scale: 1.08 }}
-                  whileTap={{ scale: 0.93 }}
-                  style={{ padding: '0.6rem 0.75rem', borderRadius: '10px' }}
-                  aria-label="GitHub Code"
-                >
-                  <Github size={15} />
-                </motion.a>
+              <div>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem', marginBottom: '1.25rem' }}>
+                  {project.technologies.map((t) => (
+                    <span key={t} className="tag-pill" style={{ fontSize: '0.75rem' }}>
+                      {t}
+                    </span>
+                  ))}
+                </div>
+
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+                  <button
+                    type="button"
+                    onClick={() => onOpenProjectModal(project)}
+                    className="btn btn-secondary btn-sm"
+                    style={{ flex: 1 }}
+                  >
+                    <span>Details</span>
+                    <ExternalLink size={13} />
+                  </button>
+
+                  {project.githubUrl && (
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-secondary btn-sm"
+                      style={{ padding: '0.55rem', minWidth: '44px' }}
+                      aria-label={`GitHub repository for ${project.name}`}
+                    >
+                      <Github size={15} />
+                    </a>
+                  )}
+                </div>
               </div>
             </motion.div>
           ))}

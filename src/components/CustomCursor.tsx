@@ -72,7 +72,7 @@ export const CustomCursor: React.FC = () => {
           width: '6px',
           height: '6px',
           borderRadius: '50%',
-          backgroundColor: 'var(--accent-aura)',
+          backgroundColor: 'var(--accent-primary)',
           pointerEvents: 'none',
           zIndex: 999998,
           transition: 'opacity 0.2s',
@@ -88,16 +88,16 @@ export const CustomCursor: React.FC = () => {
           width: cursorText ? 72 : hovered ? 48 : 36,
           height: cursorText ? 72 : hovered ? 48 : 36,
           backgroundColor: cursorText
-            ? 'rgba(220, 248, 54, 0.95)'
+            ? 'var(--accent-primary)'
             : hovered
-            ? 'rgba(220, 248, 54, 0.15)'
-            : 'rgba(255, 255, 255, 0.04)',
+            ? 'rgba(91, 75, 255, 0.1)'
+            : 'rgba(91, 75, 255, 0.03)',
           borderColor: cursorText
-            ? 'var(--accent-aura)'
+            ? 'var(--accent-primary)'
             : hovered
-            ? 'var(--accent-aura)'
-            : 'rgba(255, 255, 255, 0.2)',
-          color: cursorText ? '#07080c' : '#ffffff',
+            ? 'var(--accent-primary)'
+            : 'rgba(91, 75, 255, 0.25)',
+          color: cursorText ? '#ffffff' : 'var(--text-primary)',
         }}
         transition={{
           type: 'spring',

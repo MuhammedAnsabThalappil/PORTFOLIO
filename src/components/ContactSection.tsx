@@ -25,7 +25,7 @@ export const ContactSection: React.FC = () => {
       await sendContactMessage(formData);
       setSubmitted(true);
       if (typeof confetti === 'function') {
-        confetti({ particleCount: 100, spread: 80, origin: { y: 0.6 } });
+        confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } });
       }
       setTimeout(() => {
         setFormData({ name: '', email: '', message: '' });
@@ -39,169 +39,206 @@ export const ContactSection: React.FC = () => {
   };
 
   const inputStyle = (field: string): React.CSSProperties => ({
-
     width: '100%',
     padding: '0.85rem 1.15rem',
+    minHeight: '48px', // Mobile touch requirement
     borderRadius: '12px',
-    background: 'rgba(255,255,255,0.03)',
-    border: `1px solid ${focused === field ? 'rgba(0,240,255,0.5)' : 'var(--border-color)'}`,
-    boxShadow: focused === field ? '0 0 0 3px rgba(0,240,255,0.1), 0 0 20px rgba(0,240,255,0.06)' : 'none',
-    color: '#ffffff',
+    background: '#FFFFFF',
+    border: `1px solid ${focused === field ? 'var(--color-primary)' : 'var(--border-color)'}`,
+    boxShadow: focused === field ? '0 0 0 3px rgba(91, 75, 255, 0.12)' : 'var(--shadow-sm)',
+    color: 'var(--text-primary)',
     fontSize: '0.95rem',
     outline: 'none',
     fontFamily: 'var(--font-body)',
-    transition: 'border-color 0.25s ease, box-shadow 0.25s ease',
+    transition: 'border-color 0.2s ease, box-shadow 0.2s ease',
   });
 
   const labelStyle: React.CSSProperties = {
     display: 'block',
-    fontFamily: 'var(--font-mono)',
-    fontSize: '0.75rem',
-    color: 'var(--text-muted)',
+    fontFamily: 'var(--font-heading)',
+    fontSize: '0.78rem',
+    color: 'var(--text-primary)',
     marginBottom: '0.4rem',
-    fontWeight: 600,
+    fontWeight: 700,
   };
 
   return (
     <section className="section" id="contact">
       <div className="container">
+        {/* Section Header */}
         <motion.div custom={0} variants={REVEAL} initial="hidden" whileInView="visible" viewport={VIEWPORT}>
           <div className="section-eyebrow">
-            <Mail size={16} />
-            <span>10 — CONTACT</span>
+            <Mail size={15} />
+            <span>08 — GET IN TOUCH</span>
           </div>
         </motion.div>
+
         <motion.h2 custom={1} variants={REVEAL} initial="hidden" whileInView="visible" viewport={VIEWPORT} className="section-title">
-          LET'S BUILD <span className="gradient-text">SOMETHING.</span>
+          Let's Build <span className="gradient-text">Something Impactful.</span>
         </motion.h2>
 
         <div className="bento-grid">
-          {/* Left column */}
-          <motion.div custom={0} variants={REVEAL} initial="hidden" whileInView="visible" viewport={VIEWPORT}
+          {/* Left Column — Context & Verified Socials */}
+          <motion.div
+            custom={0}
+            variants={REVEAL}
+            initial="hidden"
+            whileInView="visible"
+            viewport={VIEWPORT}
             className="col-span-5"
             style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', minWidth: 0 }}
           >
-            <p style={{ fontSize: '1.2rem', color: '#ffffff', lineHeight: 1.65, marginBottom: '2rem' }}>
-              Have an idea, opportunity, project or collaboration in mind? Let's connect and turn it into reality.
+            <p style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: '2rem' }}>
+              Have an idea, project, venture opportunity, or collaboration in mind? I'm always open to discussing new engineering and entrepreneurial frontiers.
             </p>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '2.5rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem', marginBottom: '2rem' }}>
               {[
-                { href: SOCIALS.linkedin, icon: <Linkedin size={20} style={{ color: 'var(--primary-cyan)' }} />, label: 'LINKEDIN PROFILE' },
-                { href: SOCIALS.github,   icon: <Github   size={20} style={{ color: 'var(--secondary-violet)' }} />, label: 'GITHUB REPOSITORIES' },
-                { href: SOCIALS.email,    icon: <Mail     size={20} style={{ color: 'var(--accent-emerald)' }} />, label: 'SEND DIRECT EMAIL' },
+                { href: SOCIALS.linkedin, icon: <Linkedin size={18} style={{ color: '#0A66C2' }} />, label: 'LinkedIn Profile' },
+                { href: SOCIALS.github,   icon: <Github   size={18} style={{ color: 'var(--text-primary)' }} />, label: 'GitHub Repositories' },
+                { href: SOCIALS.email,    icon: <Mail     size={18} style={{ color: 'var(--color-primary)' }} />, label: 'Direct Email' },
               ].map((item) => (
-                <motion.a
+                <a
                   key={item.label}
                   href={item.href}
-                  target={item.label !== 'SEND DIRECT EMAIL' ? '_blank' : undefined}
+                  target={item.label !== 'Direct Email' ? '_blank' : undefined}
                   rel="noopener noreferrer"
                   className="btn btn-secondary"
-                  whileHover={{ x: 4, scale: 1.02 }}
-                  whileTap={{ scale: 0.97 }}
-                  style={{ justifyContent: 'flex-start' }}
+                  style={{ justifyContent: 'flex-start', minHeight: '48px', padding: '0.75rem 1.25rem' }}
                 >
                   {item.icon}
                   <span>{item.label}</span>
-                </motion.a>
+                </a>
               ))}
             </div>
 
-            <div style={{ fontSize: '0.85rem', fontFamily: 'var(--font-mono)', color: 'var(--text-dim)' }}>
-              LOCATION: {SOCIALS.location}
+            <div
+              style={{
+                fontSize: '0.82rem',
+                fontFamily: 'var(--font-heading)',
+                fontWeight: 600,
+                color: 'var(--text-muted)',
+              }}
+            >
+              Location: {SOCIALS.location}
             </div>
           </motion.div>
 
-          {/* Right form */}
-          <motion.div custom={1} variants={REVEAL} initial="hidden" whileInView="visible" viewport={VIEWPORT}
+          {/* Right Column — Clean Contact Form */}
+          <motion.div
+            custom={1}
+            variants={REVEAL}
+            initial="hidden"
+            whileInView="visible"
+            viewport={VIEWPORT}
             className="glass-card col-span-7"
-            style={{ minWidth: 0 }}
+            style={{ minWidth: 0, background: '#FFFFFF' }}
           >
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+              {/* Name Field */}
               <div>
-                <label htmlFor="contact-name" style={labelStyle}>YOUR NAME</label>
+                <label style={labelStyle}>YOUR NAME</label>
                 <input
-                  id="contact-name" type="text" required
+                  type="text"
+                  required
+                  placeholder="e.g. Navas K. M."
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   onFocus={() => setFocused('name')}
                   onBlur={() => setFocused(null)}
-                  placeholder="e.g. Alex Morgan"
                   style={inputStyle('name')}
                 />
               </div>
 
+              {/* Email Field */}
               <div>
-                <label htmlFor="contact-email" style={labelStyle}>YOUR EMAIL</label>
+                <label style={labelStyle}>EMAIL ADDRESS</label>
                 <input
-                  id="contact-email" type="email" required
+                  type="email"
+                  required
+                  placeholder="name@domain.com"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   onFocus={() => setFocused('email')}
                   onBlur={() => setFocused(null)}
-                  placeholder="alex@company.com"
                   style={inputStyle('email')}
                 />
               </div>
 
+              {/* Message Field */}
               <div>
-                <label htmlFor="contact-message" style={labelStyle}>YOUR MESSAGE</label>
+                <label style={labelStyle}>MESSAGE / PROJECT BRIEF</label>
                 <textarea
-                  id="contact-message" required rows={4}
+                  required
+                  rows={4}
+                  placeholder="Tell me about your project, idea, or how we might collaborate..."
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   onFocus={() => setFocused('message')}
                   onBlur={() => setFocused(null)}
-                  placeholder="Tell me about your idea, opportunity, or collaboration..."
-                  style={{ ...inputStyle('message'), resize: 'vertical' }}
+                  style={{
+                    ...inputStyle('message'),
+                    resize: 'vertical',
+                    minHeight: '120px',
+                  }}
                 />
               </div>
 
-              <motion.button
-                type="submit"
-                disabled={submitting}
-                className="btn btn-primary"
-                whileHover={{ scale: 1.02, y: -2 }}
-                whileTap={{ scale: 0.97 }}
-                style={{ width: '100%', marginTop: '0.5rem', opacity: submitting ? 0.7 : 1 }}
-              >
-                <span>{submitting ? 'SENDING MESSAGE...' : 'SEND MESSAGE'}</span>
-                <Send size={18} />
-              </motion.button>
-
+              {/* Feedback Alerts */}
               {errorMsg && (
-                <div style={{
-                  padding: '0.85rem 1rem',
-                  borderRadius: '10px',
-                  background: 'rgba(239, 68, 68, 0.15)',
-                  border: '1px solid rgba(239, 68, 68, 0.4)',
-                  color: '#ef4444',
-                  fontSize: '0.85rem',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.5rem',
-                }}>
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    padding: '0.75rem 1rem',
+                    borderRadius: '10px',
+                    background: 'var(--color-coral-subtle)',
+                    border: '1px solid var(--color-coral-border)',
+                    color: 'var(--color-coral)',
+                    fontSize: '0.85rem',
+                  }}
+                >
                   <AlertCircle size={16} />
                   <span>{errorMsg}</span>
                 </div>
               )}
 
               {submitted && (
-                <motion.div
-                  initial={{ opacity: 0, y: 10, scale: 0.97 }}
-                  animate={{ opacity: 1, y: 0,  scale: 1 }}
+                <div
                   style={{
-                    display: 'flex', alignItems: 'center', gap: '0.75rem',
-                    padding: '1rem 1.25rem', borderRadius: '12px',
-                    background: 'rgba(16,185,129,0.15)', border: '1px solid rgba(16,185,129,0.4)',
-                    color: '#10b981', fontSize: '0.9rem', fontFamily: 'var(--font-mono)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.5rem',
+                    padding: '0.75rem 1rem',
+                    borderRadius: '10px',
+                    background: 'var(--color-teal-subtle)',
+                    border: '1px solid var(--color-teal-border)',
+                    color: 'var(--color-teal)',
+                    fontSize: '0.88rem',
+                    fontWeight: 600,
                   }}
                 >
-                  <CheckCircle2 size={20} />
-                  <span>Message received! Thank you for reaching out. Let's turn ideas into reality.</span>
-                </motion.div>
+                  <CheckCircle2 size={16} />
+                  <span>Message delivered successfully! I will reply shortly.</span>
+                </div>
               )}
 
+              {/* Submit Button (Full Width on Mobile, Min 48px) */}
+              <button
+                type="submit"
+                disabled={submitting || submitted}
+                className="btn btn-primary"
+                style={{
+                  width: '100%',
+                  minHeight: '48px',
+                  opacity: submitting ? 0.7 : 1,
+                  cursor: submitting ? 'wait' : 'pointer',
+                }}
+              >
+                <Send size={16} />
+                <span>{submitting ? 'Delivering Message...' : submitted ? 'Message Sent' : 'Send Message'}</span>
+              </button>
             </form>
           </motion.div>
         </div>

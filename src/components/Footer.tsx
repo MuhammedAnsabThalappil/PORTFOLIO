@@ -26,9 +26,9 @@ export const Footer: React.FC = () => {
       whileInView="visible"
       viewport={VIEWPORT}
       style={{
-        padding: '5rem 0 3rem 0',
+        padding: 'clamp(3rem, 6vw, 4.5rem) 0 2.5rem 0',
         borderTop: '1px solid var(--border-color)',
-        background: 'rgba(7, 8, 12, 0.98)',
+        background: 'var(--bg-card)',
         position: 'relative',
       }}
     >
@@ -41,17 +41,17 @@ export const Footer: React.FC = () => {
             justifyContent: 'space-between',
             flexWrap: 'wrap',
             gap: '2.5rem',
-            marginBottom: '3.5rem',
+            marginBottom: '3rem',
           }}
         >
-          <div style={{ maxWidth: '520px' }}>
+          <div style={{ maxWidth: '520px', minWidth: 0 }}>
             <div
               className="footer-name"
               style={{
                 fontFamily: 'var(--font-heading)',
-                fontSize: 'clamp(1.2rem, 4vw, 1.8rem)',
-                fontWeight: 900,
-                color: '#ffffff',
+                fontSize: 'clamp(1.3rem, 4vw, 1.8rem)',
+                fontWeight: 800,
+                color: 'var(--text-primary)',
                 marginBottom: '0.4rem',
                 letterSpacing: '-0.02em',
               }}
@@ -61,7 +61,7 @@ export const Footer: React.FC = () => {
 
             <div
               style={{
-                color: 'var(--accent-aura)',
+                color: 'var(--accent-primary)',
                 fontFamily: 'var(--font-mono)',
                 fontSize: '0.85rem',
                 fontWeight: 700,
@@ -72,17 +72,17 @@ export const Footer: React.FC = () => {
               AI &amp; DATA SCIENCE SCHOLAR · SOFTWARE ENGINEER · FOUNDER
             </div>
 
-            <div style={{ fontStyle: 'italic', color: 'var(--text-muted)', fontSize: '0.95rem', lineHeight: 1.6 }}>
+            <div style={{ fontStyle: 'italic', color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: 1.6 }}>
               "{PROFILE.brandLine}"
             </div>
           </div>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'flex-start' }}>
-            <div style={{ fontSize: '0.72rem', fontFamily: 'var(--font-mono)', color: 'var(--text-dim)', letterSpacing: '0.08em' }}>
+            <div style={{ fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: 'var(--text-muted)', letterSpacing: '0.08em', fontWeight: 600 }}>
               CONNECT &amp; EXPLORE
             </div>
 
-            <div style={{ display: 'flex', gap: '1.25rem', flexWrap: 'wrap', alignItems: 'center' }}>
+            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
               {[
                 { href: SOCIALS.linkedin, label: 'LinkedIn' },
                 { href: SOCIALS.github, label: 'GitHub' },
@@ -93,14 +93,17 @@ export const Footer: React.FC = () => {
                   href={link.href}
                   target={link.label !== 'Email' ? '_blank' : undefined}
                   rel="noopener noreferrer"
-                  whileHover={{ color: 'var(--accent-aura)', y: -2 }}
+                  whileHover={{ color: 'var(--accent-primary)', y: -2 }}
                   style={{
-                    color: 'var(--text-muted)',
+                    color: 'var(--text-secondary)',
                     textDecoration: 'none',
                     fontSize: '0.9rem',
                     fontFamily: 'var(--font-heading)',
                     fontWeight: 700,
                     transition: 'color 0.2s ease',
+                    minHeight: '44px',
+                    display: 'inline-flex',
+                    alignItems: 'center',
                   }}
                 >
                   {link.label}
@@ -118,7 +121,7 @@ export const Footer: React.FC = () => {
             </div>
 
             {/* Back to top + Replay Intro */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginTop: '0.5rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginTop: '0.5rem', flexWrap: 'wrap' }}>
               <button
                 onClick={scrollToTop}
                 style={{
@@ -127,21 +130,22 @@ export const Footer: React.FC = () => {
                   gap: '0.4rem',
                   background: 'transparent',
                   border: 'none',
-                  color: 'var(--text-dim)',
-                  fontSize: '0.75rem',
+                  color: 'var(--text-secondary)',
+                  fontSize: '0.78rem',
                   fontFamily: 'var(--font-mono)',
                   cursor: 'pointer',
                   transition: 'color 0.2s',
-                  padding: 0,
+                  padding: '0.4rem 0',
+                  minHeight: '44px',
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = '#fff')}
-                onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-dim)')}
+                onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent-primary)')}
+                onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
               >
-                <ArrowUp size={13} />
+                <ArrowUp size={14} />
                 <span>BACK TO TOP</span>
               </button>
 
-              <span style={{ color: 'rgba(255, 255, 255, 0.1)' }}>·</span>
+              <span style={{ color: 'var(--border-color)' }}>·</span>
 
               <button
                 onClick={replayIntro}
@@ -151,17 +155,18 @@ export const Footer: React.FC = () => {
                   gap: '0.4rem',
                   background: 'transparent',
                   border: 'none',
-                  color: 'var(--text-dim)',
-                  fontSize: '0.75rem',
+                  color: 'var(--text-secondary)',
+                  fontSize: '0.78rem',
                   fontFamily: 'var(--font-mono)',
                   cursor: 'pointer',
                   transition: 'color 0.2s',
-                  padding: 0,
+                  padding: '0.4rem 0',
+                  minHeight: '44px',
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent-aura)')}
-                onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-dim)')}
+                onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--accent-primary)')}
+                onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
               >
-                <Sparkles size={12} />
+                <Sparkles size={14} />
                 <span>REPLAY CINEMATIC INTRO</span>
               </button>
             </div>
@@ -173,14 +178,14 @@ export const Footer: React.FC = () => {
           className="footer-bottom"
           style={{
             paddingTop: '2rem',
-            borderTop: '1px solid rgba(255, 255, 255, 0.06)',
+            borderTop: '1px solid var(--border-color)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
             flexWrap: 'wrap',
             gap: '1rem',
-            fontSize: '0.8rem',
-            color: 'var(--text-dim)',
+            fontSize: '0.82rem',
+            color: 'var(--text-muted)',
             fontFamily: 'var(--font-mono)',
           }}
         >
@@ -193,24 +198,27 @@ export const Footer: React.FC = () => {
             <Link
               to="/admin"
               style={{
-                color: 'var(--text-dim)',
+                color: 'var(--accent-primary)',
                 textDecoration: 'none',
-                fontSize: '0.75rem',
+                fontSize: '0.78rem',
+                fontWeight: 600,
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '0.3rem',
-                padding: '0.2rem 0.5rem',
-                borderRadius: '6px',
-                background: 'rgba(255, 255, 255, 0.03)',
-                border: '1px solid rgba(255, 255, 255, 0.06)',
+                gap: '0.35rem',
+                padding: '0.35rem 0.65rem',
+                borderRadius: '8px',
+                background: 'rgba(91, 75, 255, 0.06)',
+                border: '1px solid var(--border-color)',
+                minHeight: '36px',
+                transition: 'all 0.2s ease',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.color = 'var(--accent-aura)';
-                e.currentTarget.style.borderColor = 'rgba(220, 248, 54, 0.3)';
+                e.currentTarget.style.background = 'rgba(91, 75, 255, 0.12)';
+                e.currentTarget.style.borderColor = 'var(--accent-primary)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.color = 'var(--text-dim)';
-                e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.06)';
+                e.currentTarget.style.background = 'rgba(91, 75, 255, 0.06)';
+                e.currentTarget.style.borderColor = 'var(--border-color)';
               }}
             >
               ⚡ Admin CMS

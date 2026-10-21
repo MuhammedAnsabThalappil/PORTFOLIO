@@ -11,6 +11,7 @@ const NAV_LINKS = [
   { name: 'About', href: '#about' },
   { name: 'Journey', href: '#journey' },
   { name: 'Achievements', href: '#achievement' },
+  { name: 'Gallery', href: '#gallery' },
   { name: 'Projects', href: '#projects' },
   { name: 'Ventures', href: '#entrepreneurship' },
   { name: 'Experience', href: '#experience' },
@@ -23,27 +24,27 @@ const drawerVariants: Variants = {
   visible: {
     x: 0,
     opacity: 1,
-    transition: { duration: 0.38, ease: [0.16, 1, 0.3, 1] },
+    transition: { duration: 0.35, ease: [0.16, 1, 0.3, 1] },
   },
   exit: {
     x: '100%',
     opacity: 0,
-    transition: { duration: 0.28, ease: [0.4, 0, 1, 1] },
+    transition: { duration: 0.25, ease: [0.4, 0, 1, 1] },
   },
 };
 
 const backdropVariants: Variants = {
   hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { duration: 0.3 } },
-  exit: { opacity: 0, transition: { duration: 0.3 } },
+  visible: { opacity: 1, transition: { duration: 0.25 } },
+  exit: { opacity: 0, transition: { duration: 0.2 } },
 };
 
 const linkItemVariants: Variants = {
-  hidden: { opacity: 0, x: 20 },
+  hidden: { opacity: 0, x: 16 },
   visible: (i: number) => ({
     opacity: 1,
     x: 0,
-    transition: { duration: 0.35, delay: 0.08 + i * 0.05, ease: [0.16, 1, 0.3, 1] },
+    transition: { duration: 0.3, delay: 0.05 + i * 0.04, ease: [0.16, 1, 0.3, 1] },
   }),
 };
 
@@ -54,7 +55,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommand }) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
+      setScrolled(window.scrollY > 30);
       const sections = NAV_LINKS.map(link => link.href.substring(1));
       for (const sectionId of [...sections].reverse()) {
         const el = document.getElementById(sectionId);
@@ -71,7 +72,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommand }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Lock body scroll when drawer open
+  // Lock body scroll when drawer is open
   useEffect(() => {
     document.body.classList.toggle('overflow-hidden', mobileDrawerOpen);
     return () => document.body.classList.remove('overflow-hidden');
@@ -88,7 +89,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommand }) => {
           left: 0,
           right: 0,
           zIndex: 100,
-          padding: scrolled ? '0.75rem 0' : '1.25rem 0',
+          padding: scrolled ? '0.65rem 0' : '1.15rem 0',
           transition: 'padding 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
         }}
       >
@@ -100,28 +101,28 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommand }) => {
               justifyContent: 'space-between',
               padding: '0.65rem 1.25rem',
               borderRadius: '16px',
-              background: scrolled ? 'rgba(7, 8, 12, 0.92)' : 'rgba(14, 18, 28, 0.55)',
-              backdropFilter: 'blur(20px)',
-              WebkitBackdropFilter: 'blur(20px)',
-              border: scrolled ? '1px solid rgba(220, 248, 54, 0.25)' : '1px solid rgba(255, 255, 255, 0.08)',
-              boxShadow: scrolled ? '0 10px 30px -10px rgba(0, 0, 0, 0.7)' : 'none',
+              background: scrolled ? 'rgba(255, 255, 255, 0.94)' : 'rgba(255, 255, 255, 0.85)',
+              backdropFilter: 'blur(16px)',
+              WebkitBackdropFilter: 'blur(16px)',
+              border: '1px solid var(--border-color)',
+              boxShadow: scrolled
+                ? '0 10px 30px -10px rgba(25, 26, 44, 0.08), 0 0 0 1px #E8E7F2'
+                : '0 4px 18px rgba(25, 26, 44, 0.03), 0 0 0 1px #E8E7F2',
               transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
             }}
           >
-            {/* Logo */}
-            <motion.a
+            {/* Brand Logo */}
+            <a
               href="#"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
               style={{
                 display: 'flex',
                 alignItems: 'center',
-                gap: '0.65rem',
+                gap: '0.6rem',
                 textDecoration: 'none',
                 fontFamily: 'var(--font-heading)',
                 fontWeight: 900,
-                fontSize: '1.25rem',
-                color: '#ffffff',
+                fontSize: '1.2rem',
+                color: 'var(--text-primary)',
                 letterSpacing: '-0.02em',
               }}
             >
@@ -130,12 +131,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommand }) => {
                   width: '9px',
                   height: '9px',
                   borderRadius: '50%',
-                  background: 'var(--accent-aura)',
-                  boxShadow: '0 0 10px var(--accent-aura)',
+                  background: 'var(--color-primary)',
+                  boxShadow: '0 0 10px rgba(91, 75, 255, 0.5)',
                 }}
               />
               <span>ANSAB</span>
-            </motion.a>
+            </a>
 
             {/* Desktop Navigation Links */}
             <div
@@ -143,41 +144,40 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommand }) => {
                 display: 'flex',
                 alignItems: 'center',
                 gap: '0.2rem',
-                background: 'rgba(255, 255, 255, 0.03)',
-                padding: '0.3rem 0.5rem',
+                background: 'var(--bg-surface-subtle)',
+                padding: '0.3rem 0.45rem',
                 borderRadius: '12px',
-                border: '1px solid rgba(255, 255, 255, 0.06)',
+                border: '1px solid var(--border-color)',
               }}
               className="desktop-nav"
             >
               {NAV_LINKS.map((link) => {
                 const isActive = activeSection === link.href.substring(1);
                 return (
-                  <motion.a
+                  <a
                     key={link.name}
                     href={link.href}
-                    whileHover={{ color: '#ffffff' }}
-                    whileTap={{ scale: 0.95 }}
                     style={{
-                      padding: '0.4rem 0.85rem',
+                      padding: '0.4rem 0.8rem',
                       borderRadius: '8px',
                       fontSize: '0.82rem',
-                      fontWeight: 600,
-                      color: isActive ? '#ffffff' : 'var(--text-muted)',
-                      background: isActive ? 'rgba(220, 248, 54, 0.12)' : 'transparent',
-                      border: isActive ? '1px solid rgba(220, 248, 54, 0.3)' : '1px solid transparent',
+                      fontFamily: 'var(--font-heading)',
+                      fontWeight: 700,
+                      color: isActive ? 'var(--color-primary)' : 'var(--text-secondary)',
+                      background: isActive ? '#FFFFFF' : 'transparent',
+                      boxShadow: isActive ? '0 2px 6px rgba(25, 26, 44, 0.06)' : 'none',
                       textDecoration: 'none',
                       transition: 'all 0.2s ease',
                       display: 'block',
                     }}
                   >
                     {link.name}
-                  </motion.a>
+                  </a>
                 );
               })}
             </div>
 
-            {/* Right Actions */}
+            {/* Right Controls */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
               {/* Quick Share Trigger */}
               <ShareButton
@@ -190,40 +190,40 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommand }) => {
               />
 
               {/* Command Palette Button */}
-              <motion.button
+              <button
+                type="button"
                 onClick={onOpenCommand}
-                whileHover={{ scale: 1.03, borderColor: 'rgba(220,248,54,0.35)' }}
-                whileTap={{ scale: 0.97 }}
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  gap: '0.5rem',
+                  gap: '0.45rem',
                   padding: '0.45rem 0.85rem',
                   borderRadius: '10px',
-                  background: 'rgba(255, 255, 255, 0.05)',
-                  border: '1px solid rgba(255, 255, 255, 0.1)',
-                  color: 'var(--text-muted)',
+                  background: 'var(--bg-surface-subtle)',
+                  border: '1px solid var(--border-color)',
+                  color: 'var(--text-secondary)',
                   fontSize: '0.78rem',
                   fontFamily: 'var(--font-mono)',
                   cursor: 'pointer',
+                  minHeight: '44px',
                   transition: 'all 0.2s ease',
                 }}
                 className="cmd-k-btn"
                 title="Open Command Palette (Cmd+K)"
               >
-                <Command size={14} style={{ color: 'var(--accent-aura)' }} />
-                <span className="cmd-k-text">Cmd+K</span>
-              </motion.button>
+                <Command size={14} style={{ color: 'var(--color-primary)' }} />
+                <span>Cmd+K</span>
+              </button>
 
-              {/* Mobile Hamburger Button */}
-              <motion.button
+              {/* Mobile Hamburger Button (Min 44px x 44px touch target) */}
+              <button
+                type="button"
                 onClick={() => setMobileDrawerOpen(true)}
-                whileTap={{ scale: 0.92 }}
                 style={{
                   display: 'none',
-                  background: 'rgba(255, 255, 255, 0.05)',
+                  background: '#FFFFFF',
                   border: '1px solid var(--border-color)',
-                  color: '#ffffff',
+                  color: 'var(--text-primary)',
                   padding: '0.55rem',
                   borderRadius: '10px',
                   cursor: 'pointer',
@@ -231,13 +231,14 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommand }) => {
                   justifyContent: 'center',
                   minHeight: '44px',
                   minWidth: '44px',
+                  boxShadow: 'var(--shadow-sm)',
                 }}
                 className="mobile-menu-btn"
                 aria-label="Open mobile menu"
                 aria-expanded={mobileDrawerOpen}
               >
                 <Menu size={22} />
-              </motion.button>
+              </button>
             </div>
           </nav>
         </div>
@@ -247,6 +248,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommand }) => {
       <AnimatePresence>
         {mobileDrawerOpen && (
           <>
+            {/* Backdrop */}
             <motion.div
               key="drawer-backdrop"
               variants={backdropVariants}
@@ -258,12 +260,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommand }) => {
                 position: 'fixed',
                 inset: 0,
                 zIndex: 199,
-                background: 'rgba(5, 7, 12, 0.75)',
+                background: 'rgba(25, 26, 44, 0.4)',
                 backdropFilter: 'blur(8px)',
                 WebkitBackdropFilter: 'blur(8px)',
               }}
             />
 
+            {/* Drawer Panel */}
             <motion.div
               key="drawer-panel"
               variants={drawerVariants}
@@ -277,116 +280,111 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommand }) => {
                 bottom: 0,
                 width: 'min(330px, 86vw)',
                 zIndex: 200,
-                background: 'rgba(7, 8, 12, 0.98)',
-                backdropFilter: 'blur(28px)',
-                WebkitBackdropFilter: 'blur(28px)',
-                borderLeft: '1px solid rgba(220, 248, 54, 0.2)',
+                background: '#FFFFFF',
+                boxShadow: '-10px 0 35px rgba(25, 26, 44, 0.12)',
+                borderLeft: '1px solid var(--border-color)',
                 display: 'flex',
                 flexDirection: 'column',
                 padding: '1.75rem 1.5rem',
                 overflowY: 'auto',
               }}
             >
-              {/* Drawer header */}
+              {/* Header with Title and Close Button */}
               <div
                 style={{
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
-                  marginBottom: '1.75rem',
+                  marginBottom: '1.5rem',
                   paddingBottom: '1rem',
-                  borderBottom: '1px solid rgba(255,255,255,0.06)',
+                  borderBottom: '1px solid var(--border-color)',
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', fontWeight: 800, fontSize: '1.25rem' }}>
-                  <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--accent-aura)', boxShadow: '0 0 10px var(--accent-aura)' }} />
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 900, fontSize: '1.2rem', fontFamily: 'var(--font-heading)' }}>
+                  <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--color-primary)' }} />
                   <span>ANSAB</span>
                 </div>
-                <motion.button
+
+                <button
+                  type="button"
                   onClick={closeDrawer}
-                  whileHover={{ rotate: 90 }}
-                  whileTap={{ scale: 0.9 }}
                   style={{
-                    background: 'rgba(255, 255, 255, 0.06)',
-                    border: '1px solid rgba(255,255,255,0.1)',
-                    color: '#fff',
-                    padding: '0.5rem',
+                    background: 'var(--bg-surface-subtle)',
+                    border: '1px solid var(--border-color)',
+                    color: 'var(--text-primary)',
                     borderRadius: '10px',
                     cursor: 'pointer',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    minWidth: '40px',
-                    minHeight: '40px',
+                    minWidth: '44px',
+                    minHeight: '44px',
                   }}
                   aria-label="Close Menu"
                 >
                   <X size={20} />
-                </motion.button>
+                </button>
               </div>
 
-              {/* Staggered Navigation Links */}
+              {/* Navigation Links with Min 48px Touch Height */}
               <nav style={{ display: 'flex', flexDirection: 'column', gap: '0.45rem', flex: 1 }}>
-                {NAV_LINKS.map((link, i) => (
-                  <motion.a
-                    key={link.name}
-                    href={link.href}
-                    custom={i}
-                    variants={linkItemVariants}
-                    initial="hidden"
-                    animate="visible"
-                    onClick={closeDrawer}
-                    whileHover={{ x: 4, background: 'rgba(220,248,54,0.08)' }}
-                    whileTap={{ scale: 0.98 }}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                      padding: '0.85rem 1.15rem',
-                      borderRadius: '12px',
-                      background: activeSection === link.href.substring(1)
-                        ? 'rgba(220, 248, 54, 0.1)'
-                        : 'rgba(255, 255, 255, 0.03)',
-                      border: activeSection === link.href.substring(1)
-                        ? '1px solid rgba(220, 248, 54, 0.3)'
-                        : '1px solid rgba(255, 255, 255, 0.05)',
-                      color: activeSection === link.href.substring(1) ? '#ffffff' : 'var(--text-muted)',
-                      fontSize: '0.95rem',
-                      fontWeight: 600,
-                      textDecoration: 'none',
-                      minHeight: '48px', // Touch-friendly
-                    }}
-                  >
-                    <span>{link.name}</span>
-                    <ChevronRight
-                      size={16}
+                {NAV_LINKS.map((link, i) => {
+                  const isActive = activeSection === link.href.substring(1);
+                  return (
+                    <motion.a
+                      key={link.name}
+                      href={link.href}
+                      custom={i}
+                      variants={linkItemVariants}
+                      initial="hidden"
+                      animate="visible"
+                      onClick={closeDrawer}
                       style={{
-                        color: activeSection === link.href.substring(1)
-                          ? 'var(--accent-aura)'
-                          : 'var(--text-dim)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                        padding: '0.85rem 1.15rem',
+                        borderRadius: '12px',
+                        background: isActive ? 'var(--color-primary-subtle)' : 'transparent',
+                        border: isActive ? '1px solid var(--color-primary-border)' : '1px solid transparent',
+                        color: isActive ? 'var(--color-primary)' : 'var(--text-primary)',
+                        fontFamily: 'var(--font-heading)',
+                        fontSize: '0.95rem',
+                        fontWeight: 700,
+                        textDecoration: 'none',
+                        minHeight: '48px',
+                        transition: 'all 0.2s ease',
                       }}
-                    />
-                  </motion.a>
-                ))}
+                    >
+                      <span>{link.name}</span>
+                      <ChevronRight
+                        size={16}
+                        style={{
+                          color: isActive ? 'var(--color-primary)' : 'var(--text-muted)',
+                        }}
+                      />
+                    </motion.a>
+                  );
+                })}
               </nav>
 
-              {/* Mobile Drawer Share Button */}
-              <div style={{ marginTop: '1.25rem', paddingTop: '1.25rem', borderTop: '1px solid rgba(255, 255, 255, 0.06)' }}>
+              {/* Bottom Share Action */}
+              <div style={{ marginTop: '1.25rem', paddingTop: '1.25rem', borderTop: '1px solid var(--border-color)' }}>
                 <ShareButton
                   title="Muhammed Ansab — Building Ideas Into Reality"
-                  text="Check out the personal portfolio of Muhammed Ansab Thalappil (AI & Data Science Student, Developer, Entrepreneur)."
+                  text="Explore the personal portfolio of Muhammed Ansab Thalappil (AI & Data Science Student, Developer, Entrepreneur)."
                   url="https://ansab.pages.dev"
                   image="/assets/ansab.jpeg"
                   variant="button"
-                  label="SHARE PORTFOLIO"
+                  label="Share Portfolio"
                   style={{ width: '100%', justifyContent: 'center', minHeight: '48px' }}
                 />
 
                 <div style={{ textAlign: 'center', marginTop: '1rem' }}>
-                  <div style={{ fontSize: '0.7rem', fontFamily: 'var(--font-mono)', color: 'var(--accent-aura)', marginBottom: '0.2rem', letterSpacing: '0.08em' }}>
+                  <div style={{ fontSize: '0.72rem', fontFamily: 'var(--font-heading)', color: 'var(--color-primary)', fontWeight: 800, letterSpacing: '0.04em' }}>
                     CORE PHILOSOPHY
                   </div>
-                  <div style={{ fontSize: '0.82rem', color: 'var(--text-muted)', fontStyle: 'italic' }}>
+                  <div style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', fontStyle: 'italic', marginTop: '0.2rem' }}>
                     "Skills create opportunities."
                   </div>
                 </div>

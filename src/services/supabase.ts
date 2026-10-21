@@ -39,6 +39,7 @@ export async function fetchPublishedPortfolioData() {
       recognitionsRes,
       currentlyExploringRes,
       settingsRes,
+      galleryRes,
     ] = await Promise.all([
       supabase.from('profile').select('*').single(),
       supabase.from('socials').select('*').single(),
@@ -56,6 +57,7 @@ export async function fetchPublishedPortfolioData() {
       supabase.from('recognitions').select('*').eq('is_published', true).order('order_index'),
       supabase.from('currently_exploring').select('*').order('order_index'),
       supabase.from('website_settings').select('*').single(),
+      supabase.from('gallery').select('*').eq('is_published', true).order('order_index').catch(() => ({ data: null })),
     ]);
 
     return {
@@ -75,6 +77,7 @@ export async function fetchPublishedPortfolioData() {
       recognitions: recognitionsRes.data || null,
       currentlyExploring: currentlyExploringRes.data?.map(i => i.topic) || null,
       websiteSettings: settingsRes.data || null,
+      gallery: galleryRes.data || null,
     };
   } catch (err) {
     console.warn('Error fetching Supabase portfolio data, using static fallback:', err);

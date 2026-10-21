@@ -13,6 +13,7 @@ const COMMAND_ITEMS = [
   { name: 'About Muhammed Ansab', section: '#about', icon: User, tag: 'Section' },
   { name: 'Visual Journey Roadmap', section: '#journey', icon: Compass, tag: 'Section' },
   { name: 'CONVERGE 2026 1st Prize Winner', section: '#achievement', icon: Trophy, tag: 'Highlight' },
+  { name: 'Photo Gallery & Archive', section: '#gallery', icon: Trophy, tag: 'Gallery' },
   { name: 'Smart Attendance System (ML)', section: '#projects', icon: Code, tag: 'Project' },
   { name: 'Motherbits Technologies LLP', section: '#entrepreneurship', icon: Briefcase, tag: 'Business' },
   { name: 'King Day Kids E-Commerce', section: '#entrepreneurship', icon: Briefcase, tag: 'Business' },
@@ -27,7 +28,6 @@ const COMMAND_ITEMS = [
 export const CommandMenu: React.FC<CommandMenuProps> = ({ isOpen, onClose }) => {
   const { socials } = usePortfolio();
   const [query, setQuery] = useState('');
-
 
   // Cmd+K toggle is handled in App.tsx — only Escape is handled locally.
   useEffect(() => {
@@ -66,9 +66,9 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({ isOpen, onClose }) => 
             right: 0,
             bottom: 0,
             zIndex: 300,
-            background: 'rgba(3, 5, 12, 0.85)',
-            backdropFilter: 'blur(16px)',
-            WebkitBackdropFilter: 'blur(16px)',
+            background: 'rgba(25, 26, 44, 0.45)',
+            backdropFilter: 'blur(12px)',
+            WebkitBackdropFilter: 'blur(12px)',
             display: 'flex',
             alignItems: 'flex-start',
             justifyContent: 'center',
@@ -86,11 +86,11 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({ isOpen, onClose }) => 
             onClick={(e) => e.stopPropagation()}
             style={{
               width: '100%',
-              maxWidth: '640px',
-              background: 'rgba(12, 16, 29, 0.95)',
-              border: '1px solid rgba(0, 240, 255, 0.25)',
+              maxWidth: '620px',
+              background: '#ffffff',
+              border: '1px solid var(--border-color)',
               borderRadius: '20px',
-              boxShadow: '0 25px 60px -15px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 240, 255, 0.15)',
+              boxShadow: '0 25px 60px -15px rgba(25, 26, 44, 0.18)',
               overflow: 'hidden',
             }}
           >
@@ -104,18 +104,18 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({ isOpen, onClose }) => 
                 borderBottom: '1px solid var(--border-color)',
               }}
             >
-              <Search size={20} style={{ color: 'var(--primary-cyan)' }} />
+              <Search size={20} style={{ color: 'var(--accent-primary)' }} />
               <input
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search sections, projects, ventures..."
+                placeholder="Search sections, projects, gallery, ventures..."
                 autoFocus
                 style={{
                   width: '100%',
                   background: 'transparent',
                   border: 'none',
-                  color: '#ffffff',
+                  color: 'var(--text-primary)',
                   fontSize: '1rem',
                   outline: 'none',
                   fontFamily: 'var(--font-body)',
@@ -124,9 +124,9 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({ isOpen, onClose }) => 
               <button
                 onClick={onClose}
                 style={{
-                  background: 'rgba(255, 255, 255, 0.08)',
-                  border: 'none',
-                  color: 'var(--text-muted)',
+                  background: 'var(--bg-primary)',
+                  border: '1px solid var(--border-color)',
+                  color: 'var(--text-secondary)',
                   padding: '0.35rem 0.6rem',
                   borderRadius: '8px',
                   cursor: 'pointer',
@@ -141,7 +141,7 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({ isOpen, onClose }) => 
             {/* Results List */}
             <div style={{ maxHeight: '380px', overflowY: 'auto', padding: '0.5rem' }}>
               {filteredItems.length === 0 ? (
-                <div style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-muted)' }}>
+                <div style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-secondary)' }}>
                   No results found for &ldquo;{query}&rdquo;
                 </div>
               ) : (
@@ -162,13 +162,14 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({ isOpen, onClose }) => 
                         justifyContent: 'space-between',
                         padding: '0.75rem 1rem',
                         borderRadius: '12px',
-                        color: '#ffffff',
+                        color: 'var(--text-primary)',
                         textDecoration: 'none',
                         transition: 'all 0.15s ease',
                         marginBottom: '0.25rem',
+                        minHeight: '44px',
                       }}
                       onMouseEnter={(e) => {
-                        e.currentTarget.style.background = 'rgba(0, 240, 255, 0.12)';
+                        e.currentTarget.style.background = 'rgba(91, 75, 255, 0.06)';
                       }}
                       onMouseLeave={(e) => {
                         e.currentTarget.style.background = 'transparent';
@@ -180,16 +181,16 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({ isOpen, onClose }) => 
                             width: '32px',
                             height: '32px',
                             borderRadius: '8px',
-                            background: 'rgba(255, 255, 255, 0.05)',
+                            background: 'rgba(91, 75, 255, 0.08)',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            color: 'var(--primary-cyan)',
+                            color: 'var(--accent-primary)',
                           }}
                         >
                           <IconComponent size={16} />
                         </div>
-                        <span style={{ fontSize: '0.95rem', fontWeight: 500 }}>{item.name}</span>
+                        <span style={{ fontSize: '0.95rem', fontWeight: 600 }}>{item.name}</span>
                       </div>
 
                       <span
@@ -198,8 +199,9 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({ isOpen, onClose }) => 
                           fontFamily: 'var(--font-mono)',
                           padding: '0.2rem 0.5rem',
                           borderRadius: '6px',
-                          background: 'rgba(255, 255, 255, 0.06)',
-                          color: 'var(--text-muted)',
+                          background: 'var(--bg-primary)',
+                          border: '1px solid var(--border-color)',
+                          color: 'var(--text-secondary)',
                         }}
                       >
                         {item.tag}
@@ -213,18 +215,18 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({ isOpen, onClose }) => 
             <div
               style={{
                 padding: '0.65rem 1.25rem',
-                background: 'rgba(0, 0, 0, 0.2)',
+                background: 'var(--bg-primary)',
                 borderTop: '1px solid var(--border-color)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 fontSize: '0.75rem',
-                color: 'var(--text-dim)',
+                color: 'var(--text-muted)',
                 fontFamily: 'var(--font-mono)',
               }}
             >
               <span>Tip: Press ESC to close</span>
-              <span>Raycast Navigation</span>
+              <span>Quick Navigation</span>
             </div>
           </motion.div>
         </motion.div>

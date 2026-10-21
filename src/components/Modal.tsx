@@ -44,13 +44,13 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, data }) => {
             right: 0,
             bottom: 0,
             zIndex: 400,
-            background: 'rgba(3, 5, 12, 0.85)',
-            backdropFilter: 'blur(16px)',
-            WebkitBackdropFilter: 'blur(16px)',
+            background: 'rgba(25, 26, 44, 0.45)',
+            backdropFilter: 'blur(12px)',
+            WebkitBackdropFilter: 'blur(12px)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            padding: '1.5rem',
+            padding: '1rem',
           }}
         >
           <motion.div
@@ -62,12 +62,14 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, data }) => {
             onClick={(e) => e.stopPropagation()}
             style={{
               width: '100%',
-              maxWidth: '680px',
-              background: 'rgba(12, 16, 29, 0.95)',
-              border: '1px solid rgba(0, 240, 255, 0.25)',
+              maxWidth: '640px',
+              maxHeight: '90vh',
+              overflowY: 'auto',
+              background: '#ffffff',
+              border: '1px solid var(--border-color)',
               borderRadius: '24px',
-              padding: '2.25rem',
-              boxShadow: '0 25px 60px -15px rgba(0, 0, 0, 0.8), 0 0 40px rgba(0, 240, 255, 0.15)',
+              padding: 'clamp(1.5rem, 5vw, 2.25rem)',
+              boxShadow: '0 25px 60px -15px rgba(25, 26, 44, 0.18)',
               position: 'relative',
             }}
           >
@@ -76,21 +78,25 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, data }) => {
               onClick={onClose}
               style={{
                 position: 'absolute',
-                top: '1.5rem',
-                right: '1.5rem',
-                background: 'rgba(255, 255, 255, 0.08)',
-                border: 'none',
-                color: '#ffffff',
-                padding: '0.5rem',
+                top: '1.25rem',
+                right: '1.25rem',
+                background: 'var(--bg-primary)',
+                border: '1px solid var(--border-color)',
+                color: 'var(--text-secondary)',
+                width: '40px',
+                height: '40px',
                 borderRadius: '10px',
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
+                transition: 'all 0.2s',
               }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
               aria-label="Close modal"
             >
-              <X size={20} />
+              <X size={18} />
             </button>
 
             {/* Modal Header */}
@@ -98,9 +104,10 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, data }) => {
               style={{
                 fontFamily: 'var(--font-mono)',
                 fontSize: '0.8rem',
-                color: 'var(--primary-cyan)',
+                color: 'var(--accent-primary)',
                 fontWeight: 700,
                 marginBottom: '0.5rem',
+                letterSpacing: '0.04em',
               }}
             >
               {isProject
@@ -111,10 +118,12 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, data }) => {
             <h3
               style={{
                 fontFamily: 'var(--font-heading)',
-                fontSize: '2rem',
+                fontSize: 'clamp(1.5rem, 4vw, 2rem)',
                 fontWeight: 900,
-                color: '#ffffff',
+                color: 'var(--text-primary)',
                 marginBottom: '0.35rem',
+                letterSpacing: '-0.02em',
+                paddingRight: '2.5rem',
               }}
             >
               {data.name}
@@ -123,9 +132,10 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, data }) => {
             <div
               style={{
                 fontFamily: 'var(--font-mono)',
-                fontSize: '0.9rem',
-                color: 'var(--secondary-violet)',
-                marginBottom: '1.5rem',
+                fontSize: '0.88rem',
+                color: 'var(--accent-secondary)',
+                fontWeight: 600,
+                marginBottom: '1.25rem',
               }}
             >
               {data.category}
@@ -133,37 +143,38 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, data }) => {
 
             <p
               style={{
-                fontSize: '1.025rem',
-                lineHeight: 1.75,
-                color: 'var(--text-muted)',
-                marginBottom: '2rem',
+                fontSize: '0.98rem',
+                lineHeight: 1.7,
+                color: 'var(--text-secondary)',
+                marginBottom: '1.75rem',
               }}
             >
               {data.description}
             </p>
 
             {/* Tags */}
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '2rem' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.45rem', marginBottom: '2rem' }}>
               {isProject && (data as Project).technologies.map((t, idx) => (
                 <span key={idx} className="tag-pill">
                   {t}
                 </span>
               ))}
               {isBusiness && (data as Business).tags.map((t, idx) => (
-                <span key={idx} className="tag-pill" style={{ borderColor: 'var(--primary-cyan)', color: 'var(--primary-cyan)' }}>
+                <span key={idx} className="tag-pill" style={{ borderColor: 'var(--accent-secondary)', color: 'var(--accent-secondary)' }}>
                   {t}
                 </span>
               ))}
             </div>
 
             {/* Modal Actions */}
-            <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
               {isProject && (data as Project).githubUrl && (
                 <a
                   href={(data as Project).githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-primary"
+                  style={{ minHeight: '44px' }}
                 >
                   <span>VIEW REPOSITORY</span>
                   <ExternalLink size={16} />
@@ -176,6 +187,7 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, data }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-primary"
+                  style={{ minHeight: '44px' }}
                 >
                   <Globe size={16} />
                   <span>OFFICIAL WEBSITE</span>
@@ -188,13 +200,14 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, data }) => {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-secondary"
+                  style={{ minHeight: '44px' }}
                 >
                   <Instagram size={16} />
                   <span>INSTAGRAM</span>
                 </a>
               )}
 
-              <button onClick={onClose} className="btn btn-secondary">
+              <button onClick={onClose} className="btn btn-secondary" style={{ minHeight: '44px' }}>
                 <span>CLOSE</span>
               </button>
             </div>

@@ -10,31 +10,32 @@ export const TimelineSection: React.FC = () => {
   return (
     <section className="section" id="journey">
       <div className="container">
+        {/* Section Header */}
         <motion.div
           custom={0}
           variants={REVEAL}
           initial="hidden"
           whileInView="visible"
           viewport={VIEWPORT}
-          style={{ textAlign: 'center', marginBottom: '3.5rem' }}
+          style={{ textAlign: 'center', marginBottom: '3rem' }}
         >
           <div className="section-eyebrow" style={{ justifyContent: 'center' }}>
-            <Compass size={16} />
+            <Compass size={15} />
             <span>CHRONOLOGY &amp; TRAJECTORY</span>
           </div>
           <h2 className="section-title">
-            THE JOURNEY <span className="gradient-text">SO FAR.</span>
+            The Journey <span className="gradient-text">So Far.</span>
           </h2>
           <p className="section-subtitle" style={{ margin: '0 auto' }}>
             From early foundations and national government awards to commercial venture building and AI innovation.
           </p>
         </motion.div>
 
-        {/* Timeline Grid */}
+        {/* Responsive Timeline Grid (Never overflows 320px) */}
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))',
             gap: '1.5rem',
           }}
         >
@@ -48,17 +49,14 @@ export const TimelineSection: React.FC = () => {
                 initial="hidden"
                 whileInView="visible"
                 viewport={VIEWPORT}
-                whileHover={{ y: -6, borderColor: 'rgba(220, 248, 54, 0.35)' }}
+                whileHover={{ y: -4 }}
                 className="glass-card"
                 style={{
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'space-between',
-                  padding: '2rem',
-                  borderColor: isHighlight ? 'rgba(220, 248, 54, 0.28)' : 'var(--border-color)',
-                  background: isHighlight
-                    ? 'linear-gradient(135deg, rgba(14, 18, 30, 0.95), rgba(220, 248, 54, 0.04))'
-                    : 'var(--bg-card)',
+                  borderColor: isHighlight ? 'var(--color-primary-border)' : 'var(--border-color)',
+                  background: isHighlight ? 'linear-gradient(180deg, #FFFFFF 0%, var(--bg-surface-subtle) 100%)' : '#FFFFFF',
                 }}
               >
                 <div>
@@ -67,19 +65,19 @@ export const TimelineSection: React.FC = () => {
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'space-between',
-                      marginBottom: '1.25rem',
+                      marginBottom: '1rem',
                     }}
                   >
                     <span
                       style={{
-                        fontFamily: 'var(--font-mono)',
+                        fontFamily: 'var(--font-heading)',
                         fontSize: '0.78rem',
-                        fontWeight: 700,
-                        color: 'var(--accent-aura)',
-                        background: 'rgba(220, 248, 54, 0.1)',
+                        fontWeight: 800,
+                        color: 'var(--color-primary)',
+                        background: 'var(--color-primary-subtle)',
                         padding: '0.25rem 0.65rem',
                         borderRadius: '6px',
-                        border: '1px solid rgba(220, 248, 54, 0.25)',
+                        border: '1px solid var(--color-primary-border)',
                       }}
                     >
                       STEP {item.step}
@@ -88,8 +86,8 @@ export const TimelineSection: React.FC = () => {
                     <span
                       className="tag-pill"
                       style={{
-                        borderColor: isHighlight ? 'var(--accent-aura)' : 'var(--border-color)',
-                        color: isHighlight ? 'var(--accent-aura)' : 'var(--text-muted)',
+                        borderColor: isHighlight ? 'var(--color-primary-border)' : 'var(--border-color)',
+                        color: isHighlight ? 'var(--color-primary)' : 'var(--text-secondary)',
                       }}
                     >
                       {item.badge}
@@ -99,10 +97,11 @@ export const TimelineSection: React.FC = () => {
                   <h3
                     style={{
                       fontFamily: 'var(--font-heading)',
-                      fontSize: '1.35rem',
+                      fontSize: '1.25rem',
                       fontWeight: 800,
                       marginBottom: '0.35rem',
-                      color: '#ffffff',
+                      color: 'var(--text-primary)',
+                      lineHeight: 1.3,
                     }}
                   >
                     {item.title}
@@ -110,11 +109,11 @@ export const TimelineSection: React.FC = () => {
 
                   <div
                     style={{
-                      fontFamily: 'var(--font-mono)',
+                      fontFamily: 'var(--font-heading)',
                       fontSize: '0.82rem',
-                      color: '#3b82f6',
-                      marginBottom: '1rem',
-                      fontWeight: 600,
+                      color: 'var(--color-teal)',
+                      fontWeight: 700,
+                      marginBottom: '0.85rem',
                     }}
                   >
                     {item.subtitle}
@@ -122,9 +121,9 @@ export const TimelineSection: React.FC = () => {
 
                   <p
                     style={{
-                      fontSize: '0.925rem',
-                      color: 'var(--text-muted)',
-                      lineHeight: 1.68,
+                      fontSize: '0.92rem',
+                      color: 'var(--text-secondary)',
+                      lineHeight: 1.65,
                     }}
                   >
                     {item.description}
@@ -135,16 +134,17 @@ export const TimelineSection: React.FC = () => {
                   style={{
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '0.4rem',
+                    gap: '0.45rem',
                     fontSize: '0.75rem',
-                    fontFamily: 'var(--font-mono)',
-                    color: isHighlight ? 'var(--accent-aura)' : 'var(--text-dim)',
-                    marginTop: '1.5rem',
-                    paddingTop: '1rem',
-                    borderTop: '1px solid rgba(255, 255, 255, 0.05)',
+                    fontFamily: 'var(--font-body)',
+                    fontWeight: 600,
+                    color: 'var(--color-primary)',
+                    marginTop: '1.25rem',
+                    paddingTop: '0.85rem',
+                    borderTop: '1px solid var(--border-color)',
                   }}
                 >
-                  <CheckCircle2 size={14} />
+                  <CheckCircle2 size={14} style={{ color: 'var(--color-teal)' }} />
                   <span>Verified Milestone</span>
                 </div>
               </motion.div>

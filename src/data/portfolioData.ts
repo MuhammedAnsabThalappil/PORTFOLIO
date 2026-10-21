@@ -13,7 +13,8 @@ import {
   Education,
   Skills,
   Recognition,
-  BusinessTechFlowStep
+  BusinessTechFlowStep,
+  GalleryItem
 } from '../types';
 
 export const PROFILE: Profile = {
@@ -368,4 +369,97 @@ export const CURRENTLY_EXPLORING: string[] = [
   "Software Development",
   "Entrepreneurship",
   "Real-World Product Building"
+];
+
+export const DEFAULT_GALLERY: GalleryItem[] = [
+  {
+    id: "gallery-converge-2026",
+    title: "CONVERGE 2026 — 1st Prize & ₹25,000 Win",
+    caption: "Reverse Pitch Competition 1st Prize winners at KMCT Future Tech Summit 2026 with team members Abraham Jolly, Muhammed Finan, Parvathi Sreejith, and Muhammed Ansab Thalappil.",
+    category: "Achievements",
+    imageUrl: "/assets/converge.jpg",
+    altText: "CONVERGE 2026 1st Prize Winners holding ₹25,000 Cheque",
+    orderIndex: 1,
+    isPublished: true,
+  },
+  {
+    id: "gallery-ansab-portrait",
+    title: "Muhammed Ansab Thalappil",
+    caption: "AI & Data Science Student, Software Developer, and Co-Founder of Motherbits Technologies LLP.",
+    category: "Entrepreneurship",
+    imageUrl: "/assets/ansab.jpeg",
+    altText: "Muhammed Ansab Thalappil Portrait",
+    orderIndex: 2,
+    isPublished: true,
+  },
+  {
+    id: "gallery-smart-attendance",
+    title: "Smart Attendance Machine Vision System",
+    caption: "National INSPIRE Award MANAK winning innovation: Raspberry Pi embedded camera attendance with OpenCV computer vision.",
+    category: "Projects",
+    imageUrl: "/assets/projects/smart-attendance.jpg",
+    altText: "Machine Learning Smart Attendance System Hardware and Camera",
+    orderIndex: 3,
+    isPublished: true,
+  },
+  {
+    id: "gallery-kmct-campus",
+    title: "KMCT Engineering College Campus",
+    caption: "Undergraduate academic base in Artificial Intelligence & Data Science at Manassery, Kerala.",
+    category: "Innovation",
+    imageUrl: "/assets/kmct.jpeg",
+    altText: "KMCT Engineering College Campus Building",
+    orderIndex: 4,
+    isPublished: true,
+  },
+  {
+    id: "gallery-nit-calicut",
+    title: "NIT Calicut Innovation & Robotics",
+    caption: "Advanced robotics workshop and hands-on autonomous navigation training at National Institute of Technology Calicut.",
+    category: "Innovation",
+    imageUrl: "/assets/nit.jpeg",
+    altText: "Robotics Workshop at NIT Calicut",
+    orderIndex: 5,
+    isPublished: true,
+  },
+  {
+    id: "gallery-media-mangalam",
+    title: "State Newspaper Recognition — Mangalam",
+    caption: "Featured for student innovation leadership and technological entrepreneurship.",
+    category: "Achievements",
+    imageUrl: "/assets/recognition/newspaper.jpg",
+    altText: "Mangalam Newspaper Feature Article",
+    orderIndex: 6,
+    isPublished: true,
+  },
+  {
+    id: "gallery-motherbits",
+    title: "Motherbits Technologies LLP",
+    caption: "Co-founded technology platform dedicated to software innovation, product R&D, and engineering.",
+    category: "Entrepreneurship",
+    imageUrl: "/assets/business/motherbits.jpg",
+    altText: "Motherbits Technologies LLP Brand and Headquarters",
+    orderIndex: 7,
+    isPublished: true,
+  },
+  {
+    id: "gallery-kingday",
+    title: "King Day Recreation & Ride-Ons",
+    caption: "Founded e-commerce brand specializing in children's electric ride-on vehicles and cycles.",
+    category: "Entrepreneurship",
+    imageUrl: "/assets/business/kingday.jpg",
+    altText: "King Day Electric Ride-On Products Showcase",
+    orderIndex: 8,
+    isPublished: true,
+  },
+  {
+    id: "gallery-zoltiq",
+    title: "Zoltiq International Commercial Trade",
+    caption: "Global product sourcing and cross-border distribution enterprise.",
+    category: "Entrepreneurship",
+    imageUrl: "/assets/business/zoltiq.jpg",
+    altText: "Zoltiq International Trade and Sourcing",
+    orderIndex: 9,
+    isPublished: true,
+  },
 ];

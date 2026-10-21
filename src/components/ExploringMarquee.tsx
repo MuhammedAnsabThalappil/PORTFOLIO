@@ -11,9 +11,10 @@ export const ExploringMarquee: React.FC = () => {
   return (
     <section
       style={{
-        padding: '3.5rem 0',
-        background: 'rgba(255, 255, 255, 0.015)',
+        padding: '3rem 0',
+        background: 'transparent',
         overflow: 'hidden',
+        position: 'relative',
       }}
     >
       <motion.div
@@ -35,8 +36,8 @@ export const ExploringMarquee: React.FC = () => {
           display: 'flex',
           overflow: 'hidden',
           userSelect: 'none',
-          maskImage: 'linear-gradient(to right, transparent, black 12%, black 88%, transparent)',
-          WebkitMaskImage: 'linear-gradient(to right, transparent, black 12%, black 88%, transparent)',
+          maskImage: 'linear-gradient(to right, transparent, black 8%, black 92%, transparent)',
+          WebkitMaskImage: 'linear-gradient(to right, transparent, black 8%, black 92%, transparent)',
         }}
       >
         {/* marquee-track class handles pause-on-hover via CSS */}
@@ -44,7 +45,7 @@ export const ExploringMarquee: React.FC = () => {
           className="marquee-track"
           style={{
             display: 'flex',
-            gap: '1.25rem',
+            gap: '1rem',
             whiteSpace: 'nowrap',
           }}
         >
@@ -55,20 +56,21 @@ export const ExploringMarquee: React.FC = () => {
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '0.75rem',
-                padding: '0.65rem 1.5rem',
+                gap: '0.65rem',
+                padding: '0.65rem 1.4rem',
                 borderRadius: '9999px',
-                background: 'rgba(12, 16, 29, 0.85)',
-                border: '1px solid rgba(0, 240, 255, 0.2)',
+                background: 'var(--bg-card)',
+                border: '1px solid var(--border-color)',
+                boxShadow: '0 2px 8px rgba(25, 26, 44, 0.04)',
                 fontFamily: 'var(--font-heading)',
-                fontSize: '1rem',
+                fontSize: '0.95rem',
                 fontWeight: 700,
-                color: '#ffffff',
+                color: 'var(--text-primary)',
                 cursor: 'default',
                 flexShrink: 0,
               }}
             >
-              <span style={{ color: 'var(--primary-cyan)' }}>⚡</span>
+              <span style={{ color: 'var(--accent-primary)' }}>⚡</span>
               <span>{item}</span>
             </div>
           ))}

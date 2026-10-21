@@ -20,6 +20,7 @@ import {
   X,
   KeyRound,
   Database,
+  Image as ImageIcon,
 } from 'lucide-react';
 import { authService } from '../services/auth';
 import { usePortfolio } from '../context/PortfolioContext';
@@ -37,6 +38,7 @@ import { ProfileResumeTab } from './tabs/ProfileResumeTab';
 import { MessagesTab } from './tabs/MessagesTab';
 import { SettingsTab } from './tabs/SettingsTab';
 import { AnalyticsTab } from './tabs/AnalyticsTab';
+import { GalleryTab } from './tabs/GalleryTab';
 import { ChangePasswordModal } from './components/ChangePasswordModal';
 
 export const AdminDashboard: React.FC = () => {
@@ -96,6 +98,7 @@ export const AdminDashboard: React.FC = () => {
     { id: 'about', label: 'About Me', icon: <User size={18} /> },
     { id: 'projects', label: 'Projects', icon: <FolderKanban size={18} /> },
     { id: 'achievements', label: 'Achievements', icon: <Trophy size={18} /> },
+    { id: 'gallery', label: 'Photo Gallery', icon: <ImageIcon size={18} /> },
     { id: 'experience', label: 'Experience', icon: <Briefcase size={18} /> },
     { id: 'education', label: 'Education', icon: <GraduationCap size={18} /> },
     { id: 'skills', label: 'Skills & Toolkit', icon: <Wrench size={18} /> },
@@ -445,6 +448,7 @@ export const AdminDashboard: React.FC = () => {
           {activeTab === 'about' && <AboutTab />}
           {activeTab === 'projects' && <ProjectsTab />}
           {activeTab === 'achievements' && <AchievementsTab />}
+          {activeTab === 'gallery' && <GalleryTab />}
           {activeTab === 'experience' && <ExperienceTab />}
           {activeTab === 'education' && <EducationTab />}
           {activeTab === 'skills' && <SkillsTab />}

@@ -5,6 +5,7 @@ import { Hero } from './Hero';
 import { AboutBento } from './AboutBento';
 import { TimelineSection } from './TimelineSection';
 import { AchievementsShowcase } from './AchievementsShowcase';
+import { GallerySection } from './GallerySection';
 import { ProjectsSection } from './ProjectsSection';
 import { BusinessShowcase } from './BusinessShowcase';
 import { ExperienceEducation } from './ExperienceEducation';
@@ -77,6 +78,7 @@ export const PortfolioView: React.FC = () => {
         <AchievementsShowcase
           onOpenLightbox={(src, caption) => setLightboxData({ src, caption })}
         />
+        <GallerySection />
         <ProjectsSection
           onOpenProjectModal={(project) => {
             setModalData(project);

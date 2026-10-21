@@ -11,15 +11,15 @@ interface BusinessShowcaseProps {
 }
 
 const BIZ_ICONS: Record<string, React.ReactNode> = {
-  motherbits: <Building2 size={20} style={{ color: 'var(--accent-aura)' }} />,
-  kingday:    <ShoppingBag size={20} style={{ color: 'var(--accent-amber)' }} />,
-  zoltiq:     <Globe size={20} style={{ color: '#3b82f6' }} />,
+  motherbits: <Building2 size={20} style={{ color: 'var(--color-primary)' }} />,
+  kingday:    <ShoppingBag size={20} style={{ color: 'var(--color-amber)' }} />,
+  zoltiq:     <Globe size={20} style={{ color: 'var(--color-teal)' }} />,
 };
 
-const BIZ_ACCENT: Record<string, string> = {
-  motherbits: 'var(--accent-aura)',
-  kingday:    'var(--accent-amber)',
-  zoltiq:     '#3b82f6',
+const BIZ_COLOR: Record<string, string> = {
+  motherbits: 'var(--color-primary)',
+  kingday:    '#B45309',
+  zoltiq:     'var(--color-teal)',
 };
 
 export const BusinessShowcase: React.FC<BusinessShowcaseProps> = ({ onOpenBusinessModal }) => {
@@ -28,28 +28,47 @@ export const BusinessShowcase: React.FC<BusinessShowcaseProps> = ({ onOpenBusine
   return (
     <section className="section" id="entrepreneurship">
       <div className="container">
-        {/* Header */}
-        <motion.div custom={0} variants={REVEAL} initial="hidden" whileInView="visible" viewport={VIEWPORT}>
+        {/* Section Header */}
+        <motion.div
+          custom={0}
+          variants={REVEAL}
+          initial="hidden"
+          whileInView="visible"
+          viewport={VIEWPORT}
+        >
           <div className="section-eyebrow">
-            <Briefcase size={16} />
+            <Briefcase size={15} />
             <span>04 — COMMERCIAL VENTURES</span>
           </div>
         </motion.div>
-        <motion.h2 custom={1} variants={REVEAL} initial="hidden" whileInView="visible" viewport={VIEWPORT} className="section-title">
-          BUILDING <span className="gradient-text">BEYOND CODE.</span>
+
+        <motion.h2
+          custom={1}
+          variants={REVEAL}
+          initial="hidden"
+          whileInView="visible"
+          viewport={VIEWPORT}
+          className="section-title"
+        >
+          Building <span className="gradient-text">Beyond Code.</span>
         </motion.h2>
 
-        {/* Intro */}
-        <motion.div custom={2} variants={REVEAL} initial="hidden" whileInView="visible" viewport={VIEWPORT} style={{ maxWidth: '680px', marginBottom: '2.5rem' }}>
-          <p style={{ fontSize: '1.05rem', color: 'var(--text-muted)', lineHeight: 1.75 }}>
-            Beyond academics and software development, I actively co-found and scale commercial enterprises across scalable software solutions, e-commerce, and international trade.
-          </p>
-        </motion.div>
+        <motion.p
+          custom={2}
+          variants={REVEAL}
+          initial="hidden"
+          whileInView="visible"
+          viewport={VIEWPORT}
+          className="section-subtitle"
+          style={{ marginBottom: '2.5rem' }}
+        >
+          Beyond academics and software development, I actively co-found and scale commercial enterprises across scalable software solutions, e-commerce, and international trade.
+        </motion.p>
 
-        {/* Business Cards */}
+        {/* Business Cards Row */}
         <div className="biz-cards-row">
           {BUSINESSES.map((biz, idx) => {
-            const accent = BIZ_ACCENT[biz.id] ?? 'var(--accent-aura)';
+            const brandColor = BIZ_COLOR[biz.id] ?? 'var(--color-primary)';
             return (
               <motion.div
                 key={biz.id}
@@ -59,145 +78,154 @@ export const BusinessShowcase: React.FC<BusinessShowcaseProps> = ({ onOpenBusine
                 initial="hidden"
                 whileInView="visible"
                 viewport={VIEWPORT}
-                whileHover={{ y: -7, borderColor: 'rgba(220, 248, 54, 0.35)' }}
-                className="glass-card biz-card"
-                style={{ borderColor: 'rgba(255,255,255,0.08)', padding: '1.75rem' }}
+                whileHover={{ y: -5 }}
+                className="biz-card"
               >
-                {/* Card Header */}
-                <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '0.85rem', marginBottom: '1.15rem' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
-                    <div
-                      style={{
-                        width: '52px',
-                        height: '52px',
-                        borderRadius: '14px',
-                        overflow: 'hidden',
-                        flexShrink: 0,
-                        border: '1px solid rgba(255,255,255,0.1)',
-                        background: 'rgba(255,255,255,0.04)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        position: 'relative',
-                      }}
-                    >
-                      <img
-                        src={biz.image}
-                        alt={biz.name}
-                        style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', inset: 0 }}
-                        onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
-                      />
-                      <div style={{ position: 'relative', zIndex: 1 }}>{BIZ_ICONS[biz.id]}</div>
+                {/* Header with Logo/Icon & Number */}
+                <div>
+                  <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '0.85rem', marginBottom: '1.25rem' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
+                      <div
+                        style={{
+                          width: '48px',
+                          height: '48px',
+                          borderRadius: '12px',
+                          overflow: 'hidden',
+                          flexShrink: 0,
+                          border: '1px solid var(--border-color)',
+                          background: 'var(--bg-surface-subtle)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          position: 'relative',
+                        }}
+                      >
+                        <img
+                          src={biz.image}
+                          alt={biz.name}
+                          style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', inset: 0 }}
+                          onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                        />
+                        <div style={{ position: 'relative', zIndex: 1 }}>{BIZ_ICONS[biz.id]}</div>
+                      </div>
+
+                      <div>
+                        <span
+                          style={{
+                            display: 'inline-block',
+                            fontFamily: 'var(--font-heading)',
+                            fontSize: '0.72rem',
+                            fontWeight: 800,
+                            color: brandColor,
+                            letterSpacing: '0.04em',
+                          }}
+                        >
+                          {biz.number}
+                        </span>
+                        <div
+                          style={{
+                            display: 'inline-block',
+                            marginLeft: '0.5rem',
+                            padding: '0.15rem 0.5rem',
+                            borderRadius: '4px',
+                            background: 'var(--bg-surface-subtle)',
+                            fontSize: '0.68rem',
+                            fontFamily: 'var(--font-heading)',
+                            fontWeight: 700,
+                            color: 'var(--text-secondary)',
+                          }}
+                        >
+                          {biz.role}
+                        </div>
+                      </div>
                     </div>
 
-                    <div>
-                      <span
-                        style={{
-                          display: 'inline-block',
-                          fontFamily: 'var(--font-mono)',
-                          fontSize: '0.7rem',
-                          fontWeight: 700,
-                          color: accent,
-                          background: 'rgba(255,255,255,0.04)',
-                          border: `1px solid ${accent}40`,
-                          padding: '0.2rem 0.55rem',
-                          borderRadius: '6px',
-                          marginBottom: '0.3rem',
-                          letterSpacing: '0.04em',
-                        }}
-                      >
-                        {biz.role}
-                      </span>
-                      <h3
-                        style={{
-                          fontFamily: 'var(--font-heading)',
-                          fontSize: '1.15rem',
-                          fontWeight: 800,
-                          color: '#ffffff',
-                          lineHeight: 1.2,
-                        }}
-                        title={biz.name}
-                      >
-                        {biz.name}
-                      </h3>
-                    </div>
+                    <ShareButton
+                      title={`${biz.name} — ${biz.role}`}
+                      text={biz.shortDesc}
+                      url={`https://ansab.pages.dev#business-${biz.id}`}
+                      image={biz.image}
+                      category={biz.name}
+                      variant="pill"
+                      label="Share"
+                    />
                   </div>
 
-                  {/* Share button for this venture */}
-                  <ShareButton
-                    title={`${biz.name} — Co-founded by Muhammed Ansab`}
-                    text={`${biz.name} (${biz.category}) — ${biz.role} · Venture co-founded by Muhammed Ansab Thalappil.`}
-                    url={`https://ansab.pages.dev#business-${biz.id}`}
-                    image={biz.image}
-                    category={biz.name}
-                    variant="icon"
-                  />
-                </div>
-
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.76rem', color: 'var(--text-dim)', marginBottom: '0.85rem', letterSpacing: '0.04em' }}>
-                  {biz.category}
-                </div>
-
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem', marginBottom: '1.5rem' }}>
-                  {biz.tags.map((t, tIdx) => (
-                    <span key={tIdx} className="tag-pill">{t}</span>
-                  ))}
-                </div>
-
-                <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap' }}>
-                  <motion.button
-                    onClick={() => onOpenBusinessModal(biz)}
-                    className="btn btn-secondary btn-sm"
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.97 }}
-                    style={{ flex: 1 }}
+                  <h3
+                    style={{
+                      fontFamily: 'var(--font-heading)',
+                      fontSize: '1.25rem',
+                      fontWeight: 800,
+                      color: 'var(--text-primary)',
+                      marginBottom: '0.25rem',
+                      lineHeight: 1.25,
+                    }}
                   >
-                    <span>EXPLORE VENTURE</span>
-                    <ArrowRight size={13} />
-                  </motion.button>
-                  {biz.website && (
-                    <motion.a
-                      href={biz.website}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    {biz.name}
+                  </h3>
+
+                  <div
+                    style={{
+                      fontFamily: 'var(--font-heading)',
+                      fontSize: '0.8rem',
+                      color: 'var(--text-muted)',
+                      fontWeight: 700,
+                      marginBottom: '0.85rem',
+                    }}
+                  >
+                    {biz.category}
+                  </div>
+
+                  <p
+                    style={{
+                      fontSize: '0.92rem',
+                      color: 'var(--text-secondary)',
+                      lineHeight: 1.65,
+                      marginBottom: '1.25rem',
+                    }}
+                  >
+                    {biz.shortDesc}
+                  </p>
+                </div>
+
+                <div>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem', marginBottom: '1.25rem' }}>
+                    {biz.tags.map((t) => (
+                      <span key={t} className="tag-pill" style={{ fontSize: '0.75rem' }}>
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+                    <button
+                      type="button"
+                      onClick={() => onOpenBusinessModal(biz)}
                       className="btn btn-secondary btn-sm"
-                      whileHover={{ scale: 1.08 }}
-                      whileTap={{ scale: 0.93 }}
-                      style={{ padding: '0.6rem 0.75rem', borderRadius: '10px' }}
-                      aria-label="Website"
+                      style={{ flex: 1 }}
                     >
-                      <ExternalLink size={14} />
-                    </motion.a>
-                  )}
+                      <span>Venture Overview</span>
+                      <ArrowRight size={13} />
+                    </button>
+
+                    {biz.website && (
+                      <a
+                        href={biz.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn btn-secondary btn-sm"
+                        style={{ padding: '0.55rem', minWidth: '44px' }}
+                        aria-label={`Visit ${biz.name} website`}
+                      >
+                        <Globe size={15} />
+                      </a>
+                    )}
+                  </div>
                 </div>
               </motion.div>
             );
           })}
         </div>
-
-        {/* Editorial Quote Strip */}
-        <motion.div
-          custom={3}
-          variants={REVEAL}
-          initial="hidden"
-          whileInView="visible"
-          viewport={VIEWPORT}
-          className="glass-card"
-          style={{
-            marginTop: '2.5rem',
-            padding: '1.6rem 2.2rem',
-            background: 'linear-gradient(135deg, rgba(220,248,54,0.04), rgba(59,130,246,0.04))',
-            borderColor: 'rgba(220,248,54,0.25)',
-            textAlign: 'center',
-          }}
-        >
-          <blockquote
-            className="gradient-text"
-            style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.15rem, 2.5vw, 1.6rem)', fontWeight: 800 }}
-          >
-            "Technology is what I learn. Building is what I do."
-          </blockquote>
-        </motion.div>
       </div>
     </section>
   );
