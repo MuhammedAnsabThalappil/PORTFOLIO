@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Share2, Copy, Check, X, MessageSquare, Linkedin, Twitter, ExternalLink } from 'lucide-react';
 
@@ -19,7 +20,7 @@ interface ShareModalProps {
 export const ShareModal: React.FC<ShareModalProps> = ({ isOpen, onClose, data }) => {
   const [copied, setCopied] = useState(false);
 
-  if (!isOpen || !data) return null;
+  if (!isOpen || !data || typeof document === 'undefined') return null;
 
   const handleCopyLink = async () => {
     try {
@@ -53,13 +54,13 @@ export const ShareModal: React.FC<ShareModalProps> = ({ isOpen, onClose, data })
     window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(data.url)}`, '_blank', 'noopener,noreferrer');
   };
 
-  return (
+  return createPortal(
     <AnimatePresence>
       <div
         style={{
           position: 'fixed',
           inset: 0,
-          zIndex: 10000,
+          zIndex: 99999,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -321,6 +322,7 @@ export const ShareModal: React.FC<ShareModalProps> = ({ isOpen, onClose, data })
           </div>
         </motion.div>
       </div>
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 };
