@@ -55,17 +55,17 @@ export const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({ isOpen
       alignItems: 'center',
       justifyContent: 'center',
       padding: '1rem',
-      background: 'rgba(0, 0, 0, 0.8)',
-      backdropFilter: 'blur(8px)',
+      background: 'rgba(5, 7, 12, 0.8)',
+      backdropFilter: 'blur(10px)',
     }}>
       <div style={{
         width: '100%',
         maxWidth: '460px',
-        background: '#0c0d14',
-        border: '1px solid rgba(0, 240, 255, 0.3)',
+        background: 'var(--bg-card, #161A24)',
+        border: '1px solid var(--border-color, #2A3140)',
         borderRadius: '16px',
         padding: '2rem',
-        boxShadow: '0 25px 60px rgba(0, 0, 0, 0.7), 0 0 30px rgba(0, 240, 255, 0.1)',
+        boxShadow: '0 25px 60px rgba(0, 0, 0, 0.7), 0 0 30px rgba(124, 108, 255, 0.1)',
         position: 'relative',
       }}>
         {/* Close Button */}
@@ -75,13 +75,20 @@ export const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({ isOpen
             position: 'absolute',
             top: '1.25rem',
             right: '1.25rem',
-            background: 'none',
-            border: 'none',
-            color: 'var(--text-muted)',
+            background: 'var(--bg-elevated, #1C2230)',
+            border: '1px solid var(--border-color, #2A3140)',
+            borderRadius: '8px',
+            color: 'var(--text-secondary, #A7B0C0)',
             cursor: 'pointer',
+            width: '32px',
+            height: '32px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
+          aria-label="Close dialog"
         >
-          <X size={20} />
+          <X size={16} />
         </button>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
@@ -89,18 +96,22 @@ export const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({ isOpen
             width: '42px',
             height: '42px',
             borderRadius: '10px',
-            background: 'rgba(0, 240, 255, 0.1)',
-            border: '1px solid rgba(0, 240, 255, 0.3)',
+            background: 'rgba(124, 108, 255, 0.12)',
+            border: '1px solid rgba(124, 108, 255, 0.3)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            color: 'var(--primary-cyan)',
+            color: 'var(--accent-primary, #7C6CFF)',
           }}>
-            <Lock size={22} />
+            <Lock size={20} />
           </div>
           <div>
-            <h3 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 700, color: '#fff' }}>Change Password</h3>
-            <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--text-muted)' }}>Required before production deployment</p>
+            <h3 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-primary, #F5F7FF)', fontFamily: 'var(--font-heading)' }}>
+              Change Password
+            </h3>
+            <p style={{ margin: 0, fontSize: '0.8rem', color: 'var(--text-muted, #7E899D)' }}>
+              Update your administrative credentials
+            </p>
           </div>
         </div>
 
@@ -108,9 +119,9 @@ export const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({ isOpen
           <div style={{
             padding: '0.75rem 1rem',
             borderRadius: '10px',
-            background: 'rgba(239, 68, 68, 0.15)',
-            border: '1px solid rgba(239, 68, 68, 0.4)',
-            color: '#ef4444',
+            background: 'rgba(248, 113, 113, 0.12)',
+            border: '1px solid var(--error, #F87171)',
+            color: 'var(--error, #F87171)',
             fontSize: '0.85rem',
             display: 'flex',
             alignItems: 'center',
@@ -126,19 +137,19 @@ export const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({ isOpen
           <div style={{
             padding: '1.5rem',
             borderRadius: '12px',
-            background: 'rgba(16, 185, 129, 0.15)',
-            border: '1px solid rgba(16, 185, 129, 0.4)',
-            color: '#10b981',
+            background: 'rgba(52, 211, 153, 0.12)',
+            border: '1px solid var(--success, #34D399)',
+            color: 'var(--success, #34D399)',
             textAlign: 'center',
           }}>
             <ShieldCheck size={40} style={{ margin: '0 auto 0.75rem' }} />
-            <h4 style={{ margin: '0 0 0.5rem', fontSize: '1.1rem' }}>Password Updated!</h4>
-            <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-muted)' }}>Your session has been securely refreshed.</p>
+            <h4 style={{ margin: '0 0 0.5rem', fontSize: '1.1rem', color: 'var(--text-primary, #F5F7FF)' }}>Password Updated!</h4>
+            <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-secondary, #A7B0C0)' }}>Your session has been securely refreshed.</p>
           </div>
         ) : (
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.1rem' }}>
             <div>
-              <label style={{ display: 'block', fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: 'var(--text-muted)', marginBottom: '0.35rem' }}>
+              <label style={{ display: 'block', fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: 'var(--text-muted, #7E899D)', marginBottom: '0.35rem', fontWeight: 600 }}>
                 CURRENT PASSWORD
               </label>
               <input
@@ -151,9 +162,9 @@ export const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({ isOpen
                   width: '100%',
                   padding: '0.75rem 1rem',
                   borderRadius: '10px',
-                  background: 'rgba(255, 255, 255, 0.04)',
-                  border: '1px solid var(--border-color)',
-                  color: '#fff',
+                  background: 'var(--bg-elevated, #1C2230)',
+                  border: '1px solid var(--border-color, #2A3140)',
+                  color: 'var(--text-primary, #F5F7FF)',
                   outline: 'none',
                   fontSize: '0.9rem',
                 }}
@@ -161,7 +172,7 @@ export const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({ isOpen
             </div>
 
             <div>
-              <label style={{ display: 'block', fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: 'var(--text-muted)', marginBottom: '0.35rem' }}>
+              <label style={{ display: 'block', fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: 'var(--text-muted, #7E899D)', marginBottom: '0.35rem', fontWeight: 600 }}>
                 NEW STRONG PASSWORD
               </label>
               <input
@@ -174,9 +185,9 @@ export const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({ isOpen
                   width: '100%',
                   padding: '0.75rem 1rem',
                   borderRadius: '10px',
-                  background: 'rgba(255, 255, 255, 0.04)',
-                  border: '1px solid var(--border-color)',
-                  color: '#fff',
+                  background: 'var(--bg-elevated, #1C2230)',
+                  border: '1px solid var(--border-color, #2A3140)',
+                  color: 'var(--text-primary, #F5F7FF)',
                   outline: 'none',
                   fontSize: '0.9rem',
                 }}
@@ -184,7 +195,7 @@ export const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({ isOpen
             </div>
 
             <div>
-              <label style={{ display: 'block', fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: 'var(--text-muted)', marginBottom: '0.35rem' }}>
+              <label style={{ display: 'block', fontSize: '0.75rem', fontFamily: 'var(--font-mono)', color: 'var(--text-muted, #7E899D)', marginBottom: '0.35rem', fontWeight: 600 }}>
                 CONFIRM NEW PASSWORD
               </label>
               <input
@@ -197,9 +208,9 @@ export const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({ isOpen
                   width: '100%',
                   padding: '0.75rem 1rem',
                   borderRadius: '10px',
-                  background: 'rgba(255, 255, 255, 0.04)',
-                  border: '1px solid var(--border-color)',
-                  color: '#fff',
+                  background: 'var(--bg-elevated, #1C2230)',
+                  border: '1px solid var(--border-color, #2A3140)',
+                  color: 'var(--text-primary, #F5F7FF)',
                   outline: 'none',
                   fontSize: '0.9rem',
                 }}
@@ -207,17 +218,27 @@ export const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({ isOpen
             </div>
 
             {/* Checklist */}
-            <div style={{ padding: '0.75rem 1rem', borderRadius: '10px', background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.06)', fontSize: '0.75rem', color: 'var(--text-muted)', display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: isMinLength ? '#10b981' : 'var(--text-dim)' }}>
+            <div style={{
+              padding: '0.75rem 1rem',
+              borderRadius: '10px',
+              background: 'var(--bg-elevated, #1C2230)',
+              border: '1px solid var(--border-color, #2A3140)',
+              fontSize: '0.75rem',
+              color: 'var(--text-muted, #7E899D)',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '0.35rem',
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: isMinLength ? 'var(--success, #34D399)' : 'var(--text-muted, #7E899D)' }}>
                 <Check size={13} /> <span>At least 8 characters</span>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: hasSymbolOrNum ? '#10b981' : 'var(--text-dim)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: hasSymbolOrNum ? 'var(--success, #34D399)' : 'var(--text-muted, #7E899D)' }}>
                 <Check size={13} /> <span>Contains number or symbol</span>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: isNotTemp ? '#10b981' : 'var(--text-dim)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: isNotTemp ? 'var(--success, #34D399)' : 'var(--text-muted, #7E899D)' }}>
                 <Check size={13} /> <span>Different from current password</span>
               </div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: isMatching ? '#10b981' : 'var(--text-dim)' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', color: isMatching ? 'var(--success, #34D399)' : 'var(--text-muted, #7E899D)' }}>
                 <Check size={13} /> <span>Passwords match</span>
               </div>
             </div>
@@ -229,11 +250,13 @@ export const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({ isOpen
                 marginTop: '0.5rem',
                 padding: '0.85rem',
                 borderRadius: '10px',
-                background: isValid ? 'linear-gradient(135deg, var(--primary-cyan), var(--secondary-violet))' : 'rgba(255,255,255,0.1)',
-                color: isValid ? '#050508' : 'var(--text-dim)',
+                background: isValid ? 'var(--accent-primary, #7C6CFF)' : 'var(--bg-elevated, #1C2230)',
+                color: isValid ? '#ffffff' : 'var(--text-muted, #7E899D)',
                 fontWeight: 700,
                 border: 'none',
                 cursor: isValid && !loading ? 'pointer' : 'not-allowed',
+                boxShadow: isValid ? '0 4px 14px rgba(124, 108, 255, 0.4)' : 'none',
+                minHeight: '44px',
                 transition: 'all 0.2s ease',
               }}
             >

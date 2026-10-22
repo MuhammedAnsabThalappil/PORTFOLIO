@@ -218,7 +218,7 @@ export const Hero: React.FC = () => {
               <ShareButton
                 title="Muhammed Ansab — Building Ideas Into Reality"
                 text="Explore the personal portfolio of Muhammed Ansab Thalappil: AI & Data Science Student, Developer, Entrepreneur & 1st Prize Winner at CONVERGE 2026."
-                url="https://ansab.pages.dev"
+                url="/"
                 image="/assets/ansab.jpeg"
                 category="PORTFOLIO"
                 variant="button"
@@ -254,7 +254,8 @@ export const Hero: React.FC = () => {
                     minHeight: '38px',
                     padding: '0.4rem 0.85rem',
                     borderRadius: '10px',
-                    background: '#FFFFFF',
+                    background: 'var(--bg-elevated, #1C2230)',
+                    border: '1px solid var(--border-color, #2A3140)',
                     boxShadow: 'var(--shadow-sm)',
                   }}
                 >
@@ -279,7 +280,7 @@ export const Hero: React.FC = () => {
                 position: 'relative',
                 borderRadius: '24px',
                 padding: '6px',
-                background: 'linear-gradient(135deg, rgba(91, 75, 255, 0.25), rgba(0, 191, 166, 0.2), #FFFFFF)',
+                background: 'linear-gradient(135deg, rgba(124, 108, 255, 0.35), rgba(54, 214, 197, 0.25), var(--bg-card, #161A24))',
                 boxShadow: 'var(--shadow-elevated)',
                 maxWidth: '340px',
                 width: '100%',
@@ -298,8 +299,8 @@ export const Hero: React.FC = () => {
                   gap: '0.5rem',
                   padding: '0.45rem 0.85rem',
                   borderRadius: '12px',
-                  background: '#FFFFFF',
-                  border: '1px solid var(--border-color)',
+                  background: 'var(--bg-card, #161A24)',
+                  border: '1px solid var(--border-color, #2A3140)',
                   boxShadow: 'var(--shadow-card)',
                 }}
               >
@@ -336,7 +337,7 @@ export const Hero: React.FC = () => {
                   overflow: 'hidden',
                   position: 'relative',
                   aspectRatio: '4 / 5',
-                  background: '#EEECF9',
+                  background: 'var(--bg-elevated, #1C2230)',
                 }}
               >
                 <img
@@ -370,9 +371,9 @@ export const Hero: React.FC = () => {
                     right: '10px',
                     padding: '0.65rem 0.85rem',
                     borderRadius: '12px',
-                    background: 'rgba(255, 255, 255, 0.95)',
-                    backdropFilter: 'blur(10px)',
-                    border: '1px solid var(--border-color)',
+                    background: 'rgba(22, 26, 36, 0.92)',
+                    backdropFilter: 'blur(12px)',
+                    border: '1px solid var(--border-color, #2A3140)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',

@@ -43,10 +43,10 @@ export const ContactSection: React.FC = () => {
     padding: '0.85rem 1.15rem',
     minHeight: '48px', // Mobile touch requirement
     borderRadius: '12px',
-    background: '#FFFFFF',
-    border: `1px solid ${focused === field ? 'var(--color-primary)' : 'var(--border-color)'}`,
-    boxShadow: focused === field ? '0 0 0 3px rgba(91, 75, 255, 0.12)' : 'var(--shadow-sm)',
-    color: 'var(--text-primary)',
+    background: 'var(--bg-elevated, #1C2230)',
+    border: `1px solid ${focused === field ? 'var(--accent-primary, #7C6CFF)' : 'var(--border-color, #2A3140)'}`,
+    boxShadow: focused === field ? '0 0 0 3px rgba(124, 108, 255, 0.2)' : 'none',
+    color: 'var(--text-primary, #F5F7FF)',
     fontSize: '0.95rem',
     outline: 'none',
     fontFamily: 'var(--font-body)',
@@ -57,9 +57,10 @@ export const ContactSection: React.FC = () => {
     display: 'block',
     fontFamily: 'var(--font-heading)',
     fontSize: '0.78rem',
-    color: 'var(--text-primary)',
+    color: 'var(--text-primary, #F5F7FF)',
     marginBottom: '0.4rem',
     fontWeight: 700,
+    letterSpacing: '0.04em',
   };
 
   return (
@@ -132,7 +133,7 @@ export const ContactSection: React.FC = () => {
             whileInView="visible"
             viewport={VIEWPORT}
             className="glass-card col-span-7"
-            style={{ minWidth: 0, background: '#FFFFFF' }}
+            style={{ minWidth: 0, background: 'var(--bg-card, #161A24)', border: '1px solid var(--border-color, #2A3140)' }}
           >
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
               {/* Name Field */}
@@ -193,9 +194,9 @@ export const ContactSection: React.FC = () => {
                     gap: '0.5rem',
                     padding: '0.75rem 1rem',
                     borderRadius: '10px',
-                    background: 'var(--color-coral-subtle)',
-                    border: '1px solid var(--color-coral-border)',
-                    color: 'var(--color-coral)',
+                    background: 'rgba(248, 113, 113, 0.12)',
+                    border: '1px solid var(--error, #F87171)',
+                    color: 'var(--error, #F87171)',
                     fontSize: '0.85rem',
                   }}
                 >
@@ -212,9 +213,9 @@ export const ContactSection: React.FC = () => {
                     gap: '0.5rem',
                     padding: '0.75rem 1rem',
                     borderRadius: '10px',
-                    background: 'var(--color-teal-subtle)',
-                    border: '1px solid var(--color-teal-border)',
-                    color: 'var(--color-teal)',
+                    background: 'rgba(52, 211, 153, 0.12)',
+                    border: '1px solid var(--success, #34D399)',
+                    color: 'var(--success, #34D399)',
                     fontSize: '0.88rem',
                     fontWeight: 600,
                   }}

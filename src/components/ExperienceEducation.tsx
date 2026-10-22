@@ -32,7 +32,7 @@ export const ExperienceEducation: React.FC = () => {
           className="glass-card"
           style={{
             marginBottom: '3.5rem',
-            background: '#FFFFFF',
+            background: 'var(--bg-card, #161A24)',
           }}
         >
           <div className="exp-inner-grid">

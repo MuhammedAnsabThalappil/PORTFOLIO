@@ -55,7 +55,7 @@ export const AchievementsShowcase: React.FC<AchievementsShowcaseProps> = ({ onOp
           style={{
             marginBottom: '2.5rem',
             position: 'relative',
-            background: 'linear-gradient(180deg, #FFFFFF 0%, #FAFAFF 100%)',
+            background: 'var(--bg-card, #161A24)',
           }}
         >
           <div className="achiev-hero-grid">
@@ -69,7 +69,7 @@ export const AchievementsShowcase: React.FC<AchievementsShowcaseProps> = ({ onOp
                 aspectRatio: '16 / 10',
                 cursor: 'pointer',
                 border: '1px solid var(--border-color)',
-                background: '#EEECF9',
+                background: 'var(--bg-elevated, #1C2230)',
               }}
               onClick={() =>
                 onOpenLightbox(
@@ -150,7 +150,7 @@ export const AchievementsShowcase: React.FC<AchievementsShowcaseProps> = ({ onOp
                 <ShareButton
                   title="CONVERGE 2026 — 1st Prize Winner | Muhammed Ansab"
                   text="Muhammed Ansab and team secured 1st Prize and ₹25,000 at the CONVERGE 2026 Reverse Pitch Competition against 43 competing teams!"
-                  url="https://ansab.pages.dev#achievement-converge-2026"
+                  url="#achievement-converge-2026"
                   image="/assets/converge.jpg"
                   category="CONVERGE 2026"
                   variant="button"
@@ -276,7 +276,7 @@ export const AchievementsShowcase: React.FC<AchievementsShowcaseProps> = ({ onOp
                       <div
                         style={{
                           padding: '1.25rem',
-                          background: '#FFFFFF',
+                          background: 'var(--bg-elevated, #1C2230)',
                           border: '1px solid var(--border-color)',
                           borderRadius: '12px',
                           marginTop: '0.5rem',
@@ -389,7 +389,7 @@ export const AchievementsShowcase: React.FC<AchievementsShowcaseProps> = ({ onOp
                     <ShareButton
                       title={`${sec.title} — ${sec.issuer}`}
                       text={sec.description}
-                      url={`https://ansab.pages.dev#achievement-${sec.id}`}
+                      url={`#achievement-${sec.id}`}
                       image={imgPath}
                       category={sec.title}
                       variant="pill"
@@ -454,7 +454,7 @@ export const AchievementsShowcase: React.FC<AchievementsShowcaseProps> = ({ onOp
           viewport={VIEWPORT}
           className="glass-card"
           style={{
-            background: 'linear-gradient(135deg, #FFFFFF 0%, var(--bg-surface-subtle) 100%)',
+            background: 'var(--bg-card, #161A24)',
           }}
         >
           <div className="newspaper-inner-grid">
@@ -467,7 +467,7 @@ export const AchievementsShowcase: React.FC<AchievementsShowcaseProps> = ({ onOp
                 aspectRatio: '4 / 3',
                 cursor: 'pointer',
                 border: '1px solid var(--border-color)',
-                background: '#EEECF9',
+                background: 'var(--bg-elevated, #1C2230)',
               }}
               onClick={() => onOpenLightbox(MEDIA_RECOGNITION.image, 'State Media Coverage in Mangalam Newspaper')}
             >
@@ -552,7 +552,7 @@ export const AchievementsShowcase: React.FC<AchievementsShowcaseProps> = ({ onOp
                 <ShareButton
                   title="State Media Recognition — Mangalam"
                   text="Muhammed Ansab Thalappil featured in Mangalam Newspaper for student innovation leadership."
-                  url="https://ansab.pages.dev#achievement"
+                  url="#achievement-media"
                   image="/assets/recognition/newspaper.jpg"
                   category="MEDIA FEATURE"
                   variant="pill"

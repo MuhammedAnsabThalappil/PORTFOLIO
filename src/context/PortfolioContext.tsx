@@ -37,11 +37,81 @@ import {
 } from '../types';
 import { fetchPublishedPortfolioData, isSupabaseConfigured } from '../services/supabase';
 
+export interface AccentPreset {
+  id: string;
+  name: string;
+  primary: string;
+  hover: string;
+  secondary: string;
+  description: string;
+}
+
+export const ACCENT_PRESETS: Record<string, AccentPreset> = {
+  violet: {
+    id: 'violet',
+    name: 'Signature Violet',
+    primary: '#7C6CFF',
+    hover: '#9387FF',
+    secondary: '#36D6C5',
+    description: 'Flagship theme — deep royal violet paired with subtle teal secondary highlights.',
+  },
+  teal: {
+    id: 'teal',
+    name: 'Electric Teal',
+    primary: '#36D6C5',
+    hover: '#4EE8D8',
+    secondary: '#7C6CFF',
+    description: 'Dynamic cyber green-teal with high-contrast sharpness.',
+  },
+  indigo: {
+    id: 'indigo',
+    name: 'Cosmic Indigo',
+    primary: '#6366F1',
+    hover: '#818CF8',
+    secondary: '#38BDF8',
+    description: 'Modern developer indigo with sky-blue highlights.',
+  },
+  blue: {
+    id: 'blue',
+    name: 'Cyber Blue',
+    primary: '#3B82F6',
+    hover: '#60A5FA',
+    secondary: '#34D399',
+    description: 'Crisp technical blue with emerald status accents.',
+  },
+  amber: {
+    id: 'amber',
+    name: 'Warm Amber',
+    primary: '#F59E0B',
+    hover: '#FBBF24',
+    secondary: '#8B5CF6',
+    description: 'Warm golden amber inspired by luxury precision watchmaking.',
+  },
+};
+
+export const applyAccentTheme = (themeId: string) => {
+  const preset = ACCENT_PRESETS[themeId] || ACCENT_PRESETS.violet;
+  if (typeof document !== 'undefined') {
+    const root = document.documentElement;
+    root.style.setProperty('--accent-primary', preset.primary);
+    root.style.setProperty('--accent-hover', preset.hover);
+    root.style.setProperty('--accent-secondary', preset.secondary);
+    root.style.setProperty('--color-primary', preset.primary);
+    root.style.setProperty('--color-primary-hover', preset.hover);
+    root.style.setProperty('--color-primary-subtle', `${preset.primary}18`);
+    root.style.setProperty('--color-primary-border', `${preset.primary}40`);
+  }
+  try {
+    localStorage.setItem('ansab_accent_theme', preset.id);
+  } catch {}
+};
+
 export interface WebsiteSettings {
   siteTitle: string;
   metaDescription: string;
   heroTagline: string;
   footerText: string;
+  accentTheme: string;
 }
 
 const DEFAULT_SETTINGS: WebsiteSettings = {
@@ -49,6 +119,7 @@ const DEFAULT_SETTINGS: WebsiteSettings = {
   metaDescription: 'Official Personal Portfolio of Muhammed Ansab Thalappil — AI & Data Science Student, Programmer, Developer, Entrepreneur & Innovator.',
   heroTagline: 'BUILDING IDEAS INTO REALITY.',
   footerText: '© 2026 Muhammed Ansab Thalappil. Built with high precision.',
+  accentTheme: 'violet',
 };
 
 interface PortfolioContextType {
@@ -83,6 +154,7 @@ interface PortfolioContextType {
   updateEducation: (edu: Education[]) => void;
   updateSkills: (skills: Skills) => void;
   updateGallery: (gallery: GalleryItem[]) => void;
+  updateWebsiteSettings: (settings: Partial<WebsiteSettings>) => void;
 }
 
 const PortfolioContext = createContext<PortfolioContextType | null>(null);
@@ -103,8 +175,16 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   const [skills, setSkills] = useState<Skills>(DEFAULT_SKILLS);
   const [recognitions, setRecognitions] = useState<Recognition[]>(DEFAULT_RECOGNITIONS);
   const [currentlyExploring, setCurrentlyExploring] = useState<string[]>(DEFAULT_CURRENTLY_EXPLORING);
-  const [websiteSettings, setWebsiteSettings] = useState<WebsiteSettings>(DEFAULT_SETTINGS);
+  const [websiteSettings, setWebsiteSettings] = useState<WebsiteSettings>(() => {
+    const savedTheme = typeof localStorage !== 'undefined' ? (localStorage.getItem('ansab_accent_theme') || 'violet') : 'violet';
+    return { ...DEFAULT_SETTINGS, accentTheme: savedTheme };
+  });
   const [gallery, setGallery] = useState<GalleryItem[]>(DEFAULT_GALLERY);
+
+  // Apply accent theme on mount and whenever changed
+  useEffect(() => {
+    applyAccentTheme(websiteSettings.accentTheme || 'violet');
+  }, [websiteSettings.accentTheme]);
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isLiveConnected, setIsLiveConnected] = useState<boolean>(isSupabaseConfigured);
@@ -254,12 +334,15 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
           setSkills(categorizedSkills);
         }
         if (data.websiteSettings) {
+          const theme = data.websiteSettings.accent_theme || (typeof localStorage !== 'undefined' ? localStorage.getItem('ansab_accent_theme') : 'violet') || 'violet';
           setWebsiteSettings({
             siteTitle: data.websiteSettings.site_title || DEFAULT_SETTINGS.siteTitle,
             metaDescription: data.websiteSettings.meta_description || DEFAULT_SETTINGS.metaDescription,
             heroTagline: data.websiteSettings.hero_tagline || DEFAULT_SETTINGS.heroTagline,
             footerText: data.websiteSettings.footer_text || DEFAULT_SETTINGS.footerText,
+            accentTheme: theme,
           });
+          applyAccentTheme(theme);
         }
         if (data.gallery && data.gallery.length > 0) {
           setGallery(data.gallery.map((g: any) => ({
@@ -297,6 +380,15 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   const updateEducation = (edu: Education[]) => setEducation(edu);
   const updateSkills = (sk: Skills) => setSkills(sk);
   const updateGallery = (items: GalleryItem[]) => setGallery(items);
+  const updateWebsiteSettings = (updated: Partial<WebsiteSettings>) => {
+    setWebsiteSettings(prev => {
+      const next = { ...prev, ...updated };
+      if (updated.accentTheme) {
+        applyAccentTheme(updated.accentTheme);
+      }
+      return next;
+    });
+  };
 
   return (
     <PortfolioContext.Provider
@@ -332,6 +424,7 @@ export const PortfolioProvider: React.FC<{ children: React.ReactNode }> = ({ chi
         updateEducation,
         updateSkills,
         updateGallery,
+        updateWebsiteSettings,
       }}
     >
       {children}

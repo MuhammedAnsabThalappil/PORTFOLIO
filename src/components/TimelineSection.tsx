@@ -55,8 +55,8 @@ export const TimelineSection: React.FC = () => {
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'space-between',
-                  borderColor: isHighlight ? 'var(--color-primary-border)' : 'var(--border-color)',
-                  background: isHighlight ? 'linear-gradient(180deg, #FFFFFF 0%, var(--bg-surface-subtle) 100%)' : '#FFFFFF',
+                  borderColor: isHighlight ? 'var(--accent-primary, #7C6CFF)' : 'var(--border-color, #2A3140)',
+                  background: isHighlight ? 'var(--bg-elevated, #1C2230)' : 'var(--bg-card, #161A24)',
                 }}
               >
                 <div>

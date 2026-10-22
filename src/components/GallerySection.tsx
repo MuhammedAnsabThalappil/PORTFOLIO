@@ -142,9 +142,10 @@ export const GallerySection: React.FC = () => {
                   cursor: 'pointer',
                   minHeight: '44px', // Touch friendly
                   transition: 'all 0.2s ease',
-                  background: isActive ? 'var(--accent-aura)' : 'rgba(255, 255, 255, 0.04)',
-                  color: isActive ? '#07080c' : 'var(--text-muted)',
-                  border: isActive ? '1px solid var(--accent-aura)' : '1px solid rgba(255, 255, 255, 0.08)',
+                  background: isActive ? 'var(--accent-primary, #7C6CFF)' : 'var(--bg-card, #161A24)',
+                  color: isActive ? '#ffffff' : 'var(--text-secondary, #A7B0C0)',
+                  border: isActive ? '1px solid var(--accent-primary, #7C6CFF)' : '1px solid var(--border-color, #2A3140)',
+                  boxShadow: isActive ? '0 4px 14px rgba(124, 108, 255, 0.4)' : 'none',
                 }}
               >
                 <span>{cat}</span>
@@ -154,7 +155,8 @@ export const GallerySection: React.FC = () => {
                     fontFamily: 'var(--font-mono)',
                     padding: '0.1rem 0.45rem',
                     borderRadius: '999px',
-                    background: isActive ? 'rgba(7, 8, 12, 0.2)' : 'rgba(255, 255, 255, 0.08)',
+                    background: isActive ? 'rgba(255, 255, 255, 0.2)' : 'var(--bg-elevated, #1C2230)',
+                    color: isActive ? '#ffffff' : 'var(--text-muted, #7E899D)',
                   }}
                 >
                   {count}
@@ -198,8 +200,8 @@ export const GallerySection: React.FC = () => {
                   display: 'flex',
                   flexDirection: 'column',
                   borderRadius: '18px',
-                  border: '1px solid rgba(255, 255, 255, 0.08)',
-                  background: 'rgba(14, 18, 28, 0.85)',
+                  border: '1px solid var(--border-color, #2A3140)',
+                  background: 'var(--bg-card, #161A24)',
                 }}
               >
                 {/* Image Frame */}
@@ -371,7 +373,7 @@ export const GallerySection: React.FC = () => {
                       pointerEvents: 'auto',
                     }}
                   >
-                    <span style={{ color: 'var(--accent-aura)', fontWeight: 700 }}>
+                    <span style={{ color: 'var(--accent-primary, #7C6CFF)', fontWeight: 700 }}>
                       {activeLightboxIndex + 1}
                     </span>
                     <span>/</span>
@@ -442,8 +444,8 @@ export const GallerySection: React.FC = () => {
                         maxWidth: '92vw',
                         objectFit: 'contain',
                         borderRadius: '16px',
-                        boxShadow: '0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(220, 248, 54, 0.12)',
-                        border: '1px solid rgba(255, 255, 255, 0.12)',
+                        boxShadow: '0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(124, 108, 255, 0.15)',
+                        border: '1px solid var(--border-color, #2A3140)',
                       }}
                       onError={(e) => {
                         (e.target as HTMLImageElement).src = '/assets/ansab.jpeg';
@@ -519,8 +521,8 @@ export const GallerySection: React.FC = () => {
                       width: '100%',
                       padding: '1rem 1.25rem',
                       borderRadius: '14px',
-                      background: 'rgba(14, 18, 28, 0.92)',
-                      border: '1px solid rgba(255, 255, 255, 0.1)',
+                      background: 'var(--bg-card, #161A24)',
+                      border: '1px solid var(--border-color, #2A3140)',
                       textAlign: 'center',
                     }}
                   >

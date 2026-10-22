@@ -72,7 +72,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenProjectM
             padding: '0',
             marginBottom: '2rem',
             overflow: 'hidden',
-            background: '#FFFFFF',
+            background: 'var(--bg-card, #161A24)',
           }}
         >
           <div className="featured-project-grid">
@@ -115,12 +115,12 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenProjectM
                     gap: '0.4rem',
                     padding: '0.35rem 0.8rem',
                     borderRadius: '8px',
-                    background: '#FFFFFF',
-                    border: '1px solid var(--border-color)',
+                    background: 'var(--bg-elevated, #1C2230)',
+                    border: '1px solid var(--border-color, #2A3140)',
                     boxShadow: 'var(--shadow-sm)',
                     fontSize: '0.75rem',
                     fontFamily: 'var(--font-heading)',
-                    color: '#B45309',
+                    color: 'var(--warning, #FBBF24)',
                     fontWeight: 800,
                   }}
                 >
@@ -155,7 +155,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenProjectM
                 <ShareButton
                   title={FEATURED_PROJECT.name}
                   text={FEATURED_PROJECT.description}
-                  url="https://ansab.pages.dev#project-smart-attendance"
+                  url="#project-smart-attendance"
                   image={FEATURED_PROJECT.image}
                   category={FEATURED_PROJECT.name}
                   variant="pill"
@@ -279,7 +279,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onOpenProjectM
                   <ShareButton
                     title={project.name}
                     text={project.description}
-                    url="https://ansab.pages.dev#projects"
+                    url={`#project-${project.id}`}
                     category={project.name}
                     variant="pill"
                     label="Share"

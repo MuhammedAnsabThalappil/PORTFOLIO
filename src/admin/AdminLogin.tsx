@@ -11,7 +11,7 @@ export const AdminLogin: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // If already logged in, redirect directly to admin dashboard
+  // If already authenticated, redirect directly to admin dashboard
   useEffect(() => {
     authService.verifySession().then(({ valid }) => {
       if (valid) {
@@ -22,7 +22,7 @@ export const AdminLogin: React.FC = () => {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!username || !password) return;
+    if (!username.trim() || !password) return;
 
     setError(null);
     setLoading(true);
@@ -31,115 +31,138 @@ export const AdminLogin: React.FC = () => {
       await authService.login(username, password);
       navigate('/admin', { replace: true });
     } catch (err: any) {
-      setError(err.message || 'Login failed. Please check credentials.');
+      setError(err.message || 'Login failed. Please verify your credentials.');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div style={{
-      minHeight: '100vh',
-      width: '100vw',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      background: 'radial-gradient(ellipse at top, #111425 0%, #06070a 100%)',
-      padding: '1.5rem',
-      position: 'relative',
-    }}>
+    <div
+      style={{
+        minHeight: '100vh',
+        width: '100vw',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: 'radial-gradient(ellipse at top, #161A24 0%, #0B0D12 70%)',
+        padding: '1.25rem',
+        position: 'relative',
+        boxSizing: 'border-box',
+      }}
+    >
       {/* Return to Portfolio Link */}
       <Link
         to="/"
         style={{
           position: 'absolute',
-          top: '2rem',
-          left: '2rem',
+          top: '1.5rem',
+          left: '1.5rem',
           display: 'inline-flex',
           alignItems: 'center',
           gap: '0.5rem',
-          color: 'var(--text-muted)',
-          fontSize: '0.85rem',
+          color: 'var(--text-secondary, #A7B0C0)',
+          fontSize: '0.82rem',
           fontFamily: 'var(--font-mono)',
           textDecoration: 'none',
-          transition: 'color 0.2s ease',
+          padding: '0.5rem 0.75rem',
+          borderRadius: '8px',
+          background: 'rgba(255, 255, 255, 0.03)',
+          border: '1px solid var(--border-color, #2A3140)',
+          minHeight: '44px',
+          transition: 'all 0.2s ease',
         }}
-        onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--primary-cyan)')}
-        onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.color = 'var(--accent-primary, #7C6CFF)';
+          e.currentTarget.style.borderColor = 'var(--accent-primary, #7C6CFF)';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.color = 'var(--text-secondary, #A7B0C0)';
+          e.currentTarget.style.borderColor = 'var(--border-color, #2A3140)';
+        }}
       >
         <ArrowLeft size={16} />
         <span>BACK TO PORTFOLIO</span>
       </Link>
 
       <motion.div
-        initial={{ opacity: 0, y: 20, scale: 0.98 }}
+        initial={{ opacity: 0, y: 18, scale: 0.98 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
-        transition={{ duration: 0.4 }}
+        transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
         style={{
           width: '100%',
-          maxWidth: '440px',
-          background: 'rgba(12, 14, 22, 0.85)',
-          backdropFilter: 'blur(20px)',
-          border: '1px solid rgba(0, 240, 255, 0.25)',
+          maxWidth: '420px',
+          background: 'var(--bg-card, #161A24)',
+          border: '1px solid var(--border-color, #2A3140)',
           borderRadius: '20px',
-          padding: '2.5rem 2rem',
-          boxShadow: '0 20px 50px rgba(0, 0, 0, 0.6), 0 0 40px rgba(0, 240, 255, 0.08)',
+          padding: 'clamp(1.75rem, 5vw, 2.5rem)',
+          boxShadow: '0 25px 60px rgba(0, 0, 0, 0.65), 0 0 40px rgba(124, 108, 255, 0.08)',
+          boxSizing: 'border-box',
         }}
       >
         {/* Header Icon */}
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-          <div style={{
-            width: '56px',
-            height: '56px',
-            margin: '0 auto 1rem',
-            borderRadius: '14px',
-            background: 'linear-gradient(135deg, rgba(0, 240, 255, 0.15), rgba(124, 58, 237, 0.15))',
-            border: '1px solid rgba(0, 240, 255, 0.4)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: 'var(--primary-cyan)',
-            boxShadow: '0 0 25px rgba(0, 240, 255, 0.2)',
-          }}>
+          <div
+            style={{
+              width: '56px',
+              height: '56px',
+              margin: '0 auto 1.25rem',
+              borderRadius: '14px',
+              background: 'rgba(124, 108, 255, 0.12)',
+              border: '1px solid rgba(124, 108, 255, 0.35)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: 'var(--accent-primary, #7C6CFF)',
+              boxShadow: '0 0 25px rgba(124, 108, 255, 0.25)',
+            }}
+          >
             <Shield size={28} />
           </div>
-          <h1 style={{
-            fontSize: '1.6rem',
-            fontWeight: 800,
-            color: '#ffffff',
-            margin: '0 0 0.4rem',
-            fontFamily: 'var(--font-heading)',
-            letterSpacing: '-0.02em',
-          }}>
+
+          <h1
+            style={{
+              fontSize: 'clamp(1.4rem, 4vw, 1.65rem)',
+              fontWeight: 800,
+              color: 'var(--text-primary, #F5F7FF)',
+              margin: '0 0 0.4rem',
+              fontFamily: 'var(--font-heading)',
+              letterSpacing: '-0.02em',
+            }}
+          >
             ADMIN <span className="gradient-text">CMS PORTAL</span>
           </h1>
-          <p style={{
-            margin: 0,
-            fontSize: '0.85rem',
-            color: 'var(--text-muted)',
-            fontFamily: 'var(--font-mono)',
-          }}>
+
+          <p
+            style={{
+              margin: 0,
+              fontSize: '0.8rem',
+              color: 'var(--text-secondary, #A7B0C0)',
+              fontFamily: 'var(--font-mono)',
+              letterSpacing: '0.04em',
+            }}
+          >
             MUHAMMED ANSAB THALAPPIL
           </p>
         </div>
 
-
         {/* Error Alert */}
         {error && (
           <motion.div
-            initial={{ opacity: 0, y: -8 }}
+            initial={{ opacity: 0, y: -6 }}
             animate={{ opacity: 1, y: 0 }}
             style={{
               padding: '0.85rem 1rem',
               borderRadius: '10px',
-              background: 'rgba(239, 68, 68, 0.15)',
-              border: '1px solid rgba(239, 68, 68, 0.4)',
-              color: '#ef4444',
+              background: 'rgba(248, 113, 113, 0.12)',
+              border: '1px solid rgba(248, 113, 113, 0.35)',
+              color: 'var(--error, #F87171)',
               fontSize: '0.85rem',
               display: 'flex',
               alignItems: 'center',
-              gap: '0.6rem',
+              gap: '0.65rem',
               marginBottom: '1.5rem',
+              lineHeight: 1.45,
             }}
           >
             <AlertCircle size={18} style={{ flexShrink: 0 }} />
@@ -150,80 +173,102 @@ export const AdminLogin: React.FC = () => {
         {/* Login Form */}
         <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
           <div>
-            <label style={{
-              display: 'block',
-              fontSize: '0.75rem',
-              fontFamily: 'var(--font-mono)',
-              color: 'var(--text-muted)',
-              marginBottom: '0.4rem',
-              fontWeight: 600,
-            }}>
+            <label
+              style={{
+                display: 'block',
+                fontSize: '0.75rem',
+                fontFamily: 'var(--font-mono)',
+                color: 'var(--text-secondary, #A7B0C0)',
+                marginBottom: '0.45rem',
+                fontWeight: 600,
+                letterSpacing: '0.04em',
+              }}
+            >
               ADMIN USERNAME
             </label>
             <div style={{ position: 'relative' }}>
-              <User size={18} style={{
-                position: 'absolute',
-                left: '1rem',
-                top: '50%',
-                transform: 'translateY(-50%)',
-                color: 'var(--text-dim)',
-              }} />
+              <User
+                size={18}
+                style={{
+                  position: 'absolute',
+                  left: '1rem',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  color: 'var(--text-muted, #7E899D)',
+                }}
+              />
               <input
                 type="text"
                 required
                 value={username}
-                onChange={e => setUsername(e.target.value)}
+                onChange={(e) => setUsername(e.target.value)}
                 placeholder="ANSAB"
                 style={{
                   width: '100%',
                   padding: '0.85rem 1rem 0.85rem 2.75rem',
                   borderRadius: '12px',
-                  background: 'rgba(255, 255, 255, 0.03)',
-                  border: '1px solid var(--border-color)',
-                  color: '#ffffff',
+                  background: 'var(--bg-elevated, #1C2230)',
+                  border: '1px solid var(--border-color, #2A3140)',
+                  color: 'var(--text-primary, #F5F7FF)',
                   fontSize: '0.95rem',
                   outline: 'none',
                   fontFamily: 'var(--font-mono)',
+                  minHeight: '48px',
+                  boxSizing: 'border-box',
+                  transition: 'border-color 0.2s',
                 }}
+                onFocus={(e) => (e.currentTarget.style.borderColor = 'var(--accent-primary, #7C6CFF)')}
+                onBlur={(e) => (e.currentTarget.style.borderColor = 'var(--border-color, #2A3140)')}
               />
             </div>
           </div>
 
           <div>
-            <label style={{
-              display: 'block',
-              fontSize: '0.75rem',
-              fontFamily: 'var(--font-mono)',
-              color: 'var(--text-muted)',
-              marginBottom: '0.4rem',
-              fontWeight: 600,
-            }}>
+            <label
+              style={{
+                display: 'block',
+                fontSize: '0.75rem',
+                fontFamily: 'var(--font-mono)',
+                color: 'var(--text-secondary, #A7B0C0)',
+                marginBottom: '0.45rem',
+                fontWeight: 600,
+                letterSpacing: '0.04em',
+              }}
+            >
               PASSWORD
             </label>
             <div style={{ position: 'relative' }}>
-              <Lock size={18} style={{
-                position: 'absolute',
-                left: '1rem',
-                top: '50%',
-                transform: 'translateY(-50%)',
-                color: 'var(--text-dim)',
-              }} />
+              <Lock
+                size={18}
+                style={{
+                  position: 'absolute',
+                  left: '1rem',
+                  top: '50%',
+                  transform: 'translateY(-50%)',
+                  color: 'var(--text-muted, #7E899D)',
+                }}
+              />
               <input
                 type="password"
                 required
                 value={password}
-                onChange={e => setPassword(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
                 style={{
                   width: '100%',
                   padding: '0.85rem 1rem 0.85rem 2.75rem',
                   borderRadius: '12px',
-                  background: 'rgba(255, 255, 255, 0.03)',
-                  border: '1px solid var(--border-color)',
-                  color: '#ffffff',
+                  background: 'var(--bg-elevated, #1C2230)',
+                  border: '1px solid var(--border-color, #2A3140)',
+                  color: 'var(--text-primary, #F5F7FF)',
                   fontSize: '0.95rem',
                   outline: 'none',
+                  minHeight: '48px',
+                  boxSizing: 'border-box',
+                  transition: 'border-color 0.2s',
                 }}
+                onFocus={(e) => (e.currentTarget.style.borderColor = 'var(--accent-primary, #7C6CFF)')}
+                onBlur={(e) => (e.currentTarget.style.borderColor = 'var(--border-color, #2A3140)')}
               />
             </div>
           </div>
@@ -231,14 +276,14 @@ export const AdminLogin: React.FC = () => {
           <motion.button
             type="submit"
             disabled={loading}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+            whileHover={{ scale: 1.015 }}
+            whileTap={{ scale: 0.985 }}
             style={{
-              marginTop: '0.75rem',
-              padding: '0.9rem',
+              marginTop: '0.5rem',
+              padding: '0.85rem 1.5rem',
               borderRadius: '12px',
-              background: 'linear-gradient(135deg, var(--primary-cyan), var(--secondary-violet))',
-              color: '#050508',
+              background: 'var(--accent-primary, #7C6CFF)',
+              color: '#FFFFFF',
               fontWeight: 700,
               fontSize: '0.95rem',
               fontFamily: 'var(--font-heading)',
@@ -248,7 +293,15 @@ export const AdminLogin: React.FC = () => {
               alignItems: 'center',
               justifyContent: 'center',
               gap: '0.5rem',
-              boxShadow: '0 4px 20px rgba(0, 240, 255, 0.25)',
+              minHeight: '48px',
+              boxShadow: '0 4px 16px rgba(124, 108, 255, 0.4)',
+              transition: 'background 0.2s ease, box-shadow 0.2s ease',
+            }}
+            onMouseEnter={(e) => {
+              if (!loading) e.currentTarget.style.background = 'var(--accent-hover, #9387FF)';
+            }}
+            onMouseLeave={(e) => {
+              if (!loading) e.currentTarget.style.background = 'var(--accent-primary, #7C6CFF)';
             }}
           >
             {loading ? (
@@ -262,13 +315,15 @@ export const AdminLogin: React.FC = () => {
           </motion.button>
         </form>
 
-        <div style={{
-          marginTop: '1.75rem',
-          textAlign: 'center',
-          fontSize: '0.75rem',
-          color: 'var(--text-dim)',
-          fontFamily: 'var(--font-mono)',
-        }}>
+        <div
+          style={{
+            marginTop: '1.75rem',
+            textAlign: 'center',
+            fontSize: '0.75rem',
+            color: 'var(--text-muted, #7E899D)',
+            fontFamily: 'var(--font-mono)',
+          }}
+        >
           Protected by rate limiting &amp; server-side encryption
         </div>
       </motion.div>

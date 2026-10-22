@@ -33,7 +33,7 @@ export const ShareButton: React.FC<ShareButtonProps> = ({
     url ||
     (typeof window !== 'undefined'
       ? `${window.location.origin}${window.location.pathname}${category ? '#' + category.toLowerCase().replace(/\s+/g, '-') : ''}`
-      : 'https://ansab.pages.dev');
+      : '/');
 
   const sharePayload: ShareData = {
     title,
@@ -80,9 +80,9 @@ export const ShareButton: React.FC<ShareButtonProps> = ({
             width: '38px',
             height: '38px',
             borderRadius: '12px',
-            background: 'rgba(255, 255, 255, 0.05)',
-            border: '1px solid rgba(255, 255, 255, 0.12)',
-            color: 'var(--text-muted)',
+            background: 'var(--bg-card, #161A24)',
+            border: '1px solid var(--border-color, #2A3140)',
+            color: 'var(--text-muted, #7E899D)',
             display: 'inline-flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -91,12 +91,12 @@ export const ShareButton: React.FC<ShareButtonProps> = ({
             ...style,
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.color = 'var(--accent-aura)';
-            e.currentTarget.style.borderColor = 'rgba(220, 248, 54, 0.4)';
+            e.currentTarget.style.color = 'var(--accent-primary, #7C6CFF)';
+            e.currentTarget.style.borderColor = 'var(--accent-primary, #7C6CFF)';
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.color = 'var(--text-muted)';
-            e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.12)';
+            e.currentTarget.style.color = 'var(--text-muted, #7E899D)';
+            e.currentTarget.style.borderColor = 'var(--border-color, #2A3140)';
           }}
         >
           <Share2 size={16} />
@@ -122,9 +122,9 @@ export const ShareButton: React.FC<ShareButtonProps> = ({
             gap: '0.45rem',
             padding: '0.35rem 0.75rem',
             borderRadius: '9999px',
-            background: 'rgba(220, 248, 54, 0.08)',
-            border: '1px solid rgba(220, 248, 54, 0.25)',
-            color: 'var(--accent-aura)',
+            background: 'rgba(124, 108, 255, 0.12)',
+            border: '1px solid rgba(124, 108, 255, 0.3)',
+            color: 'var(--accent-primary, #7C6CFF)',
             fontSize: '0.72rem',
             fontFamily: 'var(--font-mono)',
             fontWeight: 600,
@@ -155,9 +155,9 @@ export const ShareButton: React.FC<ShareButtonProps> = ({
           gap: '0.5rem',
           padding: '0.55rem 1rem',
           borderRadius: '12px',
-          background: 'rgba(255, 255, 255, 0.05)',
-          border: '1px solid rgba(255, 255, 255, 0.12)',
-          color: '#ffffff',
+          background: 'var(--bg-elevated, #1C2230)',
+          border: '1px solid var(--border-color, #2A3140)',
+          color: 'var(--text-primary, #F5F7FF)',
           fontSize: '0.8rem',
           fontFamily: 'var(--font-mono)',
           fontWeight: 600,
@@ -167,14 +167,14 @@ export const ShareButton: React.FC<ShareButtonProps> = ({
           ...style,
         }}
         onMouseEnter={(e) => {
-          e.currentTarget.style.borderColor = 'var(--accent-aura)';
-          e.currentTarget.style.color = 'var(--accent-aura)';
-          e.currentTarget.style.background = 'rgba(220, 248, 54, 0.08)';
+          e.currentTarget.style.borderColor = 'var(--accent-primary, #7C6CFF)';
+          e.currentTarget.style.color = 'var(--accent-hover, #9387FF)';
+          e.currentTarget.style.background = 'rgba(124, 108, 255, 0.15)';
         }}
         onMouseLeave={(e) => {
-          e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.12)';
-          e.currentTarget.style.color = '#ffffff';
-          e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
+          e.currentTarget.style.borderColor = 'var(--border-color, #2A3140)';
+          e.currentTarget.style.color = 'var(--text-primary, #F5F7FF)';
+          e.currentTarget.style.background = 'var(--bg-elevated, #1C2230)';
         }}
       >
         <Share2 size={14} />

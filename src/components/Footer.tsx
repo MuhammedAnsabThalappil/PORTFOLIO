@@ -113,7 +113,7 @@ export const Footer: React.FC = () => {
               <ShareButton
                 title="Muhammed Ansab — Building Ideas Into Reality"
                 text="Official portfolio of Muhammed Ansab Thalappil — AI & Data Science Student, Developer, Entrepreneur & 1st Prize Winner at CONVERGE 2026."
-                url="https://ansab.pages.dev"
+                url="/"
                 image="/assets/ansab.jpeg"
                 variant="pill"
                 label="SHARE SITE"

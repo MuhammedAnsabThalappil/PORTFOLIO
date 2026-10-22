@@ -142,7 +142,7 @@ export const AboutBento: React.FC = () => {
                 aspectRatio: '16 / 9',
                 border: '1px solid var(--border-color)',
                 marginBottom: '1.25rem',
-                background: '#EEECF9',
+                background: 'var(--bg-elevated, #1C2230)',
               }}
             >
               <img

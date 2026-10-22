@@ -101,13 +101,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommand }) => {
               justifyContent: 'space-between',
               padding: '0.65rem 1.25rem',
               borderRadius: '16px',
-              background: scrolled ? 'rgba(255, 255, 255, 0.94)' : 'rgba(255, 255, 255, 0.85)',
+              background: scrolled ? 'rgba(17, 20, 28, 0.92)' : 'rgba(22, 26, 36, 0.82)',
               backdropFilter: 'blur(16px)',
               WebkitBackdropFilter: 'blur(16px)',
-              border: '1px solid var(--border-color)',
+              border: '1px solid var(--border-color, #2A3140)',
               boxShadow: scrolled
-                ? '0 10px 30px -10px rgba(25, 26, 44, 0.08), 0 0 0 1px #E8E7F2'
-                : '0 4px 18px rgba(25, 26, 44, 0.03), 0 0 0 1px #E8E7F2',
+                ? '0 10px 30px -10px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.05)'
+                : '0 4px 18px rgba(0, 0, 0, 0.3)',
               transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
             }}
           >
@@ -131,8 +131,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommand }) => {
                   width: '9px',
                   height: '9px',
                   borderRadius: '50%',
-                  background: 'var(--color-primary)',
-                  boxShadow: '0 0 10px rgba(91, 75, 255, 0.5)',
+                  background: 'var(--accent-primary, #7C6CFF)',
+                  boxShadow: '0 0 12px rgba(124, 108, 255, 0.6)',
                 }}
               />
               <span>ANSAB</span>
@@ -144,10 +144,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommand }) => {
                 display: 'flex',
                 alignItems: 'center',
                 gap: '0.2rem',
-                background: 'var(--bg-surface-subtle)',
+                background: 'var(--bg-primary, #0B0D12)',
                 padding: '0.3rem 0.45rem',
                 borderRadius: '12px',
-                border: '1px solid var(--border-color)',
+                border: '1px solid var(--border-color, #2A3140)',
               }}
               className="desktop-nav"
             >
@@ -163,9 +163,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommand }) => {
                       fontSize: '0.82rem',
                       fontFamily: 'var(--font-heading)',
                       fontWeight: 700,
-                      color: isActive ? 'var(--color-primary)' : 'var(--text-secondary)',
-                      background: isActive ? '#FFFFFF' : 'transparent',
-                      boxShadow: isActive ? '0 2px 6px rgba(25, 26, 44, 0.06)' : 'none',
+                      color: isActive ? 'var(--accent-primary, #7C6CFF)' : 'var(--text-secondary, #A7B0C0)',
+                      background: isActive ? 'var(--bg-elevated, #1C2230)' : 'transparent',
+                      boxShadow: isActive ? '0 2px 8px rgba(0, 0, 0, 0.4)' : 'none',
                       textDecoration: 'none',
                       transition: 'all 0.2s ease',
                       display: 'block',
@@ -183,7 +183,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommand }) => {
               <ShareButton
                 title="Muhammed Ansab — Building Ideas Into Reality"
                 text="Official portfolio of Muhammed Ansab Thalappil — AI & Data Science Student, Developer, Entrepreneur & 1st Prize Winner at CONVERGE 2026."
-                url="https://ansab.pages.dev"
+                url="/"
                 image="/assets/ansab.jpeg"
                 variant="icon"
                 className="desktop-nav"
@@ -199,9 +199,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommand }) => {
                   gap: '0.45rem',
                   padding: '0.45rem 0.85rem',
                   borderRadius: '10px',
-                  background: 'var(--bg-surface-subtle)',
-                  border: '1px solid var(--border-color)',
-                  color: 'var(--text-secondary)',
+                  background: 'var(--bg-primary, #0B0D12)',
+                  border: '1px solid var(--border-color, #2A3140)',
+                  color: 'var(--text-secondary, #A7B0C0)',
                   fontSize: '0.78rem',
                   fontFamily: 'var(--font-mono)',
                   cursor: 'pointer',
@@ -211,7 +211,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommand }) => {
                 className="cmd-k-btn"
                 title="Open Command Palette (Cmd+K)"
               >
-                <Command size={14} style={{ color: 'var(--color-primary)' }} />
+                <Command size={14} style={{ color: 'var(--accent-primary, #7C6CFF)' }} />
                 <span>Cmd+K</span>
               </button>
 
@@ -221,9 +221,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommand }) => {
                 onClick={() => setMobileDrawerOpen(true)}
                 style={{
                   display: 'none',
-                  background: '#FFFFFF',
-                  border: '1px solid var(--border-color)',
-                  color: 'var(--text-primary)',
+                  background: 'var(--bg-card, #161A24)',
+                  border: '1px solid var(--border-color, #2A3140)',
+                  color: 'var(--text-primary, #F5F7FF)',
                   padding: '0.55rem',
                   borderRadius: '10px',
                   cursor: 'pointer',
@@ -260,7 +260,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommand }) => {
                 position: 'fixed',
                 inset: 0,
                 zIndex: 199,
-                background: 'rgba(25, 26, 44, 0.4)',
+                background: 'rgba(5, 7, 12, 0.75)',
                 backdropFilter: 'blur(8px)',
                 WebkitBackdropFilter: 'blur(8px)',
               }}
@@ -280,9 +280,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommand }) => {
                 bottom: 0,
                 width: 'min(330px, 86vw)',
                 zIndex: 200,
-                background: '#FFFFFF',
-                boxShadow: '-10px 0 35px rgba(25, 26, 44, 0.12)',
-                borderLeft: '1px solid var(--border-color)',
+                background: 'var(--bg-secondary, #11141C)',
+                boxShadow: '-10px 0 35px rgba(0, 0, 0, 0.7)',
+                borderLeft: '1px solid var(--border-color, #2A3140)',
                 display: 'flex',
                 flexDirection: 'column',
                 padding: '1.75rem 1.5rem',
@@ -297,11 +297,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommand }) => {
                   justifyContent: 'space-between',
                   marginBottom: '1.5rem',
                   paddingBottom: '1rem',
-                  borderBottom: '1px solid var(--border-color)',
+                  borderBottom: '1px solid var(--border-color, #2A3140)',
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 900, fontSize: '1.2rem', fontFamily: 'var(--font-heading)' }}>
-                  <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--color-primary)' }} />
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontWeight: 900, fontSize: '1.2rem', fontFamily: 'var(--font-heading)', color: 'var(--text-primary, #F5F7FF)' }}>
+                  <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--accent-primary, #7C6CFF)' }} />
                   <span>ANSAB</span>
                 </div>
 
@@ -309,9 +309,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommand }) => {
                   type="button"
                   onClick={closeDrawer}
                   style={{
-                    background: 'var(--bg-surface-subtle)',
-                    border: '1px solid var(--border-color)',
-                    color: 'var(--text-primary)',
+                    background: 'var(--bg-card, #161A24)',
+                    border: '1px solid var(--border-color, #2A3140)',
+                    color: 'var(--text-primary, #F5F7FF)',
                     borderRadius: '10px',
                     cursor: 'pointer',
                     display: 'flex',
@@ -345,9 +345,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommand }) => {
                         justifyContent: 'space-between',
                         padding: '0.85rem 1.15rem',
                         borderRadius: '12px',
-                        background: isActive ? 'var(--color-primary-subtle)' : 'transparent',
-                        border: isActive ? '1px solid var(--color-primary-border)' : '1px solid transparent',
-                        color: isActive ? 'var(--color-primary)' : 'var(--text-primary)',
+                        background: isActive ? 'rgba(124, 108, 255, 0.12)' : 'transparent',
+                        border: isActive ? '1px solid rgba(124, 108, 255, 0.3)' : '1px solid transparent',
+                        color: isActive ? 'var(--accent-primary, #7C6CFF)' : 'var(--text-primary, #F5F7FF)',
                         fontFamily: 'var(--font-heading)',
                         fontSize: '0.95rem',
                         fontWeight: 700,
@@ -360,7 +360,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommand }) => {
                       <ChevronRight
                         size={16}
                         style={{
-                          color: isActive ? 'var(--color-primary)' : 'var(--text-muted)',
+                          color: isActive ? 'var(--accent-primary, #7C6CFF)' : 'var(--text-muted, #7E899D)',
                         }}
                       />
                     </motion.a>
@@ -369,11 +369,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCommand }) => {
               </nav>
 
               {/* Bottom Share Action */}
-              <div style={{ marginTop: '1.25rem', paddingTop: '1.25rem', borderTop: '1px solid var(--border-color)' }}>
+              <div style={{ marginTop: '1.25rem', paddingTop: '1.25rem', borderTop: '1px solid var(--border-color, #2A3140)' }}>
                 <ShareButton
                   title="Muhammed Ansab — Building Ideas Into Reality"
                   text="Explore the personal portfolio of Muhammed Ansab Thalappil (AI & Data Science Student, Developer, Entrepreneur)."
-                  url="https://ansab.pages.dev"
+                  url="/"
                   image="/assets/ansab.jpeg"
                   variant="button"
                   label="Share Portfolio"

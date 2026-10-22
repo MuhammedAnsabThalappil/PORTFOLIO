@@ -143,7 +143,7 @@ export const BusinessShowcase: React.FC<BusinessShowcaseProps> = ({ onOpenBusine
                     <ShareButton
                       title={`${biz.name} — ${biz.role}`}
                       text={biz.shortDesc}
-                      url={`https://ansab.pages.dev#business-${biz.id}`}
+                      url={`#business-${biz.id}`}
                       image={biz.image}
                       category={biz.name}
                       variant="pill"

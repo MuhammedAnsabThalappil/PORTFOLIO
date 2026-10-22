@@ -76,7 +76,7 @@ export const ShareModal: React.FC<ShareModalProps> = ({ isOpen, onClose, data })
           style={{
             position: 'absolute',
             inset: 0,
-            background: 'rgba(25, 26, 44, 0.45)',
+            background: 'rgba(5, 7, 12, 0.8)',
             backdropFilter: 'blur(12px)',
           }}
         />
@@ -91,11 +91,11 @@ export const ShareModal: React.FC<ShareModalProps> = ({ isOpen, onClose, data })
             position: 'relative',
             width: '100%',
             maxWidth: '480px',
-            background: '#ffffff',
-            border: '1px solid var(--border-color)',
+            background: 'var(--bg-card, #161A24)',
+            border: '1px solid var(--border-color, #2A3140)',
             borderRadius: '20px',
             padding: '1.75rem',
-            boxShadow: '0 25px 60px rgba(25, 26, 44, 0.16), 0 0 40px rgba(91, 75, 255, 0.08)',
+            boxShadow: '0 25px 60px rgba(0, 0, 0, 0.7), 0 0 40px rgba(124, 108, 255, 0.1)',
             zIndex: 1,
             overflow: 'hidden',
           }}
@@ -108,21 +108,21 @@ export const ShareModal: React.FC<ShareModalProps> = ({ isOpen, onClose, data })
                   width: '38px',
                   height: '38px',
                   borderRadius: '10px',
-                  background: 'rgba(91, 75, 255, 0.1)',
-                  border: '1px solid rgba(91, 75, 255, 0.25)',
+                  background: 'rgba(124, 108, 255, 0.12)',
+                  border: '1px solid rgba(124, 108, 255, 0.25)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  color: 'var(--accent-primary)',
+                  color: 'var(--accent-primary, #7C6CFF)',
                 }}
               >
                 <Share2 size={18} />
               </div>
               <div>
-                <h3 style={{ fontSize: '1.05rem', fontWeight: 800, margin: 0, color: 'var(--text-primary)', fontFamily: 'var(--font-heading)' }}>
+                <h3 style={{ fontSize: '1.05rem', fontWeight: 800, margin: 0, color: 'var(--text-primary, #F5F7FF)', fontFamily: 'var(--font-heading)' }}>
                   SHARE THIS HIGHLIGHT
                 </h3>
-                <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
+                <span style={{ fontSize: '0.72rem', color: 'var(--text-muted, #7E899D)', fontFamily: 'var(--font-mono)' }}>
                   {data.category || 'MUHAMMED ANSAB PORTFOLIO'}
                 </span>
               </div>
@@ -135,17 +135,23 @@ export const ShareModal: React.FC<ShareModalProps> = ({ isOpen, onClose, data })
                 width: '36px',
                 height: '36px',
                 borderRadius: '8px',
-                background: 'var(--bg-primary)',
-                border: '1px solid var(--border-color)',
-                color: 'var(--text-secondary)',
+                background: 'var(--bg-elevated, #1C2230)',
+                border: '1px solid var(--border-color, #2A3140)',
+                color: 'var(--text-secondary, #A7B0C0)',
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 transition: 'all 0.2s',
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = 'var(--text-primary, #F5F7FF)';
+                e.currentTarget.style.borderColor = 'var(--border-strong, #3D465A)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = 'var(--text-secondary, #A7B0C0)';
+                e.currentTarget.style.borderColor = 'var(--border-color, #2A3140)';
+              }}
             >
               <X size={16} />
             </button>
@@ -156,8 +162,8 @@ export const ShareModal: React.FC<ShareModalProps> = ({ isOpen, onClose, data })
             style={{
               padding: '1rem',
               borderRadius: '14px',
-              background: 'var(--bg-primary)',
-              border: '1px solid var(--border-color)',
+              background: 'var(--bg-secondary, #11141C)',
+              border: '1px solid var(--border-color, #2A3140)',
               marginBottom: '1.5rem',
               display: 'flex',
               gap: '1rem',
@@ -281,8 +287,8 @@ export const ShareModal: React.FC<ShareModalProps> = ({ isOpen, onClose, data })
                 gap: '0.5rem',
                 padding: '0.4rem 0.4rem 0.4rem 0.85rem',
                 borderRadius: '12px',
-                background: 'var(--bg-primary)',
-                border: '1px solid var(--border-color)',
+                background: 'var(--bg-secondary, #11141C)',
+                border: '1px solid var(--border-color, #2A3140)',
               }}
             >
               <input
@@ -292,7 +298,7 @@ export const ShareModal: React.FC<ShareModalProps> = ({ isOpen, onClose, data })
                   flex: 1,
                   background: 'transparent',
                   border: 'none',
-                  color: 'var(--text-secondary)',
+                  color: 'var(--text-secondary, #A7B0C0)',
                   fontSize: '0.8rem',
                   fontFamily: 'var(--font-mono)',
                   outline: 'none',
@@ -307,7 +313,7 @@ export const ShareModal: React.FC<ShareModalProps> = ({ isOpen, onClose, data })
                   gap: '0.4rem',
                   padding: '0.55rem 0.95rem',
                   borderRadius: '9px',
-                  background: copied ? 'var(--accent-secondary)' : 'var(--accent-primary)',
+                  background: copied ? 'var(--accent-secondary, #36D6C5)' : 'var(--accent-primary, #7C6CFF)',
                   color: '#ffffff',
                   border: 'none',
                   fontSize: '0.75rem',

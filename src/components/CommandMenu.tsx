@@ -66,7 +66,7 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({ isOpen, onClose }) => 
             right: 0,
             bottom: 0,
             zIndex: 300,
-            background: 'rgba(25, 26, 44, 0.45)',
+            background: 'rgba(5, 7, 12, 0.8)',
             backdropFilter: 'blur(12px)',
             WebkitBackdropFilter: 'blur(12px)',
             display: 'flex',
@@ -87,10 +87,10 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({ isOpen, onClose }) => 
             style={{
               width: '100%',
               maxWidth: '620px',
-              background: '#ffffff',
-              border: '1px solid var(--border-color)',
+              background: 'var(--bg-card, #161A24)',
+              border: '1px solid var(--border-color, #2A3140)',
               borderRadius: '20px',
-              boxShadow: '0 25px 60px -15px rgba(25, 26, 44, 0.18)',
+              boxShadow: '0 25px 60px -15px rgba(0, 0, 0, 0.7)',
               overflow: 'hidden',
             }}
           >
@@ -124,9 +124,9 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({ isOpen, onClose }) => 
               <button
                 onClick={onClose}
                 style={{
-                  background: 'var(--bg-primary)',
-                  border: '1px solid var(--border-color)',
-                  color: 'var(--text-secondary)',
+                  background: 'var(--bg-elevated, #1C2230)',
+                  border: '1px solid var(--border-color, #2A3140)',
+                  color: 'var(--text-secondary, #A7B0C0)',
                   padding: '0.35rem 0.6rem',
                   borderRadius: '8px',
                   cursor: 'pointer',
@@ -141,7 +141,7 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({ isOpen, onClose }) => 
             {/* Results List */}
             <div style={{ maxHeight: '380px', overflowY: 'auto', padding: '0.5rem' }}>
               {filteredItems.length === 0 ? (
-                <div style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-secondary)' }}>
+                <div style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-muted, #7E899D)' }}>
                   No results found for &ldquo;{query}&rdquo;
                 </div>
               ) : (
@@ -162,14 +162,14 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({ isOpen, onClose }) => 
                         justifyContent: 'space-between',
                         padding: '0.75rem 1rem',
                         borderRadius: '12px',
-                        color: 'var(--text-primary)',
+                        color: 'var(--text-primary, #F5F7FF)',
                         textDecoration: 'none',
                         transition: 'all 0.15s ease',
                         marginBottom: '0.25rem',
                         minHeight: '44px',
                       }}
                       onMouseEnter={(e) => {
-                        e.currentTarget.style.background = 'rgba(91, 75, 255, 0.06)';
+                        e.currentTarget.style.background = 'rgba(124, 108, 255, 0.12)';
                       }}
                       onMouseLeave={(e) => {
                         e.currentTarget.style.background = 'transparent';
@@ -181,11 +181,11 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({ isOpen, onClose }) => 
                             width: '32px',
                             height: '32px',
                             borderRadius: '8px',
-                            background: 'rgba(91, 75, 255, 0.08)',
+                            background: 'rgba(124, 108, 255, 0.15)',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            color: 'var(--accent-primary)',
+                            color: 'var(--accent-primary, #7C6CFF)',
                           }}
                         >
                           <IconComponent size={16} />
@@ -199,9 +199,9 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({ isOpen, onClose }) => 
                           fontFamily: 'var(--font-mono)',
                           padding: '0.2rem 0.5rem',
                           borderRadius: '6px',
-                          background: 'var(--bg-primary)',
-                          border: '1px solid var(--border-color)',
-                          color: 'var(--text-secondary)',
+                          background: 'var(--bg-elevated, #1C2230)',
+                          border: '1px solid var(--border-color, #2A3140)',
+                          color: 'var(--text-secondary, #A7B0C0)',
                         }}
                       >
                         {item.tag}
@@ -215,13 +215,13 @@ export const CommandMenu: React.FC<CommandMenuProps> = ({ isOpen, onClose }) => 
             <div
               style={{
                 padding: '0.65rem 1.25rem',
-                background: 'var(--bg-primary)',
-                borderTop: '1px solid var(--border-color)',
+                background: 'var(--bg-secondary, #11141C)',
+                borderTop: '1px solid var(--border-color, #2A3140)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
                 fontSize: '0.75rem',
-                color: 'var(--text-muted)',
+                color: 'var(--text-muted, #7E899D)',
                 fontFamily: 'var(--font-mono)',
               }}
             >

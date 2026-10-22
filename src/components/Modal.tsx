@@ -44,7 +44,7 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, data }) => {
             right: 0,
             bottom: 0,
             zIndex: 400,
-            background: 'rgba(25, 26, 44, 0.45)',
+            background: 'rgba(5, 7, 12, 0.8)',
             backdropFilter: 'blur(12px)',
             WebkitBackdropFilter: 'blur(12px)',
             display: 'flex',
@@ -65,11 +65,11 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, data }) => {
               maxWidth: '640px',
               maxHeight: '90vh',
               overflowY: 'auto',
-              background: '#ffffff',
-              border: '1px solid var(--border-color)',
+              background: 'var(--bg-card, #161A24)',
+              border: '1px solid var(--border-color, #2A3140)',
               borderRadius: '24px',
               padding: 'clamp(1.5rem, 5vw, 2.25rem)',
-              boxShadow: '0 25px 60px -15px rgba(25, 26, 44, 0.18)',
+              boxShadow: '0 25px 60px -15px rgba(0, 0, 0, 0.7)',
               position: 'relative',
             }}
           >
@@ -80,9 +80,9 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, data }) => {
                 position: 'absolute',
                 top: '1.25rem',
                 right: '1.25rem',
-                background: 'var(--bg-primary)',
-                border: '1px solid var(--border-color)',
-                color: 'var(--text-secondary)',
+                background: 'var(--bg-elevated, #1C2230)',
+                border: '1px solid var(--border-color, #2A3140)',
+                color: 'var(--text-secondary, #A7B0C0)',
                 width: '40px',
                 height: '40px',
                 borderRadius: '10px',
@@ -92,8 +92,14 @@ export const Modal: React.FC<ModalProps> = ({ isOpen, onClose, data }) => {
                 justifyContent: 'center',
                 transition: 'all 0.2s',
               }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-primary)')}
-              onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-secondary)')}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = 'var(--text-primary, #F5F7FF)';
+                e.currentTarget.style.borderColor = 'var(--border-strong, #3D465A)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = 'var(--text-secondary, #A7B0C0)';
+                e.currentTarget.style.borderColor = 'var(--border-color, #2A3140)';
+              }}
               aria-label="Close modal"
             >
               <X size={18} />

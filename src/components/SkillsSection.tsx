@@ -92,13 +92,13 @@ export const SkillsSection: React.FC = () => {
                   cursor: 'pointer',
                   minHeight: '44px',
                   transition: 'all 0.2s ease',
-                  background: isActive ? 'var(--color-primary)' : '#FFFFFF',
-                  border: isActive ? '1px solid var(--color-primary)' : '1px solid var(--border-color)',
-                  color: isActive ? '#FFFFFF' : 'var(--text-secondary)',
-                  boxShadow: isActive ? '0 4px 12px rgba(91, 75, 255, 0.25)' : 'var(--shadow-sm)',
+                  background: isActive ? 'var(--accent-primary, #7C6CFF)' : 'var(--bg-card, #161A24)',
+                  border: isActive ? '1px solid var(--accent-primary, #7C6CFF)' : '1px solid var(--border-color, #2A3140)',
+                  color: isActive ? '#FFFFFF' : 'var(--text-secondary, #A7B0C0)',
+                  boxShadow: isActive ? '0 4px 14px rgba(124, 108, 255, 0.4)' : 'none',
                 }}
               >
-                <IconComponent size={15} style={{ color: isActive ? '#FFFFFF' : 'var(--color-primary)' }} />
+                <IconComponent size={15} style={{ color: isActive ? '#FFFFFF' : 'var(--accent-primary, #7C6CFF)' }} />
                 <span>{cat.label}</span>
               </button>
             );
@@ -116,7 +116,8 @@ export const SkillsSection: React.FC = () => {
             gap: '0.65rem',
             minHeight: '140px',
             alignContent: 'flex-start',
-            background: '#FFFFFF',
+            background: 'var(--bg-card, #161A24)',
+            border: '1px solid var(--border-color, #2A3140)',
           }}
         >
           <AnimatePresence mode="popLayout">
@@ -133,12 +134,12 @@ export const SkillsSection: React.FC = () => {
                   gap: '0.45rem',
                   padding: '0.5rem 1rem',
                   borderRadius: '10px',
-                  background: 'var(--bg-surface-subtle)',
-                  border: '1px solid var(--border-color)',
+                  background: 'var(--bg-elevated, #1C2230)',
+                  border: '1px solid var(--border-color, #2A3140)',
                   fontFamily: 'var(--font-heading)',
                   fontSize: '0.85rem',
                   fontWeight: 700,
-                  color: 'var(--text-primary)',
+                  color: 'var(--text-primary, #F5F7FF)',
                   boxShadow: 'var(--shadow-sm)',
                 }}
               >

@@ -113,8 +113,8 @@ export const AdminDashboard: React.FC = () => {
     <div style={{
       display: 'flex',
       minHeight: '100vh',
-      background: '#07080c',
-      color: '#ffffff',
+      background: 'var(--bg-primary, #0B0D12)',
+      color: 'var(--text-primary, #F5F7FF)',
       fontFamily: 'var(--font-body)',
       position: 'relative',
     }}>
@@ -123,8 +123,8 @@ export const AdminDashboard: React.FC = () => {
         className="admin-sidebar"
         style={{
           width: '260px',
-          background: 'rgba(12, 14, 22, 0.95)',
-          borderRight: '1px solid var(--border-color)',
+          background: 'var(--bg-secondary, #11141C)',
+          borderRight: '1px solid var(--border-color, #2A3140)',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
@@ -136,27 +136,28 @@ export const AdminDashboard: React.FC = () => {
       >
         <div>
           {/* Logo / Header */}
-          <div style={{ padding: '1.5rem', borderBottom: '1px solid var(--border-color)' }}>
+          <div style={{ padding: '1.5rem', borderBottom: '1px solid var(--border-color, #2A3140)' }}>
             <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
               <div style={{
                 width: '32px',
                 height: '32px',
                 borderRadius: '8px',
-                background: 'linear-gradient(135deg, var(--primary-cyan), var(--secondary-violet))',
+                background: 'var(--accent-primary, #7C6CFF)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: '#050508',
+                color: '#ffffff',
                 fontWeight: 900,
                 fontSize: '1rem',
+                boxShadow: '0 0 12px rgba(124, 108, 255, 0.4)',
               }}>
                 ⚡
               </div>
               <div>
-                <div style={{ fontSize: '1rem', fontWeight: 800, color: '#fff', letterSpacing: '-0.02em' }}>
-                  ANSAB <span style={{ color: 'var(--primary-cyan)' }}>CMS</span>
+                <div style={{ fontSize: '1rem', fontWeight: 800, color: 'var(--text-primary, #F5F7FF)', letterSpacing: '-0.02em' }}>
+                  ANSAB <span style={{ color: 'var(--accent-primary, #7C6CFF)' }}>CMS</span>
                 </div>
-                <div style={{ fontSize: '0.7rem', color: 'var(--text-dim)', fontFamily: 'var(--font-mono)' }}>
+                <div style={{ fontSize: '0.7rem', color: 'var(--text-muted, #7E899D)', fontFamily: 'var(--font-mono)' }}>
                   PORTFOLIO CONTROL PANEL
                 </div>
               </div>
@@ -179,9 +180,9 @@ export const AdminDashboard: React.FC = () => {
                   justifyContent: 'space-between',
                   padding: '0.7rem 0.85rem',
                   borderRadius: '10px',
-                  background: activeTab === item.id ? 'rgba(0, 240, 255, 0.12)' : 'transparent',
-                  border: activeTab === item.id ? '1px solid rgba(0, 240, 255, 0.3)' : '1px solid transparent',
-                  color: activeTab === item.id ? 'var(--primary-cyan)' : 'var(--text-muted)',
+                  background: activeTab === item.id ? 'rgba(124, 108, 255, 0.12)' : 'transparent',
+                  border: activeTab === item.id ? '1px solid rgba(124, 108, 255, 0.3)' : '1px solid transparent',
+                  color: activeTab === item.id ? 'var(--accent-primary, #7C6CFF)' : 'var(--text-secondary, #A7B0C0)',
                   fontWeight: activeTab === item.id ? 700 : 500,
                   fontSize: '0.85rem',
                   cursor: 'pointer',
@@ -200,8 +201,8 @@ export const AdminDashboard: React.FC = () => {
                     fontFamily: 'var(--font-mono)',
                     padding: '0.15rem 0.45rem',
                     borderRadius: '9999px',
-                    background: 'var(--primary-cyan)',
-                    color: '#050508',
+                    background: 'var(--accent-primary, #7C6CFF)',
+                    color: '#ffffff',
                     fontWeight: 800,
                   }}>
                     {item.badge}
@@ -213,7 +214,7 @@ export const AdminDashboard: React.FC = () => {
         </div>
 
         {/* Sidebar Footer */}
-        <div style={{ padding: '1rem 1.25rem', borderTop: '1px solid var(--border-color)', display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+        <div style={{ padding: '1rem 1.25rem', borderTop: '1px solid var(--border-color, #2A3140)', display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
           <button
             type="button"
             onClick={handleLogout}
@@ -223,7 +224,7 @@ export const AdminDashboard: React.FC = () => {
               gap: '0.5rem',
               background: 'none',
               border: 'none',
-              color: '#ef4444',
+              color: 'var(--error, #F87171)',
               fontSize: '0.85rem',
               cursor: 'pointer',
               padding: '0.4rem 0',
@@ -240,9 +241,9 @@ export const AdminDashboard: React.FC = () => {
         {/* Top Navbar */}
         <header style={{
           height: '68px',
-          background: 'rgba(12, 14, 22, 0.8)',
+          background: 'rgba(17, 20, 28, 0.92)',
           backdropFilter: 'blur(16px)',
-          borderBottom: '1px solid var(--border-color)',
+          borderBottom: '1px solid var(--border-color, #2A3140)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
@@ -258,13 +259,16 @@ export const AdminDashboard: React.FC = () => {
               className="admin-mobile-toggle"
               style={{
                 display: 'none',
-                background: 'none',
-                border: 'none',
-                color: '#fff',
+                background: 'var(--bg-card, #161A24)',
+                border: '1px solid var(--border-color, #2A3140)',
+                color: 'var(--text-primary, #F5F7FF)',
                 cursor: 'pointer',
+                borderRadius: '8px',
+                padding: '0.4rem',
               }}
+              aria-label="Toggle Navigation"
             >
-              {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+              {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
 
             {/* Database indicator */}
@@ -273,10 +277,10 @@ export const AdminDashboard: React.FC = () => {
                 width: '8px',
                 height: '8px',
                 borderRadius: '50%',
-                background: isLiveConnected ? '#10b981' : 'var(--primary-cyan)',
-                boxShadow: `0 0 10px ${isLiveConnected ? '#10b981' : 'var(--primary-cyan)'}`,
+                background: isLiveConnected ? 'var(--success, #34D399)' : 'var(--accent-secondary, #36D6C5)',
+                boxShadow: `0 0 10px ${isLiveConnected ? 'var(--success, #34D399)' : 'var(--accent-secondary, #36D6C5)'}`,
               }} />
-              <span style={{ fontSize: '0.8rem', fontFamily: 'var(--font-mono)', color: 'var(--text-muted)' }}>
+              <span style={{ fontSize: '0.8rem', fontFamily: 'var(--font-mono)', color: 'var(--text-muted, #7E899D)' }}>
                 {isLiveConnected ? 'Supabase Connected' : 'Local Dev Active'}
               </span>
             </div>
@@ -295,9 +299,9 @@ export const AdminDashboard: React.FC = () => {
                   gap: '0.4rem',
                   padding: '0.35rem 0.75rem',
                   borderRadius: '9999px',
-                  background: 'rgba(239, 68, 68, 0.15)',
-                  border: '1px solid rgba(239, 68, 68, 0.4)',
-                  color: '#ef4444',
+                  background: 'rgba(248, 113, 113, 0.15)',
+                  border: '1px solid rgba(248, 113, 113, 0.4)',
+                  color: 'var(--error, #F87171)',
                   fontSize: '0.75rem',
                   fontFamily: 'var(--font-mono)',
                   cursor: 'pointer',
@@ -315,17 +319,20 @@ export const AdminDashboard: React.FC = () => {
               onClick={() => setIsPasswordModalOpen(true)}
               title="Security Settings"
               style={{
-                background: 'rgba(255, 255, 255, 0.05)',
-                border: '1px solid var(--border-color)',
+                background: 'var(--bg-elevated, #1C2230)',
+                border: '1px solid var(--border-color, #2A3140)',
                 borderRadius: '8px',
-                color: 'var(--text-muted)',
+                color: 'var(--text-secondary, #A7B0C0)',
                 padding: '0.45rem 0.65rem',
                 fontSize: '0.8rem',
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
                 gap: '0.35rem',
+                transition: 'all 0.2s',
               }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--text-primary, #F5F7FF)')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-secondary, #A7B0C0)')}
             >
               <KeyRound size={14} />
               <span>Security</span>
@@ -342,12 +349,13 @@ export const AdminDashboard: React.FC = () => {
                 gap: '0.4rem',
                 padding: '0.45rem 0.85rem',
                 borderRadius: '8px',
-                background: 'rgba(0, 240, 255, 0.08)',
-                border: '1px solid rgba(0, 240, 255, 0.25)',
-                color: 'var(--primary-cyan)',
+                background: 'rgba(124, 108, 255, 0.12)',
+                border: '1px solid rgba(124, 108, 255, 0.3)',
+                color: 'var(--accent-primary, #7C6CFF)',
                 fontSize: '0.8rem',
                 fontFamily: 'var(--font-mono)',
                 textDecoration: 'none',
+                fontWeight: 600,
               }}
             >
               <span>VIEW PORTFOLIO</span>
@@ -361,13 +369,13 @@ export const AdminDashboard: React.FC = () => {
               gap: '0.5rem',
               padding: '0.35rem 0.75rem',
               borderRadius: '9999px',
-              background: 'rgba(255, 255, 255, 0.05)',
-              border: '1px solid var(--border-color)',
+              background: 'var(--bg-elevated, #1C2230)',
+              border: '1px solid var(--border-color, #2A3140)',
               fontSize: '0.8rem',
               fontFamily: 'var(--font-mono)',
-              color: '#fff',
+              color: 'var(--text-primary, #F5F7FF)',
             }}>
-              <User size={13} style={{ color: 'var(--primary-cyan)' }} />
+              <User size={13} style={{ color: 'var(--accent-primary, #7C6CFF)' }} />
               <span>{username}</span>
             </div>
           </div>
@@ -379,13 +387,14 @@ export const AdminDashboard: React.FC = () => {
             position: 'fixed',
             inset: 0,
             top: '68px',
-            background: 'rgba(7, 8, 12, 0.98)',
+            background: 'var(--bg-secondary, #11141C)',
             backdropFilter: 'blur(20px)',
             zIndex: 99,
             padding: '1.5rem',
             display: 'flex',
             flexDirection: 'column',
             gap: '0.5rem',
+            overflowY: 'auto',
           }}>
             {navItems.map(item => (
               <button
@@ -400,9 +409,9 @@ export const AdminDashboard: React.FC = () => {
                   justifyContent: 'space-between',
                   padding: '0.85rem 1rem',
                   borderRadius: '10px',
-                  background: activeTab === item.id ? 'rgba(0, 240, 255, 0.15)' : 'rgba(255, 255, 255, 0.03)',
-                  border: `1px solid ${activeTab === item.id ? 'rgba(0, 240, 255, 0.3)' : 'var(--border-color)'}`,
-                  color: activeTab === item.id ? 'var(--primary-cyan)' : '#fff',
+                  background: activeTab === item.id ? 'rgba(124, 108, 255, 0.15)' : 'var(--bg-card, #161A24)',
+                  border: `1px solid ${activeTab === item.id ? 'rgba(124, 108, 255, 0.4)' : 'var(--border-color, #2A3140)'}`,
+                  color: activeTab === item.id ? 'var(--accent-primary, #7C6CFF)' : 'var(--text-primary, #F5F7FF)',
                   fontSize: '0.95rem',
                   cursor: 'pointer',
                   textAlign: 'left',
@@ -421,9 +430,9 @@ export const AdminDashboard: React.FC = () => {
                 marginTop: '1rem',
                 padding: '0.85rem',
                 borderRadius: '10px',
-                background: 'rgba(239, 68, 68, 0.1)',
-                border: '1px solid rgba(239, 68, 68, 0.3)',
-                color: '#ef4444',
+                background: 'rgba(248, 113, 113, 0.1)',
+                border: '1px solid rgba(248, 113, 113, 0.3)',
+                color: 'var(--error, #F87171)',
                 fontWeight: 700,
                 cursor: 'pointer',
               }}
@@ -432,6 +441,7 @@ export const AdminDashboard: React.FC = () => {
             </button>
           </div>
         )}
+
 
         {/* Tab Viewport */}
         <main style={{ flex: 1, padding: 'clamp(1.25rem, 3vw, 2.5rem)', maxWidth: '1400px', width: '100%', margin: '0 auto' }}>
